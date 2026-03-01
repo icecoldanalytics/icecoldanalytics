@@ -1,0 +1,3010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Analyzer — Ice Cold Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #1C2026;
+    --surface: #242A32;
+    --surface-2: #2C3440;
+    --surface-3: #323A48;
+    --border: rgba(200,230,245,0.12);
+    --border-bright: rgba(200,230,245,0.25);
+    --text-primary: #F0F7FC;
+    --text-secondary: #90BDD4;
+    --text-muted: #5A7A90;
+    --accent: #00C2FF;
+    --accent-dim: rgba(0,194,255,0.12);
+    --red: #FF4444;
+    --amber: #FFB020;
+    --green: #22C55E;
+    --red-dim: rgba(255,68,68,0.1);
+    --amber-dim: rgba(255,176,32,0.1);
+    --green-dim: rgba(34,197,94,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    background: var(--deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(0,194,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    background: rgba(28,32,38,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo { text-decoration: none; }
+  .nav-logo-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    color: var(--text-primary);
+  }
+  .nav-logo-top span { color: var(--accent); }
+  .nav-logo-bottom {
+    font-family: 'DM Mono', monospace;
+    font-size: 7px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 1px;
+  }
+
+  .nav-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text-primary); }
+
+  /* ── MAIN LAYOUT ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 40px 80px;
+  }
+
+  .page-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 80px);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .page-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  /* ── ANALYZER LAYOUT ── */
+  .analyzer-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* ── PANELS ── */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .panel-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .panel-body { padding: 24px; }
+
+  /* ── GAME SELECTOR ── */
+  .game-selector {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .team-input-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .input-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .team-input {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    background: var(--surface-3);
+    border: 1px solid var(--border-bright);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+    text-transform: uppercase;
+    transition: border-color 0.2s;
+  }
+
+  .team-input:focus { border-color: var(--accent); }
+  .team-input::placeholder { color: var(--text-muted); font-size: 24px; }
+
+  .vs-divider {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-align: center;
+    padding-top: 24px;
+  }
+
+  /* ── FACTORS ── */
+  .factors-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .factors-group {
+    margin-bottom: 24px;
+  }
+
+  .factors-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .factor-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+    background: var(--surface-3);
+    user-select: none;
+  }
+
+  .factor-row:hover { border-color: var(--border-bright); }
+
+  .factor-row.active-red   { background: var(--red-dim);   border-color: rgba(255,68,68,0.3); }
+  .factor-row.active-amber { background: var(--amber-dim); border-color: rgba(255,176,32,0.3); }
+  .factor-row.active-green { background: var(--green-dim); border-color: rgba(34,197,94,0.3); }
+
+  .factor-left { display: flex; align-items: center; gap: 10px; }
+
+  .factor-icon { font-size: 16px; width: 24px; text-align: center; }
+
+  .factor-text { }
+  .factor-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .factor-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .factor-weight {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  .weight-red   { color: var(--red);   background: var(--red-dim); }
+  .weight-amber { color: var(--amber); background: var(--amber-dim); }
+  .weight-green { color: var(--green); background: var(--green-dim); }
+  .weight-neutral { color: var(--text-muted); background: rgba(90,122,144,0.15); }
+
+  /* Toggle switch */
+  .toggle {
+    width: 36px; height: 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-bright);
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .toggle::after {
+    content: '';
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    top: 2px; left: 2px;
+    transition: all 0.2s;
+  }
+
+  .factor-row.active-red   .toggle,
+  .factor-row.active-amber .toggle,
+  .factor-row.active-green .toggle { background: var(--accent); border-color: var(--accent); }
+
+  .factor-row.active-red   .toggle::after,
+  .factor-row.active-amber .toggle::after,
+  .factor-row.active-green .toggle::after {
+    left: 18px;
+    background: white;
+  }
+
+  /* ── RESULTS PANEL ── */
+  .result-panel {
+    position: sticky;
+    top: 84px;
+  }
+
+  /* Risk Meter */
+  .risk-meter-wrap {
+    padding: 28px 24px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .risk-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .risk-gauge {
+    position: relative;
+    width: 200px;
+    height: 110px;
+    margin: 0 auto 16px;
+  }
+
+  .gauge-svg { width: 100%; height: 100%; overflow: visible; }
+
+  .gauge-track {
+    fill: none;
+    stroke: var(--surface-3);
+    stroke-width: 14;
+    stroke-linecap: round;
+  }
+
+  .gauge-fill {
+    fill: none;
+    stroke-width: 14;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1), stroke 0.4s;
+    transform-origin: center;
+  }
+
+  .gauge-needle {
+    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    transform-origin: 100px 100px;
+  }
+
+  .risk-score-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 2px;
+    line-height: 1;
+    transition: color 0.4s;
+  }
+
+  .risk-score-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    transition: color 0.4s;
+  }
+
+  /* Result stats */
+  .result-stats {
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-box {
+    background: var(--surface-3);
+    border-radius: 5px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  .stat-box-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+    transition: color 0.3s;
+  }
+
+  .stat-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Verdict */
+  .verdict-box {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .verdict-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .verdict-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    min-height: 60px;
+    transition: color 0.3s;
+  }
+
+  /* Active factors summary */
+  .active-factors {
+    padding: 16px 24px;
+  }
+
+  .active-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .active-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 30px;
+  }
+
+  .active-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    animation: tagPop 0.2s ease;
+  }
+
+  .tag-red   { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(255,68,68,0.25); }
+  .tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(255,176,32,0.2); }
+  .tag-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+
+  .no-factors {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* CTA */
+  .result-cta {
+    padding: 20px 24px;
+    background: var(--surface-2);
+  }
+
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--deep);
+    border: none;
+    padding: 13px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background: #33CFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0,194,255,0.25);
+  }
+
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-bright);
+    padding: 13px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .btn-secondary:hover { color: var(--text-primary); border-color: rgba(200,230,245,0.4); }
+
+  /* Disclaimer */
+  .disclaimer-strip {
+    position: relative;
+    z-index: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px 40px 32px;
+    line-height: 1.9;
+    border-top: 1px solid var(--border);
+    opacity: 0.6;
+    margin-top: 40px;
+  }
+
+  @keyframes tagPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-label, .page-title, .page-desc, .analyzer-grid {
+    animation: fadeUp 0.5s ease both;
+  }
+  .page-title  { animation-delay: 0.05s; }
+  .page-desc   { animation-delay: 0.1s; }
+  .analyzer-grid { animation-delay: 0.15s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .page { padding: 90px 20px 60px; }
+    .analyzer-grid { grid-template-columns: 1fr; }
+    .result-panel { position: static; }
+  }
+
+  /* ── MONEYLINE COMPARISON ── */
+  .ml-section {
+    margin-top: 24px;
+  }
+
+  .ml-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ml-book {
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 12px 14px;
+    transition: border-color 0.2s;
+  }
+
+  .ml-book.best-value {
+    border-color: rgba(0,194,255,0.4);
+    background: rgba(0,194,255,0.05);
+  }
+
+  .ml-book-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .ml-book-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .best-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 2px 7px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .ml-book.best-value .best-badge { display: block; }
+
+  .ml-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .ml-input-wrap { display: flex; flex-direction: column; gap: 3px; }
+
+  .ml-side-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .ml-input {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 7px 10px;
+    border-radius: 3px;
+    outline: none;
+    width: 100%;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .ml-input:focus { border-color: var(--accent); }
+  .ml-input::placeholder { color: var(--text-muted); font-size: 12px; }
+
+  .ml-imp {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 4px;
+    height: 14px;
+    transition: color 0.2s;
+  }
+
+  /* Odds comparison bar */
+  .odds-comparison {
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 14px 16px;
+    margin-top: 8px;
+  }
+
+  .odds-comp-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .odds-comp-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .odds-comp-book {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .odds-comp-bar-wrap {
+    flex: 1;
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .odds-comp-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    background: var(--accent);
+  }
+
+  .odds-comp-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-secondary);
+    width: 50px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .odds-comp-val.best { color: var(--accent); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">ICE <span>COLD</span></span>
+    <span class="nav-logo-bottom">Analytics</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Dashboard</a>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+  <div class="page-label">Tool</div>
+  <div class="page-title">Risk Analyzer</div>
+  <p class="page-desc">Select a matchup, toggle the situational factors that apply, and see how the Ice Cold model reads the risk. Built on 17 years of NHL data.</p>
+
+  <div class="analyzer-grid">
+
+    <!-- LEFT: INPUT PANEL -->
+    <div>
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Game Setup</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;">Enter team abbreviations</div>
+        </div>
+        <div class="panel-body">
+
+          <!-- Team selector -->
+          <div class="game-selector">
+            <div class="team-input-group">
+              <div class="input-label">Away Team</div>
+              <input class="team-input" id="awayTeam" type="text" maxlength="3" placeholder="TOR" oninput="this.value=this.value.toUpperCase();updateAnalysis()">
+            </div>
+            <div class="vs-divider">@</div>
+            <div class="team-input-group">
+              <div class="input-label">Home Team</div>
+              <input class="team-input" id="homeTeam" type="text" maxlength="3" placeholder="FLA" oninput="this.value=this.value.toUpperCase();updateAnalysis()">
+            </div>
+          </div>
+
+          <!-- FACTORS -->
+          <div class="factors-title">Situational Factors</div>
+
+          <!-- AWAY FATIGUE -->
+          <div class="factors-group">
+            <div class="factors-group-label">Away Team Fatigue</div>
+
+            <div class="factor-row" id="f-away-b2b" onclick="toggleFactor('f-away-b2b')">
+              <div class="factor-left">
+                <div class="factor-icon">📅</div>
+                <div class="factor-text">
+                  <div class="factor-name" style="font-size:15px;font-weight:500">Away Back-to-Back</div>
+                  <div class="factor-sub">Away team played yesterday</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-red" data-weight="-8" data-color="red">−8%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+            <div class="factor-row" id="f-away-backup" onclick="toggleFactor('f-away-backup')">
+              <div class="factor-left">
+                <div class="factor-icon">🥅</div>
+                <div class="factor-text">
+                  <div class="factor-name">Away Backup Goalie</div>
+                  <div class="factor-sub">Backup expected to start</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-red" data-weight="-6" data-color="red">−6%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+            <div class="factor-row" id="f-away-b2b-backup" onclick="toggleFactor('f-away-b2b-backup')">
+              <div class="factor-left">
+                <div class="factor-icon">⚡</div>
+                <div class="factor-text">
+                  <div class="factor-name">Away B2B + Backup</div>
+                  <div class="factor-sub">Both conditions — strongest signal</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-red" data-weight="-14" data-color="red">−14%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+            <div class="factor-row" id="f-away-travel" onclick="toggleFactor('f-away-travel')">
+              <div class="factor-left">
+                <div class="factor-icon">✈️</div>
+                <div class="factor-text">
+                  <div class="factor-name">Long Haul Travel</div>
+                  <div class="factor-sub">Away team traveled 1,500+ miles</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-amber" data-weight="-4" data-color="amber">−4%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- HOME ADVANTAGE -->
+          <div class="factors-group">
+            <div class="factors-group-label">Home Team Edge</div>
+
+            <div class="factor-row" id="f-home-rest" onclick="toggleFactor('f-home-rest')">
+              <div class="factor-left">
+                <div class="factor-icon">🛌</div>
+                <div class="factor-text">
+                  <div class="factor-name">Home Well Rested</div>
+                  <div class="factor-sub">3+ days rest at home</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-green" data-weight="+5" data-color="green">+5%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+            <div class="factor-row" id="f-home-goalie" onclick="toggleFactor('f-home-goalie')">
+              <div class="factor-left">
+                <div class="factor-icon">⭐</div>
+                <div class="factor-text">
+                  <div class="factor-name">Home Goalie Advantage</div>
+                  <div class="factor-sub">Home SV% clearly better (+2%)</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-green" data-weight="+6" data-color="green">+6%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+            <div class="factor-row" id="f-home-b2b" onclick="toggleFactor('f-home-b2b')">
+              <div class="factor-left">
+                <div class="factor-icon">⚠️</div>
+                <div class="factor-text">
+                  <div class="factor-name">Home Back-to-Back</div>
+                  <div class="factor-sub">Home team also on B2B</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-amber" data-weight="-3" data-color="amber">−3%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- FORM -->
+          <div class="factors-group">
+            <div class="factors-group-label">Recent Form</div>
+
+            <div class="factor-row" id="f-home-form" onclick="toggleFactor('f-home-form')">
+              <div class="factor-left">
+                <div class="factor-icon">📈</div>
+                <div class="factor-text">
+                  <div class="factor-name">Home Strong Form</div>
+                  <div class="factor-sub">4+ wins in last 5 games</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-green" data-weight="+4" data-color="green">+4%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+            <div class="factor-row" id="f-away-form" onclick="toggleFactor('f-away-form')">
+              <div class="factor-left">
+                <div class="factor-icon">📉</div>
+                <div class="factor-text">
+                  <div class="factor-name">Away Poor Form</div>
+                  <div class="factor-sub">1 or fewer wins in last 5</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="factor-weight weight-amber" data-weight="-5" data-color="amber">−5%</span>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MONEYLINE COMPARISON -->
+      <div class="panel ml-section">
+        <div class="panel-header">
+          <div class="panel-title">Moneyline Comparison</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;">Enter odds from each book</div>
+        </div>
+        <div class="panel-body">
+
+          <div class="ml-grid">
+
+            <!-- Pinnacle -->
+            <div class="ml-book" id="book-pinnacle">
+              <div class="ml-book-header">
+                <span class="ml-book-name">Pinnacle</span>
+                <span class="best-badge">BEST VALUE</span>
+              </div>
+              <div class="ml-inputs">
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label" id="away-label-pinnacle">Away</div>
+                  <input class="ml-input" id="ml-pinnacle-away" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-pinnacle-away"></div>
+                </div>
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label" id="home-label-pinnacle">Home</div>
+                  <input class="ml-input" id="ml-pinnacle-home" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-pinnacle-home"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- DraftKings -->
+            <div class="ml-book" id="book-draftkings">
+              <div class="ml-book-header">
+                <span class="ml-book-name">DraftKings</span>
+                <span class="best-badge">BEST VALUE</span>
+              </div>
+              <div class="ml-inputs">
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label">Away</div>
+                  <input class="ml-input" id="ml-draftkings-away" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-draftkings-away"></div>
+                </div>
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label">Home</div>
+                  <input class="ml-input" id="ml-draftkings-home" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-pinnacle-home"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- FanDuel -->
+            <div class="ml-book" id="book-fanduel">
+              <div class="ml-book-header">
+                <span class="ml-book-name">FanDuel</span>
+                <span class="best-badge">BEST VALUE</span>
+              </div>
+              <div class="ml-inputs">
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label">Away</div>
+                  <input class="ml-input" id="ml-fanduel-away" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-fanduel-away"></div>
+                </div>
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label">Home</div>
+                  <input class="ml-input" id="ml-fanduel-home" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-fanduel-home"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BetMGM -->
+            <div class="ml-book" id="book-betmgm">
+              <div class="ml-book-header">
+                <span class="ml-book-name">BetMGM</span>
+                <span class="best-badge">BEST VALUE</span>
+              </div>
+              <div class="ml-inputs">
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label">Away</div>
+                  <input class="ml-input" id="ml-betmgm-away" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-betmgm-away"></div>
+                </div>
+                <div class="ml-input-wrap">
+                  <div class="ml-side-label">Home</div>
+                  <input class="ml-input" id="ml-betmgm-home" placeholder="-110" oninput="updateOdds()">
+                  <div class="ml-imp" id="imp-betmgm-home"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Odds comparison bars -->
+          <div class="odds-comparison" id="oddsComparison" style="display:none;">
+            <div class="odds-comp-title" id="oddsCompTitle">Home Win Implied Probability</div>
+            <div id="oddsCompBars"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:10px;line-height:1.6;">
+              Lower implied probability = better odds for you.<br>
+              <span style="color:var(--accent);">Highlighted book</span> offers the most value on the home side.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- HOW IT WORKS NOTE -->
+      <div style="padding:20px 4px 0; font-family:'DM Mono',monospace; font-size:10px; color:var(--text-muted); line-height:1.8; letter-spacing:0.5px;">
+        Edge weights are derived from 17 years of NHL data and validated against Pinnacle closing lines.<br>
+        This tool is for informational purposes only — not betting advice.
+      </div>
+    </div>
+
+    <!-- RIGHT: RESULTS PANEL -->
+    <div class="result-panel">
+      <div class="panel">
+
+        <!-- Gauge -->
+        <div class="risk-meter-wrap">
+          <div class="risk-label">Home Win Edge Score</div>
+
+          <div class="risk-gauge">
+            <svg class="gauge-svg" viewBox="0 0 200 120">
+              <!-- Track arc: half circle -->
+              <path class="gauge-track"
+                d="M 20 100 A 80 80 0 0 1 180 100"
+              />
+              <!-- Fill arc -->
+              <path class="gauge-fill" id="gaugeFill"
+                d="M 20 100 A 80 80 0 0 1 180 100"
+                stroke="#00C2FF"
+                stroke-dasharray="251"
+                stroke-dashoffset="251"
+              />
+              <!-- Needle -->
+              <g class="gauge-needle" id="gaugeNeedle" style="transform:rotate(-90deg)">
+                <line x1="100" y1="100" x2="100" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+                <circle cx="100" cy="100" r="5" fill="white" opacity="0.9"/>
+              </g>
+              <!-- Labels -->
+              <text x="16" y="118" fill="#5A7A90" font-family="monospace" font-size="9" text-anchor="middle">−</text>
+              <text x="100" y="15" fill="#5A7A90" font-family="monospace" font-size="9" text-anchor="middle">0</text>
+              <text x="184" y="118" fill="#5A7A90" font-family="monospace" font-size="9" text-anchor="middle">+</text>
+            </svg>
+          </div>
+
+          <div class="risk-score-display" id="riskScore" style="color:var(--text-muted)">—</div>
+          <div class="risk-score-label" id="riskLabel" style="color:var(--text-muted)">Select factors above</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="result-stats">
+          <div class="stat-box">
+            <div class="stat-box-value" id="statEdge">—</div>
+            <div class="stat-box-label">Model Edge</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-value" id="statSignal">—</div>
+            <div class="stat-box-label">Signal Level</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-value" id="statFactors">0</div>
+            <div class="stat-box-label">Factors Active</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-value" id="statConfidence">—</div>
+            <div class="stat-box-label">Confidence</div>
+          </div>
+        </div>
+
+        <!-- Verdict -->
+        <div class="verdict-box">
+          <div class="verdict-header">Ice Cold Assessment</div>
+          <div class="verdict-text" id="verdictText">
+            Toggle the situational factors that apply to tonight's matchup to see the Ice Cold Analytics model assessment.
+          </div>
+        </div>
+
+        <!-- Active tags -->
+        <div class="active-factors">
+          <div class="active-label">Active Signals</div>
+          <div class="active-tags" id="activeTags">
+            <span class="no-factors">No factors selected</span>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="result-cta">
+          <a href="#beta" class="btn-primary" onclick="window.location='index.html#beta'">Get Full Model Access</a>
+          <a href="index.html" class="btn-secondary">← Back to Dashboard</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="disclaimer-strip">
+  Ice Cold Analytics provides statistical analysis for entertainment and research purposes only.<br>
+  We do not offer betting advice. Please gamble responsibly. Must be of legal age in your jurisdiction.<br>
+  icecoldanalytics.ca
+</div>
+
+<script>
+var FACTORS = {
+  'f-away-b2b':         { name: 'Away B2B',          weight: -8,  color: 'red',   tag: 'AWAY B2B' },
+  'f-away-backup':      { name: 'Away Backup Goalie', weight: -12, color: 'red',   tag: 'BACKUP GOALIE' },
+  'f-away-b2b-backup':  { name: 'B2B + Backup',       weight: -14, color: 'red',   tag: 'B2B + BACKUP' },
+  'f-away-travel':      { name: 'Long Haul Travel',   weight: -2,  color: 'amber', tag: '1500MI+ TRAVEL' },
+  'f-home-rest':        { name: 'Home Rested 3+ days',weight: -4,  color: 'green', tag: 'HOME RESTED' },
+  'f-home-goalie':      { name: 'Home Goalie Edge',   weight: 4,   color: 'green', tag: 'GOALIE EDGE' },
+  'f-home-b2b':         { name: 'Home B2B',           weight: 6,   color: 'amber', tag: 'HOME B2B' },
+  'f-home-form':        { name: 'Home Strong Form',   weight: 3,   color: 'green', tag: 'HOT STREAK' },
+  'f-away-form':        { name: 'Away Poor Form',     weight: -3,  color: 'amber', tag: 'AWAY COLD' }
+};
+
+var activeFactors = {};
+
+function toggleFactor(id) {
+  var el = document.getElementById(id);
+  if (!el) { console.error('No element:', id); return; }
+  var f = FACTORS[id];
+  if (!f) { console.error('No factor:', id); return; }
+
+  if (activeFactors[id]) {
+    delete activeFactors[id];
+    el.className = 'factor-row';
+  } else {
+    activeFactors[id] = true;
+    el.className = 'factor-row active-' + f.color;
+  }
+  updateAnalysis();
+}
+
+function updateAnalysis() {
+  var away = document.getElementById('awayTeam').value || 'AWAY';
+  var home = document.getElementById('homeTeam').value || 'HOME';
+  var ids = Object.keys(activeFactors);
+  var count = ids.length;
+
+  var totalEdge = 0;
+  ids.forEach(function(id) { totalEdge += FACTORS[id].weight; });
+
+  // Active tags
+  var tagsEl = document.getElementById('activeTags');
+  if (count === 0) {
+    tagsEl.innerHTML = '<span class="no-factors">No factors selected</span>';
+  } else {
+    tagsEl.innerHTML = ids.map(function(id) {
+      var f = FACTORS[id];
+      return '<span class="active-tag tag-' + f.color + '">' + f.tag + '</span>';
+    }).join('');
+  }
+
+  document.getElementById('statFactors').textContent = count;
+
+  if (count === 0) { resetDisplay(); return; }
+
+  var edgeStr = totalEdge >= 0 ? '+' + totalEdge + '%' : totalEdge + '%';
+  var edgeEl = document.getElementById('statEdge');
+  edgeEl.textContent = edgeStr;
+  edgeEl.style.color = totalEdge > 0 ? 'var(--green)' : totalEdge < -8 ? 'var(--red)' : 'var(--amber)';
+
+  var absEdge = Math.abs(totalEdge);
+  var level, confidence;
+  if (absEdge >= 14)      { level = '3 / 3'; confidence = 'HIGH'; }
+  else if (absEdge >= 8)  { level = '2 / 3'; confidence = 'MED'; }
+  else if (absEdge >= 4)  { level = '1 / 3'; confidence = 'LOW'; }
+  else                    { level = '—';     confidence = '—'; }
+
+  document.getElementById('statSignal').textContent = level;
+  var confEl = document.getElementById('statConfidence');
+  confEl.textContent = confidence;
+  confEl.style.color = confidence === 'HIGH' ? 'var(--green)' : confidence === 'MED' ? 'var(--amber)' : 'var(--text-muted)';
+
+  updateGauge(totalEdge);
+
+  var scoreEl = document.getElementById('riskScore');
+  var labelEl = document.getElementById('riskLabel');
+  scoreEl.textContent = edgeStr;
+
+  if (totalEdge <= -10) {
+    scoreEl.style.color = 'var(--red)';
+    labelEl.style.color = 'var(--red)';
+    labelEl.textContent = 'FADE ' + away;
+  } else if (totalEdge <= -4) {
+    scoreEl.style.color = 'var(--amber)';
+    labelEl.style.color = 'var(--amber)';
+    labelEl.textContent = 'LEAN ' + home;
+  } else if (totalEdge >= 8) {
+    scoreEl.style.color = 'var(--green)';
+    labelEl.style.color = 'var(--green)';
+    labelEl.textContent = 'BACK ' + home;
+  } else if (totalEdge > 0) {
+    scoreEl.style.color = 'var(--green)';
+    labelEl.style.color = 'var(--text-secondary)';
+    labelEl.textContent = 'SLIGHT LEAN';
+  } else {
+    scoreEl.style.color = 'var(--text-muted)';
+    labelEl.style.color = 'var(--text-muted)';
+    labelEl.textContent = 'NEUTRAL';
+  }
+
+  updateVerdict(away, home, totalEdge, absEdge);
+}
+
+function updateGauge(edge) {
+  var clipped = Math.max(-20, Math.min(20, edge));
+  var pct = (clipped + 20) / 40;
+  var arcLen = 251;
+  var offset = arcLen - (pct * arcLen);
+  var fill = document.getElementById('gaugeFill');
+  fill.style.strokeDashoffset = offset;
+  fill.style.stroke = edge <= -10 ? 'var(--red)' : edge <= -4 ? 'var(--amber)' : edge >= 8 ? 'var(--green)' : 'var(--accent)';
+  var angle = pct * 180 - 90;
+  document.getElementById('gaugeNeedle').style.transform = 'rotate(' + angle + 'deg)';
+}
+
+function updateVerdict(away, home, edge, abs) {
+  var el = document.getElementById('verdictText');
+  var awayLabel = away !== 'AWAY' ? away : 'the away team';
+  var homeLabel = home !== 'HOME' ? home : 'the home team';
+
+  if (abs < 4) {
+    el.textContent = 'No strong edge detected. The active factors roughly cancel out — this game sits close to a coin flip based on situational data alone.';
+    el.style.color = 'var(--text-secondary)';
+  } else if (edge <= -14) {
+    el.textContent = 'Maximum alert — ' + awayLabel + ' is in a high-fatigue situation. Signal 2 (B2B + backup goalie) is active. Backtested at +38.7% ROI. Back ' + homeLabel + '.';
+    el.style.color = 'var(--red)';
+  } else if (edge <= -10) {
+    el.textContent = 'Strong situational edge for ' + homeLabel + '. Multiple fatigue factors stacking against ' + awayLabel + '. Signal 1 + additional context active. Worth a look at the line.';
+    el.style.color = 'var(--red)';
+  } else if (edge <= -6) {
+    el.textContent = 'Moderate lean toward ' + homeLabel + '. ' + awayLabel + ' carries meaningful fatigue disadvantage tonight. Check the line.';
+    el.style.color = 'var(--amber)';
+  } else if (edge <= -4) {
+    el.textContent = 'Slight lean toward ' + homeLabel + '. Worth monitoring closer to puck drop — goalie confirmation could strengthen this.';
+    el.style.color = 'var(--text-secondary)';
+  } else if (edge >= 8) {
+    el.textContent = 'Strong situational profile for ' + homeLabel + '. Rested home team with clear edge. High confidence read.';
+    el.style.color = 'var(--green)';
+  } else {
+    el.textContent = 'Slight situational lean toward ' + homeLabel + '. Positive setup but not a high-conviction signal on its own.';
+    el.style.color = 'var(--text-secondary)';
+  }
+}
+
+// Moneyline logic
+var BOOKS = ['pinnacle', 'draftkings', 'fanduel', 'betmgm'];
+
+function americanToProb(odds) {
+  var o = parseFloat(odds);
+  if (isNaN(o)) return null;
+  return o < 0 ? (-o) / ((-o) + 100) : 100 / (o + 100);
+}
+
+function updateOdds() {
+  var away = document.getElementById('awayTeam').value || 'Away';
+  var home = document.getElementById('homeTeam').value || 'Home';
+
+  BOOKS.forEach(function(book) {
+    ['away','home'].forEach(function(side) {
+      var input = document.getElementById('ml-' + book + '-' + side);
+      var impEl = document.getElementById('imp-' + book + '-' + side);
+      if (!input || !impEl) return;
+      var prob = americanToProb(input.value.trim());
+      impEl.textContent = prob !== null ? (prob * 100).toFixed(1) + '% imp.' : '';
+      impEl.style.color = 'var(--text-secondary)';
+    });
+  });
+
+  var bestHomeProb = Infinity, bestBook = null, bookProbs = {};
+  BOOKS.forEach(function(book) {
+    var input = document.getElementById('ml-' + book + '-home');
+    if (!input || !input.value.trim()) return;
+    var prob = americanToProb(input.value.trim());
+    if (prob !== null) {
+      bookProbs[book] = prob;
+      if (prob < bestHomeProb) { bestHomeProb = prob; bestBook = book; }
+    }
+  });
+
+  BOOKS.forEach(function(book) {
+    var el = document.getElementById('book-' + book);
+    if (el) el.classList.toggle('best-value', book === bestBook);
+  });
+
+  var compEl = document.getElementById('oddsComparison');
+  var barsEl = document.getElementById('oddsCompBars');
+  var compTitle = document.getElementById('oddsCompTitle');
+  var keys = Object.keys(bookProbs);
+
+  if (keys.length >= 2) {
+    compEl.style.display = 'block';
+    compTitle.textContent = home + ' Win — Implied Probability by Book';
+    var probs = keys.map(function(k) { return bookProbs[k]; });
+    var minP = Math.min.apply(null, probs), maxP = Math.max.apply(null, probs);
+    var range = maxP - minP || 0.01;
+    var bookNames = { pinnacle:'Pinnacle', draftkings:'DraftKings', fanduel:'FanDuel', betmgm:'BetMGM' };
+    var sorted = keys.sort(function(a,b) { return bookProbs[a]-bookProbs[b]; });
+    barsEl.innerHTML = sorted.map(function(book) {
+      var prob = bookProbs[book];
+      var pct = 40 + ((prob - minP) / range) * 55;
+      var isBest = book === bestBook;
+      return '<div class="odds-comp-row">' +
+        '<div class="odds-comp-book">' + bookNames[book] + '</div>' +
+        '<div class="odds-comp-bar-wrap"><div class="odds-comp-bar" style="width:' + pct + '%;background:' + (isBest?'var(--accent)':'var(--surface-2)') + ';border:1px solid ' + (isBest?'var(--accent)':'var(--border-bright)') + '"></div></div>' +
+        '<div class="odds-comp-val ' + (isBest?'best':'') + '">' + (prob*100).toFixed(1) + '%</div>' +
+        '</div>';
+    }).join('');
+  } else {
+    if (compEl) compEl.style.display = 'none';
+  }
+
+  updateAnalysis();
+}
+
+function resetDisplay() {
+  document.getElementById('riskScore').textContent = '—';
+  document.getElementById('riskScore').style.color = 'var(--text-muted)';
+  document.getElementById('riskLabel').textContent = 'Select factors above';
+  document.getElementById('riskLabel').style.color = 'var(--text-muted)';
+  document.getElementById('statEdge').textContent = '—';
+  document.getElementById('statEdge').style.color = 'var(--text-muted)';
+  document.getElementById('statSignal').textContent = '—';
+  document.getElementById('statConfidence').textContent = '—';
+  document.getElementById('statConfidence').style.color = 'var(--text-muted)';
+  document.getElementById('verdictText').textContent = 'Toggle the situational factors that apply to tonight\'s matchup to see the Ice Cold Analytics model assessment.';
+  document.getElementById('verdictText').style.color = 'var(--text-secondary)';
+  document.getElementById('gaugeFill').style.strokeDashoffset = '251';
+  document.getElementById('gaugeNeedle').style.transform = 'rotate(-90deg)';
+}
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ice Cold Analytics — The Analytics Edge for NHL Bettors</title>
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ice: #C8E6F5;
+    --ice-dim: #7BAEC8;
+    --deep: #1C2026;
+    --surface: #242A32;
+    --surface-2: #2C3440;
+    --surface-3: #323A48;
+    --border: rgba(200,230,245,0.12);
+    --border-bright: rgba(200,230,245,0.25);
+    --alert-red: #FF4444;
+    --alert-amber: #FFB020;
+    --alert-green: #22C55E;
+    --text-primary: #F0F7FC;
+    --text-secondary: #90BDD4;
+    --text-muted: #5A7A90;
+    --accent: #00C2FF;
+    --accent-dim: rgba(0,194,255,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,194,255,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 90% 20%, rgba(0,100,180,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 68px;
+    background: rgba(28,32,38,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .nav-logo-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 5px;
+    color: var(--text-primary);
+  }
+
+  .nav-logo-top span { color: var(--accent); }
+
+  .nav-logo-bottom {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text-primary); }
+
+  .nav-cta {
+    color: var(--accent) !important;
+    border: 1px solid rgba(0,194,255,0.3);
+    padding: 8px 20px;
+    border-radius: 3px;
+    transition: all 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-dim) !important;
+    border-color: var(--accent) !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 40px 100px;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(0,194,255,0.25);
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 40px;
+    display: inline-block;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-wordmark {
+    animation: fadeUp 0.6s 0.1s ease both;
+    margin-bottom: 8px;
+  }
+
+  .hero-wordmark-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 160px);
+    letter-spacing: 12px;
+    line-height: 0.85;
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .hero-wordmark-top .cold { color: var(--accent); }
+
+  .hero-wordmark-bottom {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(12px, 2vw, 18px);
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 8px;
+  }
+
+  .hero-tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 3vw, 28px);
+    letter-spacing: 5px;
+    color: var(--text-muted);
+    margin: 32px 0;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero p {
+    max-width: 500px;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--deep);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: #33CFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(0,194,255,0.3);
+  }
+
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-bright);
+    padding: 14px 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    color: var(--text-primary);
+    border-color: rgba(200,230,245,0.35);
+  }
+
+  /* ── DIVIDER LINE ── */
+  .ice-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.25;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .stat-item {
+    flex: 1;
+    max-width: 220px;
+    padding: 32px 24px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 110px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 64px;
+  }
+
+  /* ── DASHBOARD PREVIEW ── */
+  .dashboard-preview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  }
+
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+
+  .dashboard-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--alert-green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+
+  .dashboard-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .games-grid {
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .game-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .game-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+
+  .game-card.alert-high::before { background: var(--alert-red); }
+  .game-card.alert-mid::before  { background: var(--alert-amber); }
+  .game-card.alert-low::before  { background: var(--text-muted); }
+
+  .game-card.alert-high { border-color: rgba(255,68,68,0.18); background: rgba(255,68,68,0.03); }
+  .game-card.alert-mid  { border-color: rgba(255,176,32,0.15); background: rgba(255,176,32,0.02); }
+
+  .team-info { display: flex; flex-direction: column; gap: 4px; }
+  .team-away { text-align: left; }
+  .team-home { text-align: right; }
+
+  .team-abbr {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .team-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+  }
+
+  .team-meta.warn  { color: var(--alert-amber); }
+  .team-meta.danger { color: var(--alert-red); }
+
+  .vs-col { text-align: center; }
+
+  .vs-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+
+  .game-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .alert-col { text-align: right; }
+
+  .alert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+
+  .badge-high { background: rgba(255,68,68,0.12);  color: var(--alert-red);   border: 1px solid rgba(255,68,68,0.25); }
+  .badge-mid  { background: rgba(255,176,32,0.10); color: var(--alert-amber); border: 1px solid rgba(255,176,32,0.2); }
+  .badge-none { background: rgba(61,90,110,0.15);  color: var(--text-muted);  border: 1px solid var(--border); }
+
+  .edge-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .edge-score span { color: var(--accent); }
+
+  /* ── FEATURES GRID ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    padding: 44px 36px;
+    transition: background 0.2s;
+  }
+
+  .feature-card:hover { background: var(--surface-2); }
+
+  .feature-icon {
+    font-size: 30px;
+    margin-bottom: 22px;
+    display: block;
+  }
+
+  .feature-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    counter-reset: steps;
+  }
+
+  .how-card {
+    background: var(--surface);
+    padding: 40px 28px;
+    position: relative;
+    counter-increment: steps;
+  }
+
+  .how-card::before {
+    content: "0" counter(steps);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    letter-spacing: 2px;
+    color: var(--border-bright);
+    line-height: 1;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .how-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .how-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 44px 36px;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .pricing-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-3px);
+  }
+
+  .pricing-card.featured {
+    border-color: rgba(0,194,255,0.3);
+    background: var(--surface-2);
+  }
+
+  .pricing-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--deep);
+    background: var(--accent);
+    padding: 4px 14px;
+    border-radius: 0 0 4px 4px;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+
+  .plan-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .plan-price sup {
+    font-size: 28px;
+    vertical-align: top;
+    margin-top: 14px;
+    color: var(--text-secondary);
+  }
+
+  .plan-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .plan-period .beta-price {
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .plan-features li {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .plan-features li::before {
+    content: '—';
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .plan-features li.dim { color: var(--text-muted); }
+  .plan-features li.dim::before { color: var(--text-muted); }
+
+  /* ── BETA SECTION ── */
+  .beta-section {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 100px 40px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .beta-section::before {
+    content: 'ICE COLD';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(100px, 20vw, 240px);
+    letter-spacing: 20px;
+    color: rgba(0,194,255,0.025);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .beta-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .beta-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--alert-amber);
+    border: 1px solid rgba(255,176,32,0.25);
+    padding: 6px 16px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 28px;
+  }
+
+  .beta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 7vw, 80px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .beta-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 12px;
+    max-width: 460px;
+    margin: 0 auto 16px;
+  }
+
+  .email-input {
+    flex: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--surface-3);
+    border: 1px solid var(--border-bright);
+    color: var(--text-primary);
+    padding: 14px 20px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-input::placeholder { color: var(--text-muted); }
+  .email-input:focus { border-color: rgba(0,194,255,0.45); }
+
+  .form-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+  }
+
+  /* ── CA BADGE ── */
+  .ca-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-top: 40px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 48px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-wordmark { text-decoration: none; }
+
+  .footer-logo-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    color: var(--text-muted);
+  }
+
+  .footer-logo-top span { color: var(--text-secondary); }
+
+  .footer-logo-bottom {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text-secondary); }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    position: relative;
+    z-index: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px 40px 28px;
+    line-height: 1.9;
+    border-top: 1px solid var(--border);
+    opacity: 0.7;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.25; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 80px; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+    .features-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .section { padding: 70px 24px; }
+    .email-form { flex-direction: column; }
+    .game-card { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .vs-col { display: none; }
+    .alert-col { grid-column: 1 / -1; text-align: left; }
+    footer { flex-direction: column; gap: 28px; text-align: center; }
+    .footer-right { text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+
+  /* ── OLYMPIC BANNER ── */
+  .olympic-banner {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,176,32,0.08);
+    border-bottom: 1px solid rgba(255,176,32,0.2);
+    padding: 10px 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .olympic-banner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--alert-amber);
+  }
+
+  .olympic-banner strong {
+    color: var(--text-primary);
+  }
+
+  /* ── MONEYLINE ROW ON GAME CARDS ── */
+  .ml-row {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .ml-row-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .ml-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--surface-3);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ml-chip-book {
+    color: var(--text-muted);
+    font-size: 10px;
+  }
+
+  .ml-chip.best-line {
+    border-color: rgba(0,194,255,0.35);
+    background: rgba(0,194,255,0.07);
+    color: var(--accent);
+  }
+
+  .ml-chip.best-line .ml-chip-book { color: var(--accent); opacity: 0.7; }
+  .dfs-row {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0,194,255,0.04);
+    border: 1px solid rgba(0,194,255,0.12);
+    border-radius: 4px;
+    flex-wrap: wrap;
+  }
+  .dfs-row-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-right: 4px;
+  }
+  .dfs-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .dfs-chip-play {
+    background: rgba(0,194,255,0.10);
+    border: 1px solid rgba(0,194,255,0.2);
+    color: var(--accent);
+  }
+  .dfs-chip-avoid {
+    background: rgba(255,68,68,0.08);
+    border: 1px solid rgba(255,68,68,0.18);
+    color: var(--alert-red);
+  }
+  .dfs-chip-neutral {
+    background: rgba(61,90,110,0.2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .dfs-chip-signal2 {
+    background: rgba(0,194,255,0.16);
+    border: 1px solid rgba(0,194,255,0.35);
+    color: #fff;
+    font-weight: 600;
+  }
+  .dfs-tag {
+    font-size: 9px;
+    opacity: 0.7;
+  }
+  .dfs-none {
+    grid-column: 1 / -1;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    opacity: 0.5;
+  }
+
+
+  .ml-coming-soon {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-top">ICE <span>COLD</span></span>
+    <span class="nav-logo-bottom">Analytics</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#signals">The Edge</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+    <li><a href="risk-analyzer.html">Risk Analyzer</a></li>
+    <li><a href="#beta" class="nav-cta">Join Beta</a></li>
+  </ul>
+</nav>
+
+
+<!-- OLYMPIC BREAK BANNER -->
+<div class="olympic-banner">
+  <span>🏒</span>
+  <span>🔥 3 signal games tonight — EDM @ SJS · BUF @ TBL · WSH @ MTL — Away B2B + rested home team: <strong>+8.7% ROI</strong> backtested.</span>
+  <span>🏒</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">🏒 Now in Beta — icecoldanalytics.ca</div>
+
+  <div class="hero-wordmark">
+    <span class="hero-wordmark-top">ICE <span class="cold">COLD</span></span>
+    <span class="hero-wordmark-bottom">Analytics</span>
+  </div>
+
+  <div class="hero-tagline">The Analytics Edge for NHL Bettors</div>
+
+  <p>We track two validated edges the market underprices: rest differential and backup goalie situations on back-to-backs. Backtested across 1,200+ games. Delivered before puck drop.</p>
+
+  <div class="hero-actions">
+    <a href="#beta" class="btn-primary">Join the Beta</a>
+    <a href="#dashboard" class="btn-secondary">See the Dashboard</a>
+  </div>
+
+  <div class="ice-line"></div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-value">22K+</div>
+    <div class="stat-label">Games Analyzed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">17 YR</div>
+    <div class="stat-label">Historical Data</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">4,800</div>
+    <div class="stat-label">Goalie Starts Tracked</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">35</div>
+    <div class="stat-label">Predictive Features</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">.ca</div>
+    <div class="stat-label">Canadian Built</div>
+  </div>
+</div>
+
+<!-- DASHBOARD PREVIEW -->
+<div id="dashboard" class="section reveal">
+  <div class="section-label">Live Dashboard</div>
+  <div class="section-title">Every Game.<br>Every Morning.</div>
+  <div class="section-desc">Two research-backed signals — rest differential and goalie load — delivered before puck drop every game day.</div>
+
+  <div class="dashboard-preview">
+    <div class="dashboard-header">
+      <div class="dashboard-title">
+        <span class="live-dot"></span>
+        NHL Daily Intelligence — Sat Feb 28 2026
+      </div>
+      <div class="dashboard-date">icecoldanalytics.ca · Updated 11:00 AM MT</div>
+    </div>
+
+    <!-- LAST NIGHT SCORES -->
+    <div style="margin-bottom:18px;padding:14px 16px;background:rgba(61,90,110,0.15);border:1px solid var(--border);border-radius:6px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:10px;">Fri Feb 27 — Final Scores</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">FLA 5 · TOR 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">BOS 4 · CBJ 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">CAR 5 · TBL 4</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">DET 2 · OTT 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">NYI 4 · MTL 3</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">PIT 4 · NJD 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">PHI 3 · NYR 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">NSH 4 · CHI 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">STL 5 · SEA 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">MIN 5 · COL 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">CGY 4 · SJS 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">EDM 8 · LAK 1</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin-top:8px;">Also today (Feb 28 early): WSH 3 · VGK 2 · FLA 2 · BUF 3 · UTA 5 · MIN 2 · ANA 5 · WPG 4</div>
+    </div>
+
+    <!-- TONIGHT'S GAMES -->
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;">Tonight — Sat Feb 28 · 3 Signal Games</div>
+
+    <!-- ⚡ SIGNAL 1: EDM @ SJS -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.35);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">EDM</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">SJS</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#ff4444;color:#fff;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">4:00 PM ET</span>
+      </div>
+      <div class="alert-badge badge-high">⚡ Signal 1 Active</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:6px 0;">EDM on B2B (won 8-1 at LAK last night) · SJS rested 2 days · +8.7% ROI historical</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> Tristan Jarry (EDM, 14-7-2, 3.14 GAA) vs Yaroslav Askarov (SJS, 17-16-2, 3.52 GAA)
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);">
+        <span style="color:var(--text-muted);">Win prob:</span> EDM 58.5% · SJS 41.5%
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="dfs-chip">SJS ML · Fade fatigued EDM</span>
+        <span class="dfs-chip dfs-chip-signal2">✦ Askarov <span class="dfs-tag">DFS VALUE vs B2B</span></span>
+      </div>
+    </div>
+
+    <!-- ⚡ SIGNAL 1: BUF @ TBL -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.35);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">BUF</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">TBL</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#ff4444;color:#fff;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">7:00 PM ET</span>
+      </div>
+      <div class="alert-badge badge-high">⚡ Signal 1 Active</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:6px 0;">BUF on B2B (lost 3-2 at FLA today) · TBL rested since Feb 27 (won vs CAR) · +8.7% ROI historical</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> TBC (BUF) vs TBC (TBL) — confirm closer to puck drop
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);">
+        <span style="color:var(--text-muted);">Win prob:</span> TBL 68% · BUF 32%
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="dfs-chip">TBL ML · Rested home favorite</span>
+      </div>
+    </div>
+
+    <!-- ⚡ SIGNAL 1: WSH @ MTL -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.35);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">WSH</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">MTL</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#ff4444;color:#fff;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">7:00 PM ET</span>
+      </div>
+      <div class="alert-badge badge-high">⚡ Signal 1 Active</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:6px 0;">WSH on B2B (beat VGK 3-2 at home today) · MTL rested since Feb 27 (lost to NYI) · +8.7% ROI historical</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> Charlie Lindgren (WSH) vs Jakub Dobes (MTL) — confirmed
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="dfs-chip">MTL ML · Rested home underdog value</span>
+        <span class="dfs-chip dfs-chip-signal2">✦ Dobes <span class="dfs-tag">DFS GOALIE VALUE</span></span>
+      </div>
+    </div>
+
+    <!-- SIGNALS CANCEL: PIT @ NYR -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">PIT</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">NYR</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#3d5a6e;color:#aaa;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#3d5a6e;color:#aaa;padding:2px 6px;border-radius:2px;margin-left:4px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">12:30 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);background:rgba(61,90,110,0.3);padding:5px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;">↔ SIGNALS CANCEL — Both teams on B2B</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> Stuart Skinner (PIT, 19-12-5) vs Igor Shesterkin (NYR, 17-12-5, 2.47 GAA)
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);">
+        <span style="color:var(--text-muted);">Win prob:</span> PIT 53.9% · NYR 46.1%
+      </div>
+    </div>
+
+    <!-- NO EDGE GAMES -->
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;margin:16px 0 8px;">Remaining Games — No Situational Edge</div>
+
+    <!-- BOS @ PHI -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">BOS</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">PHI</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">3:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Jeremy Swayman (BOS) vs Daniel Vladar (PHI) · PHI home on 2nd game of back-to-back, BOS rested — note PHI is home so Signal 1 does not apply</div>
+    </div>
+
+    <!-- NJD @ STL -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">NJD</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">STL</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">5:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Jacob Markstrom (NJD) vs Jordan Binnington (STL) · Near pick'em — NJD -110 / STL -108</div>
+    </div>
+
+    <!-- CHI @ COL -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">CHI</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">COL</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">6:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Spencer Knight (CHI) vs Mackenzie Blackwood (COL, 16-6-1, .916 SV%) · COL heavy favorite 76.5%</div>
+    </div>
+
+    <!-- NYI @ CBJ -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">NYI</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">CBJ</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">6:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Ilya Sorokin (NYI, 20-13-2, .913 SV%) vs Elvis Merzlikins (CBJ)</div>
+    </div>
+
+    <!-- DET @ CAR -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">DET</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">CAR</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">7:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">John Gibson (DET) vs Brandon Bussi (CAR) · CAR 62% win probability</div>
+    </div>
+
+    <!-- OTT @ TOR — tomorrow preview note -->
+    <!-- NSH @ DAL -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">NSH</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">DAL</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">8:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">No situational edge — standard research applies</div>
+    </div>
+
+    <!-- VAN @ SEA (late) -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">VAN</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">SEA</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">10:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">No situational edge — standard research applies</div>
+    </div>
+
+    <!-- SUNDAY PREVIEW -->
+    <div style="margin-top:20px;padding:14px 16px;background:rgba(0,194,255,0.04);border:1px solid rgba(0,194,255,0.2);border-radius:6px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;">Sun Mar 1 — Early Look</div>
+      <div style="display:grid;gap:6px;">
+        <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);">
+          <span style="color:var(--text-muted);">OTT @ TOR</span> — 7:00 PM ET · OTT on B2B (played Sat) · <span style="color:#ffb020;">⚠ Signal 1 Watch</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);">
+          <span style="color:var(--text-muted);">WPG @ SEA</span> — 10:00 PM ET · WPG on B2B (lost 4-5 at ANA today) · <span style="color:#ffb020;">⚠ Signal 1 Watch</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);">
+          <span style="color:var(--text-muted);">NSH @ DAL · DET @ CAR · OTT @ TOR · CGY @ LAK · MTL @ WSH</span> — Full slate, 11 games
+        </div>
+      </div>
+    </div>
+
+    </div><!-- end weekend -->
+
+    <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);text-align:center;padding:12px 0;border-top:1px solid var(--border);margin-top:4px;">
+      Odds sourced from DraftKings, FanDuel, BetMGM. Updated as of 11:00 AM MT Feb 28. Signal alerts based on backtested situational filters — not guaranteed outcomes. Gamble responsibly.
+    </div>
+
+  </div><!-- end dashboard-preview -->
+</div><!-- end dashboard section -->
+
+<!-- FEATURES -->
+<div id="features" class="section reveal">
+  <div class="section-label">What We Track</div>
+  <div class="section-title">Six Signals.<br>One Edge.</div>
+  <div class="section-desc">Proprietary data points the market consistently undervalues — tracked automatically and delivered every morning.</div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🥅</span>
+      <div class="feature-title">Goalie Intelligence</div>
+      <div class="feature-desc">Real starter identification pulled from every boxscore. Season save%, last-5 form, days rest, and starter vs backup classification — updated daily.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">✈️</span>
+      <div class="feature-title">Travel Load</div>
+      <div class="feature-desc">Exact miles traveled between every NHL arena. Cross-country trips, time zone crossings, and back-to-back road games flagged and impact-scored.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📅</span>
+      <div class="feature-title">Schedule Fatigue</div>
+      <div class="feature-desc">Back-to-back detection, 3-in-4 nights alerts, rest differentials, and cumulative load scores across the brutal 82-game NHL grind.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🤖</span>
+      <div class="feature-title">XGBoost Model</div>
+      <div class="feature-desc">Machine learning trained on 22,500 games across 17 NHL seasons. Thirty-five features combined into a calibrated win probability you can trust.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📐</span>
+      <div class="feature-title">Edge Scoring</div>
+      <div class="feature-desc">Model probability vs closing market implied probability. When the gap exceeds 8–10%, you have a mathematically identified value opportunity.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🚨</span>
+      <div class="feature-title">Morning Alerts</div>
+      <div class="feature-desc">Level 1–3 alert system in your inbox every game day. Level 3 signals have shown measurable edge over a 79-game tracked sample — and we're still counting.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div id="how" class="section reveal">
+  <div class="section-label">Process</div>
+  <div class="section-title">How It Works</div>
+  <div class="section-desc" style="margin-bottom:48px;">Four steps from raw data to your morning edge report.</div>
+
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-title">Data Collection</div>
+      <div class="how-desc">NHL API, Pinnacle odds snapshots, and goalie boxscores pulled automatically every day across 17 years of history.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-title">Feature Engine</div>
+      <div class="how-desc">Two primary signals validated: rest differential (+8.7% ROI, 77 games/season) and backup goalie on B2B (+38% ROI, 45 games/season). No black box — you see exactly why every alert fires.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-title">Model Prediction</div>
+      <div class="how-desc">XGBoost model trained on 22,500 games generates a win probability for every game, compared against closing market odds.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-title">Your Daily Report</div>
+      <div class="how-desc">Edge scores, alert levels, and goalie situations delivered to your dashboard and inbox before puck drop — every game day.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+
+<!-- ── VALIDATED SIGNALS SECTION ── -->
+<div id="signals" class="section reveal">
+  <div class="section-label">The Edge</div>
+  <div class="section-title">Two Signals. Both Validated.</div>
+  <div class="section-desc">We don't use a black box. Every alert traces back to one of two research-backed situational edges, backtested across 1,200+ games with real closing lines from Pinnacle and DraftKings.</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:860px;margin:40px auto 0;">
+
+    <!-- Signal 1 -->
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:28px 24px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;">SIGNAL 01 — REST DIFFERENTIAL</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--text-primary);line-height:1;margin-bottom:4px;">+8.7%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin-bottom:20px;">ROI · Pinnacle closing lines · n=48</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;">
+        When the away team is on a back-to-back and the home team has had <strong style="color:var(--text-primary);">3+ days rest</strong>, home teams win 60.4% of the time — and the market doesn't fully price it in.
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">60.4%</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">HIT RATE</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">+7.4%</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">ROI @ DRAFTKINGS</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">~77</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">GAMES / SEASON</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signal 2 -->
+    <div style="background:var(--surface-2);border:1px solid rgba(0,194,255,0.25);border-radius:6px;padding:28px 24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;background:var(--accent);color:#000;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:0 0 0 4px;">PREMIUM</div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;">SIGNAL 02 — BACKUP GOALIE ON B2B</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--text-primary);line-height:1;margin-bottom:4px;">+38.7%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin-bottom:20px;">ROI · Pinnacle closing lines · n=39</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;">
+        When the away team's goalie load is low on a B2B — a strong proxy for a <strong style="color:var(--text-primary);">backup starting</strong> — the edge is dramatic. Home teams win 71.8% of the time.
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">71.8%</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">HIT RATE</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">~45</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">GAMES / SEASON</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">3</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">SEASONS VALIDATED</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width:860px;margin:16px auto 0;background:var(--surface-3);border:1px solid var(--border);border-radius:4px;padding:14px 20px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);line-height:1.7;">
+    ⚠ Past performance does not guarantee future results. Sample sizes are real but limited. Signal 2 carries higher variance. We show our work — always.
+  </div>
+</div>
+
+<div id="pricing" class="section reveal">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Simple.<br>Transparent.</div>
+  <div class="section-desc">Beta members lock in founding pricing permanently. No hidden fees. Cancel any time.</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><sup>$</sup>0</div>
+      <div class="plan-period">forever free</div>
+      <ul class="plan-features">
+        <li>Today's schedule & B2B flags</li>
+        <li>Basic goalie situation</li>
+        <li>Level 1 alerts only</li>
+        <li class="dim">No edge scores</li>
+        <li class="dim">No model probabilities</li>
+        <li class="dim">No historical data</li>
+      </ul>
+      <a href="#beta" class="btn-secondary" style="width:100%;text-align:center;">Get Started</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price"><sup>$</sup>29</div>
+      <div class="plan-period">
+        per month<br>
+        <span class="beta-price">$19/mo for beta members — save 35%</span>
+      </div>
+      <ul class="plan-features">
+        <li>Full daily dashboard</li>
+        <li>All alert levels (1–3)</li>
+        <li>Model edge scores</li>
+        <li>Goalie form & save%</li>
+        <li>Travel distance data</li>
+        <li>Email alerts before puck drop</li>
+      </ul>
+      <a href="#beta" class="btn-primary" style="width:100%;text-align:center;">Join Beta — $19/mo</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="plan-name">Sharp</div>
+      <div class="plan-price"><sup>$</sup>79</div>
+      <div class="plan-period">
+        per month<br>
+        <span class="beta-price">$49/mo for beta members — save 38%</span>
+      </div>
+      <ul class="plan-features">
+        <li>Everything in Pro</li>
+        <li>Raw model probabilities</li>
+        <li>Full historical database</li>
+        <li>CSV data exports</li>
+        <li>API access (coming soon)</li>
+        <li>Private Discord + priority support</li>
+      </ul>
+      <a href="#beta" class="btn-secondary" style="width:100%;text-align:center;">Join Beta — $49/mo</a>
+    </div>
+  </div>
+</div>
+
+<!-- BETA SIGNUP -->
+<div id="beta" class="beta-section reveal">
+  <div class="beta-inner">
+    <div class="beta-tag">⚡ Founding Member Access</div>
+    <div class="beta-title">Get On The Ice</div>
+    <p class="beta-desc">
+      Ice Cold Analytics is opening to a small founding group before public launch.
+      Beta members lock in 35–38% off forever and get direct input
+      into what we build next.
+    </p>
+    <!-- Brevo embedded form -->
+    <div style="max-width:540px; margin:0 auto;">
+      <iframe src="https://a4ceb66d.sibforms.com/serve/MUIFAOShPrVrFkI5b6SAN-hCcTHy6LWMs2NTNWiXt7hCZYtF4UZaVpU39u5osmGMkdr8_yK2uiDdbwS47lBmdNGqkkQQtpMkwRXeHf5PpDGPMtOFS2Z_wuLHfwguIbdYFYXpu_GRRjO8XQot1Aj0DIqgwxsdm5GTRMEiZUbpV1cprJrQ4N_ZwyUEvp3jeMKQcIJlo5TRA_ekmw5dFw==" frameborder="0" scrolling="auto" allowfullscreen style="display:block; width:100%; min-height:305px; border:none;"></iframe>
+    </div>
+    <p class="form-note" style="margin-top:16px;">No spam. No credit card required. Unsubscribe any time.</p>
+    <div class="ca-badge">🍁 Built in Canada · icecoldanalytics.ca</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-wordmark">
+    <div class="footer-logo-top">ICE <span>COLD</span></div>
+    <div class="footer-logo-bottom">Analytics · icecoldanalytics.ca</div>
+  </a>
+  <ul class="footer-links">
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#signals">The Edge</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#beta">Beta</a></li>
+  </ul>
+  <div class="footer-right">
+    Built on 17 years of NHL data<br>
+    © 2025 Ice Cold Analytics — All rights reserved
+  </div>
+</footer>
+
+<div class="disclaimer">
+  Ice Cold Analytics provides statistical analysis and information tools for entertainment and research purposes only. We do not offer betting advice or tips.<br>
+  Please gamble responsibly. Sports betting may not be legal in your jurisdiction. You must be of legal gambling age to use betting-related services.
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Beta signup
+  function submitBeta() {
+    const input = document.getElementById('beta-email');
+    const btn = document.getElementById('beta-btn');
+    const email = input.value.trim();
+
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = 'rgba(255,68,68,0.6)';
+      input.placeholder = 'Please enter a valid email';
+      setTimeout(() => {
+        input.style.borderColor = '';
+        input.placeholder = 'your@email.com';
+      }, 2500);
+      return;
+    }
+
+    window.location.href = 'mailto:icecoldanalytics@shaw.ca?subject=Beta%20Access%20Request&body=Hi%2C%20I%27d%20like%20to%20join%20the%20Ice%20Cold%20Analytics%20beta.%0A%0AEmail%3A%20' + encodeURIComponent(email);
+    document.getElementById('signup-form-wrap').style.display = 'none';
+    document.getElementById('signup-success').style.display = 'block';
+  }
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--text-primary)' : '';
+    });
+  });
+</script>
+</body>
+</html>
