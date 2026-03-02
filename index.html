@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ice Cold Analytics — The Analytics Edge for NHL Bettors</title>
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ice: #C8E6F5;
+    --ice-dim: #7BAEC8;
+    --deep: #1C2026;
+    --surface: #242A32;
+    --surface-2: #2C3440;
+    --surface-3: #323A48;
+    --border: rgba(200,230,245,0.12);
+    --border-bright: rgba(200,230,245,0.25);
+    --alert-red: #FF4444;
+    --alert-amber: #FFB020;
+    --alert-green: #22C55E;
+    --text-primary: #F0F7FC;
+    --text-secondary: #90BDD4;
+    --text-muted: #5A7A90;
+    --accent: #00C2FF;
+    --accent-dim: rgba(0,194,255,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,194,255,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 90% 20%, rgba(0,100,180,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 68px;
+    background: rgba(28,32,38,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .nav-logo-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 5px;
+    color: var(--text-primary);
+  }
+
+  .nav-logo-top span { color: var(--accent); }
+
+  .nav-logo-bottom {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text-primary); }
+
+  .nav-cta {
+    color: var(--accent) !important;
+    border: 1px solid rgba(0,194,255,0.3);
+    padding: 8px 20px;
+    border-radius: 3px;
+    transition: all 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-dim) !important;
+    border-color: var(--accent) !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 40px 100px;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(0,194,255,0.25);
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 40px;
+    display: inline-block;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-wordmark {
+    animation: fadeUp 0.6s 0.1s ease both;
+    margin-bottom: 8px;
+  }
+
+  .hero-wordmark-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 160px);
+    letter-spacing: 12px;
+    line-height: 0.85;
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .hero-wordmark-top .cold { color: var(--accent); }
+
+  .hero-wordmark-bottom {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(12px, 2vw, 18px);
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 8px;
+  }
+
+  .hero-tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 3vw, 28px);
+    letter-spacing: 5px;
+    color: var(--text-muted);
+    margin: 32px 0;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero p {
+    max-width: 500px;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--deep);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: #33CFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(0,194,255,0.3);
+  }
+
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-bright);
+    padding: 14px 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    color: var(--text-primary);
+    border-color: rgba(200,230,245,0.35);
+  }
+
+  /* ── DIVIDER LINE ── */
+  .ice-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.25;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .stat-item {
+    flex: 1;
+    max-width: 220px;
+    padding: 32px 24px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 110px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 64px;
+  }
+
+  /* ── DASHBOARD PREVIEW ── */
+  .dashboard-preview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  }
+
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+
+  .dashboard-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--alert-green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+
+  .dashboard-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .games-grid {
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .game-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .game-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+
+  .game-card.alert-high::before { background: var(--alert-red); }
+  .game-card.alert-mid::before  { background: var(--alert-amber); }
+  .game-card.alert-low::before  { background: var(--text-muted); }
+
+  .game-card.alert-high { border-color: rgba(255,68,68,0.18); background: rgba(255,68,68,0.03); }
+  .game-card.alert-mid  { border-color: rgba(255,176,32,0.15); background: rgba(255,176,32,0.02); }
+
+  .team-info { display: flex; flex-direction: column; gap: 4px; }
+  .team-away { text-align: left; }
+  .team-home { text-align: right; }
+
+  .team-abbr {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .team-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+  }
+
+  .team-meta.warn  { color: var(--alert-amber); }
+  .team-meta.danger { color: var(--alert-red); }
+
+  .vs-col { text-align: center; }
+
+  .vs-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+
+  .game-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .alert-col { text-align: right; }
+
+  .alert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+
+  .badge-high { background: rgba(255,68,68,0.12);  color: var(--alert-red);   border: 1px solid rgba(255,68,68,0.25); }
+  .badge-mid  { background: rgba(255,176,32,0.10); color: var(--alert-amber); border: 1px solid rgba(255,176,32,0.2); }
+  .badge-none { background: rgba(61,90,110,0.15);  color: var(--text-muted);  border: 1px solid var(--border); }
+
+  .edge-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .edge-score span { color: var(--accent); }
+
+  /* ── FEATURES GRID ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    padding: 44px 36px;
+    transition: background 0.2s;
+  }
+
+  .feature-card:hover { background: var(--surface-2); }
+
+  .feature-icon {
+    font-size: 30px;
+    margin-bottom: 22px;
+    display: block;
+  }
+
+  .feature-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    counter-reset: steps;
+  }
+
+  .how-card {
+    background: var(--surface);
+    padding: 40px 28px;
+    position: relative;
+    counter-increment: steps;
+  }
+
+  .how-card::before {
+    content: "0" counter(steps);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    letter-spacing: 2px;
+    color: var(--border-bright);
+    line-height: 1;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .how-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .how-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 44px 36px;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .pricing-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-3px);
+  }
+
+  .pricing-card.featured {
+    border-color: rgba(0,194,255,0.3);
+    background: var(--surface-2);
+  }
+
+  .pricing-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--deep);
+    background: var(--accent);
+    padding: 4px 14px;
+    border-radius: 0 0 4px 4px;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+
+  .plan-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .plan-price sup {
+    font-size: 28px;
+    vertical-align: top;
+    margin-top: 14px;
+    color: var(--text-secondary);
+  }
+
+  .plan-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .plan-period .beta-price {
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .plan-features li {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .plan-features li::before {
+    content: '—';
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .plan-features li.dim { color: var(--text-muted); }
+  .plan-features li.dim::before { color: var(--text-muted); }
+
+  /* ── BETA SECTION ── */
+  .beta-section {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 100px 40px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .beta-section::before {
+    content: 'ICE COLD';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(100px, 20vw, 240px);
+    letter-spacing: 20px;
+    color: rgba(0,194,255,0.025);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .beta-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .beta-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--alert-amber);
+    border: 1px solid rgba(255,176,32,0.25);
+    padding: 6px 16px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 28px;
+  }
+
+  .beta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 7vw, 80px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .beta-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 12px;
+    max-width: 460px;
+    margin: 0 auto 16px;
+  }
+
+  .email-input {
+    flex: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--surface-3);
+    border: 1px solid var(--border-bright);
+    color: var(--text-primary);
+    padding: 14px 20px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-input::placeholder { color: var(--text-muted); }
+  .email-input:focus { border-color: rgba(0,194,255,0.45); }
+
+  .form-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+  }
+
+  /* ── CA BADGE ── */
+  .ca-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-top: 40px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 48px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-wordmark { text-decoration: none; }
+
+  .footer-logo-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    color: var(--text-muted);
+  }
+
+  .footer-logo-top span { color: var(--text-secondary); }
+
+  .footer-logo-bottom {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text-secondary); }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    position: relative;
+    z-index: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px 40px 28px;
+    line-height: 1.9;
+    border-top: 1px solid var(--border);
+    opacity: 0.7;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.25; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 80px; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+    .features-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .section { padding: 70px 24px; }
+    .email-form { flex-direction: column; }
+    .game-card { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .vs-col { display: none; }
+    .alert-col { grid-column: 1 / -1; text-align: left; }
+    footer { flex-direction: column; gap: 28px; text-align: center; }
+    .footer-right { text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+
+  /* ── OLYMPIC BANNER ── */
+  .olympic-banner {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,176,32,0.08);
+    border-bottom: 1px solid rgba(255,176,32,0.2);
+    padding: 10px 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .olympic-banner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--alert-amber);
+  }
+
+  .olympic-banner strong {
+    color: var(--text-primary);
+  }
+
+  /* ── MONEYLINE ROW ON GAME CARDS ── */
+  .ml-row {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .ml-row-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .ml-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--surface-3);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ml-chip-book {
+    color: var(--text-muted);
+    font-size: 10px;
+  }
+
+  .ml-chip.best-line {
+    border-color: rgba(0,194,255,0.35);
+    background: rgba(0,194,255,0.07);
+    color: var(--accent);
+  }
+
+  .ml-chip.best-line .ml-chip-book { color: var(--accent); opacity: 0.7; }
+  .dfs-row {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0,194,255,0.04);
+    border: 1px solid rgba(0,194,255,0.12);
+    border-radius: 4px;
+    flex-wrap: wrap;
+  }
+  .dfs-row-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-right: 4px;
+  }
+  .dfs-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .dfs-chip-play {
+    background: rgba(0,194,255,0.10);
+    border: 1px solid rgba(0,194,255,0.2);
+    color: var(--accent);
+  }
+  .dfs-chip-avoid {
+    background: rgba(255,68,68,0.08);
+    border: 1px solid rgba(255,68,68,0.18);
+    color: var(--alert-red);
+  }
+  .dfs-chip-neutral {
+    background: rgba(61,90,110,0.2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .dfs-chip-signal2 {
+    background: rgba(0,194,255,0.16);
+    border: 1px solid rgba(0,194,255,0.35);
+    color: #fff;
+    font-weight: 600;
+  }
+  .dfs-tag {
+    font-size: 9px;
+    opacity: 0.7;
+  }
+  .dfs-none {
+    grid-column: 1 / -1;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    opacity: 0.5;
+  }
+
+
+  .ml-coming-soon {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-top">ICE <span>COLD</span></span>
+    <span class="nav-logo-bottom">Analytics</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#signals">The Edge</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+    <li><a href="risk-analyzer.html">Risk Analyzer</a></li>
+    <li><a href="#beta" class="nav-cta">Join Beta</a></li>
+  </ul>
+</nav>
+
+
+<!-- OLYMPIC BREAK BANNER -->
+<div class="olympic-banner">
+  <span>🏒</span>
+  <span>🔥 3 signal games tonight — EDM @ SJS · BUF @ TBL · WSH @ MTL — Away B2B + rested home team: <strong>+8.7% ROI</strong> backtested.</span>
+  <span>🏒</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">🏒 Now in Beta — icecoldanalytics.ca</div>
+
+  <div class="hero-wordmark">
+    <span class="hero-wordmark-top">ICE <span class="cold">COLD</span></span>
+    <span class="hero-wordmark-bottom">Analytics</span>
+  </div>
+
+  <div class="hero-tagline">The Analytics Edge for NHL Bettors</div>
+
+  <p>We track two validated edges the market underprices: rest differential and backup goalie situations on back-to-backs. Backtested across 1,200+ games. Delivered before puck drop.</p>
+
+  <div class="hero-actions">
+    <a href="#beta" class="btn-primary">Join the Beta</a>
+    <a href="#dashboard" class="btn-secondary">See the Dashboard</a>
+  </div>
+
+  <div class="ice-line"></div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-value">22K+</div>
+    <div class="stat-label">Games Analyzed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">17 YR</div>
+    <div class="stat-label">Historical Data</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">4,800</div>
+    <div class="stat-label">Goalie Starts Tracked</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">35</div>
+    <div class="stat-label">Predictive Features</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value">.ca</div>
+    <div class="stat-label">Canadian Built</div>
+  </div>
+</div>
+
+<!-- DASHBOARD PREVIEW -->
+<div id="dashboard" class="section reveal">
+  <div class="section-label">Live Dashboard</div>
+  <div class="section-title">Every Game.<br>Every Morning.</div>
+  <div class="section-desc">Two research-backed signals — rest differential and goalie load — delivered before puck drop every game day.</div>
+
+  <div class="dashboard-preview">
+    <div class="dashboard-header">
+      <div class="dashboard-title">
+        <span class="live-dot"></span>
+        NHL Daily Intelligence — Sat Feb 28 2026
+      </div>
+      <div class="dashboard-date">icecoldanalytics.ca · Updated 11:00 AM MT</div>
+    </div>
+
+    <!-- LAST NIGHT SCORES -->
+    <div style="margin-bottom:18px;padding:14px 16px;background:rgba(61,90,110,0.15);border:1px solid var(--border);border-radius:6px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:10px;">Fri Feb 27 — Final Scores</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">FLA 5 · TOR 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">BOS 4 · CBJ 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">CAR 5 · TBL 4</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">DET 2 · OTT 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">NYI 4 · MTL 3</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">PIT 4 · NJD 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">PHI 3 · NYR 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">NSH 4 · CHI 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">STL 5 · SEA 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">MIN 5 · COL 2</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">CGY 4 · SJS 1</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface-2);padding:4px 10px;border-radius:3px;">EDM 8 · LAK 1</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin-top:8px;">Also today (Feb 28 early): WSH 3 · VGK 2 · FLA 2 · BUF 3 · UTA 5 · MIN 2 · ANA 5 · WPG 4</div>
+    </div>
+
+    <!-- TONIGHT'S GAMES -->
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;">Tonight — Sat Feb 28 · 3 Signal Games</div>
+
+    <!-- ⚡ SIGNAL 1: EDM @ SJS -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.35);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">EDM</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">SJS</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#ff4444;color:#fff;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">4:00 PM ET</span>
+      </div>
+      <div class="alert-badge badge-high">⚡ Signal 1 Active</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:6px 0;">EDM on B2B (won 8-1 at LAK last night) · SJS rested 2 days · +8.7% ROI historical</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> Tristan Jarry (EDM, 14-7-2, 3.14 GAA) vs Yaroslav Askarov (SJS, 17-16-2, 3.52 GAA)
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);">
+        <span style="color:var(--text-muted);">Win prob:</span> EDM 58.5% · SJS 41.5%
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="dfs-chip">SJS ML · Fade fatigued EDM</span>
+        <span class="dfs-chip dfs-chip-signal2">✦ Askarov <span class="dfs-tag">DFS VALUE vs B2B</span></span>
+      </div>
+    </div>
+
+    <!-- ⚡ SIGNAL 1: BUF @ TBL -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.35);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">BUF</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">TBL</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#ff4444;color:#fff;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">7:00 PM ET</span>
+      </div>
+      <div class="alert-badge badge-high">⚡ Signal 1 Active</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:6px 0;">BUF on B2B (lost 3-2 at FLA today) · TBL rested since Feb 27 (won vs CAR) · +8.7% ROI historical</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> TBC (BUF) vs TBC (TBL) — confirm closer to puck drop
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);">
+        <span style="color:var(--text-muted);">Win prob:</span> TBL 68% · BUF 32%
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="dfs-chip">TBL ML · Rested home favorite</span>
+      </div>
+    </div>
+
+    <!-- ⚡ SIGNAL 1: WSH @ MTL -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.35);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">WSH</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">MTL</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#ff4444;color:#fff;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">7:00 PM ET</span>
+      </div>
+      <div class="alert-badge badge-high">⚡ Signal 1 Active</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:6px 0;">WSH on B2B (beat VGK 3-2 at home today) · MTL rested since Feb 27 (lost to NYI) · +8.7% ROI historical</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> Charlie Lindgren (WSH) vs Jakub Dobes (MTL) — confirmed
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="dfs-chip">MTL ML · Rested home underdog value</span>
+        <span class="dfs-chip dfs-chip-signal2">✦ Dobes <span class="dfs-tag">DFS GOALIE VALUE</span></span>
+      </div>
+    </div>
+
+    <!-- SIGNALS CANCEL: PIT @ NYR -->
+    <div style="margin-bottom:10px;padding:14px 16px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">PIT</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--text-primary);">NYR</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#3d5a6e;color:#aaa;padding:2px 6px;border-radius:2px;margin-left:8px;">B2B</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;background:#3d5a6e;color:#aaa;padding:2px 6px;border-radius:2px;margin-left:4px;">B2B</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">12:30 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);background:rgba(61,90,110,0.3);padding:5px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;">↔ SIGNALS CANCEL — Both teams on B2B</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);margin:6px 0;">
+        <span style="color:var(--text-muted);">Goalies:</span> Stuart Skinner (PIT, 19-12-5) vs Igor Shesterkin (NYR, 17-12-5, 2.47 GAA)
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);">
+        <span style="color:var(--text-muted);">Win prob:</span> PIT 53.9% · NYR 46.1%
+      </div>
+    </div>
+
+    <!-- NO EDGE GAMES -->
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;margin:16px 0 8px;">Remaining Games — No Situational Edge</div>
+
+    <!-- BOS @ PHI -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">BOS</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">PHI</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">3:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Jeremy Swayman (BOS) vs Daniel Vladar (PHI) · PHI home on 2nd game of back-to-back, BOS rested — note PHI is home so Signal 1 does not apply</div>
+    </div>
+
+    <!-- NJD @ STL -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">NJD</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">STL</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">5:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Jacob Markstrom (NJD) vs Jordan Binnington (STL) · Near pick'em — NJD -110 / STL -108</div>
+    </div>
+
+    <!-- CHI @ COL -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">CHI</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">COL</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">6:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Spencer Knight (CHI) vs Mackenzie Blackwood (COL, 16-6-1, .916 SV%) · COL heavy favorite 76.5%</div>
+    </div>
+
+    <!-- NYI @ CBJ -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">NYI</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">CBJ</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">6:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">Ilya Sorokin (NYI, 20-13-2, .913 SV%) vs Elvis Merzlikins (CBJ)</div>
+    </div>
+
+    <!-- DET @ CAR -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">DET</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">CAR</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">7:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">John Gibson (DET) vs Brandon Bussi (CAR) · CAR 62% win probability</div>
+    </div>
+
+    <!-- OTT @ TOR — tomorrow preview note -->
+    <!-- NSH @ DAL -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">NSH</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">DAL</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">8:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">No situational edge — standard research applies</div>
+    </div>
+
+    <!-- VAN @ SEA (late) -->
+    <div style="margin-bottom:8px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">VAN</span>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin:0 6px;">@</span>
+          <span style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text-secondary);">SEA</span>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);">10:00 PM ET</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:5px;">No situational edge — standard research applies</div>
+    </div>
+
+    <!-- SUNDAY PREVIEW -->
+    <div style="margin-top:20px;padding:14px 16px;background:rgba(0,194,255,0.04);border:1px solid rgba(0,194,255,0.2);border-radius:6px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;">Sun Mar 1 — Early Look</div>
+      <div style="display:grid;gap:6px;">
+        <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);">
+          <span style="color:var(--text-muted);">OTT @ TOR</span> — 7:00 PM ET · OTT on B2B (played Sat) · <span style="color:#ffb020;">⚠ Signal 1 Watch</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);">
+          <span style="color:var(--text-muted);">WPG @ SEA</span> — 10:00 PM ET · WPG on B2B (lost 4-5 at ANA today) · <span style="color:#ffb020;">⚠ Signal 1 Watch</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-secondary);">
+          <span style="color:var(--text-muted);">NSH @ DAL · DET @ CAR · OTT @ TOR · CGY @ LAK · MTL @ WSH</span> — Full slate, 11 games
+        </div>
+      </div>
+    </div>
+
+    </div><!-- end weekend -->
+
+    <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);text-align:center;padding:12px 0;border-top:1px solid var(--border);margin-top:4px;">
+      Odds sourced from DraftKings, FanDuel, BetMGM. Updated as of 11:00 AM MT Feb 28. Signal alerts based on backtested situational filters — not guaranteed outcomes. Gamble responsibly.
+    </div>
+
+  </div><!-- end dashboard-preview -->
+</div><!-- end dashboard section -->
+
+<!-- FEATURES -->
+<div id="features" class="section reveal">
+  <div class="section-label">What We Track</div>
+  <div class="section-title">Six Signals.<br>One Edge.</div>
+  <div class="section-desc">Proprietary data points the market consistently undervalues — tracked automatically and delivered every morning.</div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🥅</span>
+      <div class="feature-title">Goalie Intelligence</div>
+      <div class="feature-desc">Real starter identification pulled from every boxscore. Season save%, last-5 form, days rest, and starter vs backup classification — updated daily.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">✈️</span>
+      <div class="feature-title">Travel Load</div>
+      <div class="feature-desc">Exact miles traveled between every NHL arena. Cross-country trips, time zone crossings, and back-to-back road games flagged and impact-scored.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📅</span>
+      <div class="feature-title">Schedule Fatigue</div>
+      <div class="feature-desc">Back-to-back detection, 3-in-4 nights alerts, rest differentials, and cumulative load scores across the brutal 82-game NHL grind.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🤖</span>
+      <div class="feature-title">XGBoost Model</div>
+      <div class="feature-desc">Machine learning trained on 22,500 games across 17 NHL seasons. Thirty-five features combined into a calibrated win probability you can trust.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📐</span>
+      <div class="feature-title">Edge Scoring</div>
+      <div class="feature-desc">Model probability vs closing market implied probability. When the gap exceeds 8–10%, you have a mathematically identified value opportunity.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🚨</span>
+      <div class="feature-title">Morning Alerts</div>
+      <div class="feature-desc">Level 1–3 alert system in your inbox every game day. Level 3 signals have shown measurable edge over a 79-game tracked sample — and we're still counting.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div id="how" class="section reveal">
+  <div class="section-label">Process</div>
+  <div class="section-title">How It Works</div>
+  <div class="section-desc" style="margin-bottom:48px;">Four steps from raw data to your morning edge report.</div>
+
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-title">Data Collection</div>
+      <div class="how-desc">NHL API, Pinnacle odds snapshots, and goalie boxscores pulled automatically every day across 17 years of history.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-title">Feature Engine</div>
+      <div class="how-desc">Two primary signals validated: rest differential (+8.7% ROI, 77 games/season) and backup goalie on B2B (+38% ROI, 45 games/season). No black box — you see exactly why every alert fires.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-title">Model Prediction</div>
+      <div class="how-desc">XGBoost model trained on 22,500 games generates a win probability for every game, compared against closing market odds.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-title">Your Daily Report</div>
+      <div class="how-desc">Edge scores, alert levels, and goalie situations delivered to your dashboard and inbox before puck drop — every game day.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+
+<!-- ── VALIDATED SIGNALS SECTION ── -->
+<div id="signals" class="section reveal">
+  <div class="section-label">The Edge</div>
+  <div class="section-title">Two Signals. Both Validated.</div>
+  <div class="section-desc">We don't use a black box. Every alert traces back to one of two research-backed situational edges, backtested across 1,200+ games with real closing lines from Pinnacle and DraftKings.</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:860px;margin:40px auto 0;">
+
+    <!-- Signal 1 -->
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:28px 24px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;">SIGNAL 01 — REST DIFFERENTIAL</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--text-primary);line-height:1;margin-bottom:4px;">+8.7%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin-bottom:20px;">ROI · Pinnacle closing lines · n=48</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;">
+        When the away team is on a back-to-back and the home team has had <strong style="color:var(--text-primary);">3+ days rest</strong>, home teams win 60.4% of the time — and the market doesn't fully price it in.
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">60.4%</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">HIT RATE</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">+7.4%</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">ROI @ DRAFTKINGS</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">~77</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">GAMES / SEASON</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signal 2 -->
+    <div style="background:var(--surface-2);border:1px solid rgba(0,194,255,0.25);border-radius:6px;padding:28px 24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;background:var(--accent);color:#000;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:0 0 0 4px;">PREMIUM</div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;">SIGNAL 02 — BACKUP GOALIE ON B2B</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--text-primary);line-height:1;margin-bottom:4px;">+38.7%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);margin-bottom:20px;">ROI · Pinnacle closing lines · n=39</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;">
+        When the away team's goalie load is low on a B2B — a strong proxy for a <strong style="color:var(--text-primary);">backup starting</strong> — the edge is dramatic. Home teams win 71.8% of the time.
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">71.8%</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">HIT RATE</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">~45</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">GAMES / SEASON</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);">3</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">SEASONS VALIDATED</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width:860px;margin:16px auto 0;background:var(--surface-3);border:1px solid var(--border);border-radius:4px;padding:14px 20px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);line-height:1.7;">
+    ⚠ Past performance does not guarantee future results. Sample sizes are real but limited. Signal 2 carries higher variance. We show our work — always.
+  </div>
+</div>
+
+<div id="pricing" class="section reveal">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Simple.<br>Transparent.</div>
+  <div class="section-desc">Beta members lock in founding pricing permanently. No hidden fees. Cancel any time.</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><sup>$</sup>0</div>
+      <div class="plan-period">forever free</div>
+      <ul class="plan-features">
+        <li>Today's schedule & B2B flags</li>
+        <li>Basic goalie situation</li>
+        <li>Level 1 alerts only</li>
+        <li class="dim">No edge scores</li>
+        <li class="dim">No model probabilities</li>
+        <li class="dim">No historical data</li>
+      </ul>
+      <a href="#beta" class="btn-secondary" style="width:100%;text-align:center;">Get Started</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price"><sup>$</sup>29</div>
+      <div class="plan-period">
+        per month<br>
+        <span class="beta-price">$19/mo for beta members — save 35%</span>
+      </div>
+      <ul class="plan-features">
+        <li>Full daily dashboard</li>
+        <li>All alert levels (1–3)</li>
+        <li>Model edge scores</li>
+        <li>Goalie form & save%</li>
+        <li>Travel distance data</li>
+        <li>Email alerts before puck drop</li>
+      </ul>
+      <a href="#beta" class="btn-primary" style="width:100%;text-align:center;">Join Beta — $19/mo</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="plan-name">Sharp</div>
+      <div class="plan-price"><sup>$</sup>79</div>
+      <div class="plan-period">
+        per month<br>
+        <span class="beta-price">$49/mo for beta members — save 38%</span>
+      </div>
+      <ul class="plan-features">
+        <li>Everything in Pro</li>
+        <li>Raw model probabilities</li>
+        <li>Full historical database</li>
+        <li>CSV data exports</li>
+        <li>API access (coming soon)</li>
+        <li>Private Discord + priority support</li>
+      </ul>
+      <a href="#beta" class="btn-secondary" style="width:100%;text-align:center;">Join Beta — $49/mo</a>
+    </div>
+  </div>
+</div>
+
+<!-- BETA SIGNUP -->
+<div id="beta" class="beta-section reveal">
+  <div class="beta-inner">
+    <div class="beta-tag">⚡ Founding Member Access</div>
+    <div class="beta-title">Get On The Ice</div>
+    <p class="beta-desc">
+      Ice Cold Analytics is opening to a small founding group before public launch.
+      Beta members lock in 35–38% off forever and get direct input
+      into what we build next.
+    </p>
+    <!-- Brevo embedded form -->
+    <div style="max-width:540px; margin:0 auto;">
+      <iframe src="https://a4ceb66d.sibforms.com/serve/MUIFAOShPrVrFkI5b6SAN-hCcTHy6LWMs2NTNWiXt7hCZYtF4UZaVpU39u5osmGMkdr8_yK2uiDdbwS47lBmdNGqkkQQtpMkwRXeHf5PpDGPMtOFS2Z_wuLHfwguIbdYFYXpu_GRRjO8XQot1Aj0DIqgwxsdm5GTRMEiZUbpV1cprJrQ4N_ZwyUEvp3jeMKQcIJlo5TRA_ekmw5dFw==" frameborder="0" scrolling="auto" allowfullscreen style="display:block; width:100%; min-height:305px; border:none;"></iframe>
+    </div>
+    <p class="form-note" style="margin-top:16px;">No spam. No credit card required. Unsubscribe any time.</p>
+    <div class="ca-badge">🍁 Built in Canada · icecoldanalytics.ca</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-wordmark">
+    <div class="footer-logo-top">ICE <span>COLD</span></div>
+    <div class="footer-logo-bottom">Analytics · icecoldanalytics.ca</div>
+  </a>
+  <ul class="footer-links">
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#signals">The Edge</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#beta">Beta</a></li>
+  </ul>
+  <div class="footer-right">
+    Built on 17 years of NHL data<br>
+    © 2025 Ice Cold Analytics — All rights reserved
+  </div>
+</footer>
+
+<div class="disclaimer">
+  Ice Cold Analytics provides statistical analysis and information tools for entertainment and research purposes only. We do not offer betting advice or tips.<br>
+  Please gamble responsibly. Sports betting may not be legal in your jurisdiction. You must be of legal gambling age to use betting-related services.
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Beta signup
+  function submitBeta() {
+    const input = document.getElementById('beta-email');
+    const btn = document.getElementById('beta-btn');
+    const email = input.value.trim();
+
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = 'rgba(255,68,68,0.6)';
+      input.placeholder = 'Please enter a valid email';
+      setTimeout(() => {
+        input.style.borderColor = '';
+        input.placeholder = 'your@email.com';
+      }, 2500);
+      return;
+    }
+
+    window.location.href = 'mailto:icecoldanalytics@shaw.ca?subject=Beta%20Access%20Request&body=Hi%2C%20I%27d%20like%20to%20join%20the%20Ice%20Cold%20Analytics%20beta.%0A%0AEmail%3A%20' + encodeURIComponent(email);
+    document.getElementById('signup-form-wrap').style.display = 'none';
+    document.getElementById('signup-success').style.display = 'block';
+  }
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--text-primary)' : '';
+    });
+  });
+</script>
+</body>
+</html>
