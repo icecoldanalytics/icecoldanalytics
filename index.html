@@ -245,6 +245,88 @@ footer{background:#03070e;border-top:1px solid var(--border);padding:36px 32px;t
 footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
 .footer-disclaimer{max-width:640px;margin:12px auto 0;padding-top:12px;border-top:1px solid var(--border);font-size:0.68rem;color:#2a3a4a;}
 
+/* ── FANTASY PICKS PAGE ─────────────────────────── */
+.fp-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:28px;}
+.fp-tab{font-weight:600;font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:12px 20px;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;}
+.fp-tab:hover{color:var(--text);}
+.fp-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.fp-panel{display:none;}.fp-panel.active{display:block;}
+
+/* Pick cards */
+.picks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:8px;}
+.pick-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:transform 0.2s,border-color 0.2s;position:relative;}
+.pick-card:hover{transform:translateY(-2px);border-color:rgba(0,180,255,0.2);}
+.pick-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.pick-card.tier-s::before{background:linear-gradient(90deg,#f5a623,#ffcc44);}
+.pick-card.tier-a::before{background:linear-gradient(90deg,var(--accent),var(--cyan));}
+.pick-card.tier-b::before{background:linear-gradient(90deg,var(--green),#00ffaa);}
+.pick-card.tier-c::before{background:linear-gradient(90deg,var(--muted),#6a8aaa);}
+
+.pick-header{padding:14px 16px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.pick-player{font-weight:700;font-size:1rem;color:var(--bright);}
+.pick-team{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+.pick-tier{font-weight:800;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+.tier-s-badge{background:rgba(245,166,35,0.15);color:var(--gold);border:1px solid rgba(245,166,35,0.3);}
+.tier-a-badge{background:rgba(0,180,255,0.12);color:var(--accent);border:1px solid rgba(0,180,255,0.25);}
+.tier-b-badge{background:rgba(0,214,143,0.12);color:var(--green);border:1px solid rgba(0,214,143,0.25);}
+.tier-c-badge{background:rgba(74,106,136,0.1);color:var(--muted);border:1px solid rgba(74,106,136,0.2);}
+
+.pick-body{padding:0 16px 14px;display:flex;flex-direction:column;gap:8px;}
+.pick-matchup{font-size:0.78rem;color:var(--muted);}
+.pick-matchup strong{color:var(--text);}
+.pick-stats{display:flex;gap:8px;flex-wrap:wrap;}
+.pick-stat{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:5px;padding:5px 10px;font-size:0.72rem;}
+.pick-stat-label{color:var(--muted);display:block;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.5px;}
+.pick-stat-val{color:var(--bright);font-weight:700;font-size:0.85rem;}
+.pick-reason{font-size:0.75rem;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:8px;margin-top:2px;}
+.pick-reason strong{color:var(--accent);}
+.pick-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.pick-tag{font-size:0.62rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;padding:2px 7px;border-radius:3px;}
+.pt-dfs{background:rgba(0,180,255,0.08);color:var(--accent);border:1px solid rgba(0,180,255,0.2);}
+.pt-season{background:rgba(245,166,35,0.08);color:var(--gold);border:1px solid rgba(245,166,35,0.2);}
+.pt-both{background:rgba(0,214,143,0.08);color:var(--green);border:1px solid rgba(0,214,143,0.2);}
+.pt-avoid{background:rgba(255,71,87,0.08);color:var(--red);border:1px solid rgba(255,71,87,0.2);}
+.pt-signal{background:rgba(255,140,0,0.08);color:var(--orange);border:1px solid rgba(255,140,0,0.2);}
+
+/* Goalie table */
+.goalie-table{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.goalie-row{display:grid;grid-template-columns:1fr 60px 70px 80px 100px;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid rgba(22,35,52,0.7);font-size:0.82rem;transition:background 0.15s;}
+.goalie-row:last-child{border-bottom:none;}
+.goalie-row:hover{background:rgba(255,255,255,0.02);}
+.goalie-row.header{background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);}
+.goalie-row.header span{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.gr-name{color:var(--bright);font-weight:600;}
+.gr-team{font-size:0.68rem;color:var(--muted);margin-top:1px;}
+.gr-stat{color:var(--text);font-size:0.8rem;}
+.gr-start{font-weight:700;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;padding:3px 9px;border-radius:4px;text-align:center;}
+.gs-confirmed{background:rgba(0,214,143,0.12);color:var(--green);border:1px solid rgba(0,214,143,0.25);}
+.gs-likely{background:rgba(0,180,255,0.1);color:var(--accent);border:1px solid rgba(0,180,255,0.2);}
+.gs-unknown{background:rgba(74,106,136,0.08);color:var(--muted);border:1px solid rgba(74,106,136,0.15);}
+.gs-avoid{background:rgba(255,71,87,0.1);color:var(--red);border:1px solid rgba(255,71,87,0.2);}
+.gr-rec{font-size:0.7rem;font-weight:600;text-align:right;}
+.rec-start{color:var(--green);}.rec-stream{color:var(--accent);}.rec-avoid{color:var(--red);}.rec-wait{color:var(--muted);}
+
+/* Prop cards */
+.props-stack{display:flex;flex-direction:column;gap:8px;}
+.prop-row{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 18px;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;transition:border-color 0.15s;}
+.prop-row:hover{border-color:rgba(0,180,255,0.15);}
+.prop-player{font-weight:700;font-size:0.9rem;color:var(--bright);}
+.prop-desc{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+.prop-desc strong{color:var(--text);}
+.prop-line{text-align:center;}
+.prop-line-val{font-weight:800;font-size:1rem;color:var(--bright);}
+.prop-line-label{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.prop-pick{font-weight:700;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;padding:5px 12px;border-radius:4px;white-space:nowrap;text-align:center;}
+.pp-over{background:rgba(0,214,143,0.12);color:var(--green);border:1px solid rgba(0,214,143,0.25);}
+.pp-under{background:rgba(255,71,87,0.1);color:var(--red);border:1px solid rgba(255,71,87,0.2);}
+
+/* Fantasy summary bar */
+.fp-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:28px;}
+.fps-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+.fps-val{font-weight:800;font-size:1.6rem;color:var(--bright);line-height:1;}
+.fps-val span{color:var(--accent);}
+.fps-label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;}
+
 /* RESPONSIVE */
 @media(max-width:768px){
   .topnav{padding:0 16px;}
@@ -325,6 +407,7 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
     <a id="nav-dashboard"      class="active"  onclick="showPage('dashboard')">Dashboard</a>
     <a id="nav-signal-tracker"                 onclick="showPage('signal-tracker')">Signal Tracker</a>
     <a id="nav-risk-analyzer"                  onclick="showPage('risk-analyzer')">Risk Analyzer</a>
+    <a id="nav-fantasy-picks"                  onclick="showPage('fantasy-picks')">Fantasy Picks</a>
     <a id="nav-about"                          onclick="showPage('about')">About</a>
   </div>
   <a class="nav-cta" onclick="showPage('risk-analyzer')">⚡ Analyze Now</a>
@@ -653,6 +736,13 @@ function showPage(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function showFPTab(id, btn) {
+  document.querySelectorAll('.fp-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.fp-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('fp-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
 function runAnalysis() {
   const awayTeam = document.getElementById('ra-away').value.trim() || 'Away Team';
   const homeTeam = document.getElementById('ra-home').value.trim() || 'Home Team';
@@ -737,6 +827,457 @@ function runAnalysis() {
   panel.classList.add('visible');
   panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
+</script>
+
+
+<!-- ══════════════════════════════════
+     FANTASY PICKS PAGE
+══════════════════════════════════ -->
+<div id="page-fantasy-picks" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-eyebrow">Ice Cold Analytics · Updated March 4, 2026</div>
+      <div class="page-title">Fantasy Picks</div>
+      <p class="page-desc">Daily value plays, goalie starts, and player props for both DFS (DraftKings / FanDuel) and season-long leagues. Signal-informed where applicable.</p>
+    </div>
+  </div>
+
+  <div class="main-wrap">
+
+    <!-- SUMMARY BAR -->
+    <div class="fp-summary" style="margin-top:28px;">
+      <div class="fps-card"><div class="fps-val"><span>8</span></div><div class="fps-label">Value Plays Today</div></div>
+      <div class="fps-card"><div class="fps-val"><span>10</span></div><div class="fps-label">Goalies Assessed</div></div>
+      <div class="fps-card"><div class="fps-val"><span>9</span></div><div class="fps-label">Prop Picks</div></div>
+      <div class="fps-card"><div class="fps-val"><span>5</span></div><div class="fps-label">Games on Slate (Mar 5)</div></div>
+      <div class="fps-card"><div class="fps-val"><span style="color:var(--gold);">S</span>-tier</div><div class="fps-label">Top Tier Available</div></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="fp-tabs">
+      <button class="fp-tab active" onclick="showFPTab('value-plays', this)">🏒 Value Plays</button>
+      <button class="fp-tab"        onclick="showFPTab('goalie-starts', this)">🥅 Goalie Starts</button>
+      <button class="fp-tab"        onclick="showFPTab('player-props', this)">📊 Player Props</button>
+    </div>
+
+    <!-- ── VALUE PLAYS ── -->
+    <div id="fp-value-plays" class="fp-panel active">
+      <div class="section-divider" style="margin-top:0;"><h2>Top Value Plays</h2><div class="sd-line"></div><div class="sd-badge">March 5 Slate · 5 Games</div></div>
+
+      <!-- S-TIER -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;">S-Tier · Must-Plays</div>
+      <div class="picks-grid">
+
+        <div class="pick-card tier-s">
+          <div class="pick-header">
+            <div><div class="pick-player">Nathan MacKinnon</div><div class="pick-team">Colorado Avalanche · C</div></div>
+            <span class="pick-tier tier-s-badge">S-Tier</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-matchup">vs <strong>DAL Stars</strong> · Mar 5 · 10 PM ET</div>
+            <div class="pick-stats">
+              <div class="pick-stat"><span class="pick-stat-label">Salary DK</span><span class="pick-stat-val">$9,400</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Proj Pts</span><span class="pick-stat-val">22.4</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val" style="color:var(--gold);">2.38x</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Points/GP</span><span class="pick-stat-val">1.56</span></div>
+            </div>
+            <div class="pick-reason">COL on back-to-back — but MacKinnon's elite level performance makes him a lock regardless of fatigue. <strong>Top scoring rate in the NHL (1.56 P/GP)</strong> and DAL is allowing 3.4 GPG on this road trip. Captain-worthy.</div>
+            <div class="pick-tags"><span class="pick-tag pt-both">DFS + Season</span><span class="pick-tag pt-signal">B2B Watch</span></div>
+          </div>
+        </div>
+
+        <div class="pick-card tier-s">
+          <div class="pick-header">
+            <div><div class="pick-player">Mikko Rantanen</div><div class="pick-team">Carolina Hurricanes · RW</div></div>
+            <span class="pick-tier tier-s-badge">S-Tier</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-matchup">@ <strong>VAN Canucks</strong> · Mar 5 · 10 PM ET</div>
+            <div class="pick-stats">
+              <div class="pick-stat"><span class="pick-stat-label">Salary DK</span><span class="pick-stat-val">$8,600</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Proj Pts</span><span class="pick-stat-val">19.8</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val" style="color:var(--gold);">2.30x</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Recent Form</span><span class="pick-stat-val" style="color:var(--green);">8-pt streak</span></div>
+            </div>
+            <div class="pick-reason"><strong>CAR is the signal bet here</strong> — VAN is the home team in a Signal 1 matchup. Rantanen on the power play unit, 8-game point streak, and VAN's Demko still working back from injury. Chalk play with upside.</div>
+            <div class="pick-tags"><span class="pick-tag pt-both">DFS + Season</span><span class="pick-tag pt-signal">Signal 1 Game</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- A-TIER -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin:20px 0 10px;">A-Tier · Strong Plays</div>
+      <div class="picks-grid">
+
+        <div class="pick-card tier-a">
+          <div class="pick-header">
+            <div><div class="pick-player">Elias Pettersson</div><div class="pick-team">Vancouver Canucks · C</div></div>
+            <span class="pick-tier tier-a-badge">A-Tier</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-matchup">vs <strong>CAR Hurricanes</strong> · Mar 5 · 10 PM ET</div>
+            <div class="pick-stats">
+              <div class="pick-stat"><span class="pick-stat-label">Salary DK</span><span class="pick-stat-val">$7,200</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Proj Pts</span><span class="pick-stat-val">15.6</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val">2.17x</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">PPG</span><span class="pick-stat-val">0.91</span></div>
+            </div>
+            <div class="pick-reason">Home-ice advantage + affordable price point. Signal 1 game but Pettersson's upside at this salary is too good to ignore for season-long. <strong>DFS only if fading Signal logic.</strong></div>
+            <div class="pick-tags"><span class="pick-tag pt-season">Season-Long</span></div>
+          </div>
+        </div>
+
+        <div class="pick-card tier-a">
+          <div class="pick-header">
+            <div><div class="pick-player">Auston Matthews</div><div class="pick-team">Toronto Maple Leafs · C</div></div>
+            <span class="pick-tier tier-a-badge">A-Tier</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-matchup">@ <strong>NJ Devils</strong> · Mar 5 · 7 PM ET</div>
+            <div class="pick-stats">
+              <div class="pick-stat"><span class="pick-stat-label">Salary DK</span><span class="pick-stat-val">$8,200</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Proj Pts</span><span class="pick-stat-val">17.1</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val">2.09x</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Goals/GP</span><span class="pick-stat-val">0.54</span></div>
+            </div>
+            <div class="pick-reason">TOR on back-to-back away is a <strong>Signal 1 fade candidate</strong>, so context matters. However Matthews' individual ceiling is always in play — use at reduced DFS exposure or swap to season-long hold.</div>
+            <div class="pick-tags"><span class="pick-tag pt-season">Season-Long</span><span class="pick-tag pt-signal">B2B Away</span></div>
+          </div>
+        </div>
+
+        <div class="pick-card tier-a">
+          <div class="pick-header">
+            <div><div class="pick-player">Kyle Connor</div><div class="pick-team">Winnipeg Jets · LW</div></div>
+            <span class="pick-tier tier-a-badge">A-Tier</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-matchup">vs <strong>TB Lightning</strong> · Mar 6 · 8 PM ET</div>
+            <div class="pick-stats">
+              <div class="pick-stat"><span class="pick-stat-label">Salary DK</span><span class="pick-stat-val">$6,800</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Proj Pts</span><span class="pick-stat-val">14.9</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val">2.19x</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">SOG/GP</span><span class="pick-stat-val">3.8</span></div>
+            </div>
+            <div class="pick-reason">Best value play on the slate at this price. WPG home-ice, Connor's shot volume is elite, and TB's PK has been leaky at 76.3%. <strong>Strong DFS value and season-long hold.</strong></div>
+            <div class="pick-tags"><span class="pick-tag pt-both">DFS + Season</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- B-TIER -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin:20px 0 10px;">B-Tier · Solid Fills / Streaming</div>
+      <div class="picks-grid">
+
+        <div class="pick-card tier-b">
+          <div class="pick-header">
+            <div><div class="pick-player">Quinton Byfield</div><div class="pick-team">Los Angeles Kings · C</div></div>
+            <span class="pick-tier tier-b-badge">B-Tier</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-matchup">vs <strong>NYI Islanders</strong> · Mar 5 · 10 PM ET</div>
+            <div class="pick-stats">
+              <div class="pick-stat"><span class="pick-stat-label">Salary DK</span><span class="pick-stat-val">$6,200</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Proj Pts</span><span class="pick-stat-val">12.8</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val">2.06x</span></div>
+            </div>
+            <div class="pick-reason">Budget-friendly fill on a strong home matchup. LA has won 6 straight at home. NYI is 26th in goals allowed. Byfield trending up with 5 pts in 4 games.</div>
+            <div class="pick-tags"><span class="pick-tag pt-dfs">DFS Fill</span></div>
+          </div>
+        </div>
+
+        <div class="pick-card tier-b">
+          <div class="pick-header">
+            <div><div class="pick-player">Dylan Guenther</div><div class="pick-team">Seattle Kraken · RW</div></div>
+            <span class="pick-tier tier-b-badge">B-Tier</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-matchup">vs <strong>STL Blues</strong> · Mar 5 · 10 PM ET</div>
+            <div class="pick-stats">
+              <div class="pick-stat"><span class="pick-stat-label">Salary DK</span><span class="pick-stat-val">$5,800</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Proj Pts</span><span class="pick-stat-val">11.4</span></div>
+              <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val">1.97x</span></div>
+            </div>
+            <div class="pick-reason">SEA home, STL on a 3-game skid allowing 4.2 GPG. Guenther is underpriced relative to his recent production. Good tournament pivot.</div>
+            <div class="pick-tags"><span class="pick-tag pt-dfs">DFS Fill</span><span class="pick-tag pt-season">Streamer</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- AVOID -->
+      <div class="section-divider" style="margin-top:28px;"><h2>Fades / Avoid List</h2><div class="sd-line"></div><div class="sd-badge">Signal-Informed</div></div>
+      <div class="picks-grid">
+        <div class="pick-card tier-c">
+          <div class="pick-header">
+            <div><div class="pick-player">Vegas Golden Knights</div><div class="pick-team">Skaters @ DET · Mar 5</div></div>
+            <span class="pick-tier" style="background:rgba(255,71,87,0.1);color:var(--red);border:1px solid rgba(255,71,87,0.2);">Avoid</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-reason"><strong>Signal 1 game — fade VGK.</strong> VGK on back-to-back away, DET rested 3+ days. Entire VGK stack depressed. Adin Hill struggling at .858 SV% — if backup confirmed, becomes a Signal 2 avoid as well. Stay away from VGK skaters and goalies.</div>
+            <div class="pick-tags"><span class="pick-tag pt-avoid">Avoid DFS</span><span class="pick-tag pt-signal">Signal 1 Fade</span></div>
+          </div>
+        </div>
+        <div class="pick-card tier-c">
+          <div class="pick-header">
+            <div><div class="pick-player">Toronto Maple Leafs</div><div class="pick-team">Skaters @ NJ · Mar 5</div></div>
+            <span class="pick-tier" style="background:rgba(255,71,87,0.1);color:var(--red);border:1px solid rgba(255,71,87,0.2);">Avoid</span>
+          </div>
+          <div class="pick-body">
+            <div class="pick-reason"><strong>Signal 1 watch — TOR on B2B away, NJ rested.</strong> Downgrade full TOR stack for DFS. Matthews is the only exception at reduced exposure. Full fades on TOR depth skaters at their current salary levels.</div>
+            <div class="pick-tags"><span class="pick-tag pt-avoid">Avoid DFS</span><span class="pick-tag pt-signal">B2B Away</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /fp-value-plays -->
+
+
+    <!-- ── GOALIE STARTS ── -->
+    <div id="fp-goalie-starts" class="fp-panel">
+      <div class="section-divider" style="margin-top:0;"><h2>Goalie Start Recommendations</h2><div class="sd-line"></div><div class="sd-badge">March 5 · 5 Games</div></div>
+
+      <div style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Statuses sourced from Daily Faceoff morning skate reports. Confirm before lineup lock. DFS salary = DraftKings. <strong style="color:var(--text);">Signal games flagged</strong> — goalies facing signal-favoured home teams rated higher.</div>
+
+      <div class="goalie-table">
+        <div class="goalie-row header">
+          <span>Goalie</span>
+          <span>SV%</span>
+          <span>GAA</span>
+          <span>Status</span>
+          <span style="text-align:right;">Rec.</span>
+        </div>
+
+        <div class="goalie-row" style="border-left:3px solid var(--gold);">
+          <div>
+            <div class="gr-name">Connor Hellebuyck</div>
+            <div class="gr-team">WPG Jets vs TB Lightning · $8,400 DK</div>
+          </div>
+          <div class="gr-stat" style="color:var(--green);">.924</div>
+          <div class="gr-stat" style="color:var(--green);">2.21</div>
+          <div><span class="gr-start gs-confirmed">Confirmed</span></div>
+          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
+        </div>
+
+        <div class="goalie-row" style="border-left:3px solid var(--accent);">
+          <div>
+            <div class="gr-name">Frederik Andersen</div>
+            <div class="gr-team">CAR Hurricanes @ VAN · $7,800 DK · <span style="color:var(--orange);">Signal 1 Game</span></div>
+          </div>
+          <div class="gr-stat" style="color:var(--green);">.921</div>
+          <div class="gr-stat" style="color:var(--green);">2.38</div>
+          <div><span class="gr-start gs-likely">Likely</span></div>
+          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
+        </div>
+
+        <div class="goalie-row" style="border-left:3px solid var(--accent);">
+          <div>
+            <div class="gr-name">Jake Oettinger</div>
+            <div class="gr-team">DAL Stars @ COL Avalanche · $7,600 DK</div>
+          </div>
+          <div class="gr-stat">.917</div>
+          <div class="gr-stat">2.44</div>
+          <div><span class="gr-start gs-likely">Likely</span></div>
+          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
+        </div>
+
+        <div class="goalie-row" style="border-left:3px solid var(--accent);">
+          <div>
+            <div class="gr-name">Jacob Markstrom</div>
+            <div class="gr-team">NJ Devils vs TOR · $7,200 DK · <span style="color:var(--orange);">Signal 1 Game</span></div>
+          </div>
+          <div class="gr-stat">.914</div>
+          <div class="gr-stat">2.61</div>
+          <div><span class="gr-start gs-likely">Likely</span></div>
+          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
+        </div>
+
+        <div class="goalie-row">
+          <div>
+            <div class="gr-name">Cam Talbot</div>
+            <div class="gr-team">LA Kings vs NYI · $6,800 DK</div>
+          </div>
+          <div class="gr-stat">.911</div>
+          <div class="gr-stat">2.72</div>
+          <div><span class="gr-start gs-confirmed">Confirmed</span></div>
+          <div class="gr-rec rec-stream" style="text-align:right;">~ Stream</div>
+        </div>
+
+        <div class="goalie-row">
+          <div>
+            <div class="gr-name">Philipp Grubauer</div>
+            <div class="gr-team">SEA Kraken vs STL · $6,400 DK</div>
+          </div>
+          <div class="gr-stat">.908</div>
+          <div class="gr-stat">2.89</div>
+          <div><span class="gr-start gs-likely">Likely</span></div>
+          <div class="gr-rec rec-stream" style="text-align:right;">~ Stream</div>
+        </div>
+
+        <div class="goalie-row">
+          <div>
+            <div class="gr-name">Thatcher Demko</div>
+            <div class="gr-team">VAN Canucks vs CAR · $7,000 DK · <span style="color:var(--red);">Signal 1 Fade</span></div>
+          </div>
+          <div class="gr-stat" style="color:var(--orange);">.903</div>
+          <div class="gr-stat" style="color:var(--orange);">3.01</div>
+          <div><span class="gr-start gs-unknown">Unconfirmed</span></div>
+          <div class="gr-rec rec-avoid" style="text-align:right;">✕ Avoid</div>
+        </div>
+
+        <div class="goalie-row">
+          <div>
+            <div class="gr-name">Ilya Samsonov</div>
+            <div class="gr-team">TOR Maple Leafs @ NJ · $6,200 DK · <span style="color:var(--red);">Signal 1 Fade</span></div>
+          </div>
+          <div class="gr-stat" style="color:var(--orange);">.901</div>
+          <div class="gr-stat" style="color:var(--orange);">3.14</div>
+          <div><span class="gr-start gs-unknown">Unconfirmed</span></div>
+          <div class="gr-rec rec-avoid" style="text-align:right;">✕ Avoid</div>
+        </div>
+
+        <div class="goalie-row">
+          <div>
+            <div class="gr-name">Adin Hill</div>
+            <div class="gr-team">VGK Golden Knights @ DET · $5,800 DK · <span style="color:var(--red);">Signal 1 + Possible S2</span></div>
+          </div>
+          <div class="gr-stat" style="color:var(--red);">.858</div>
+          <div class="gr-stat" style="color:var(--red);">3.76</div>
+          <div><span class="gr-start gs-avoid">B2B Away</span></div>
+          <div class="gr-rec rec-avoid" style="text-align:right;">✕ Hard Avoid</div>
+        </div>
+
+        <div class="goalie-row">
+          <div>
+            <div class="gr-name">Lukas Dostal</div>
+            <div class="gr-team">ANA Ducks vs NYI · $6,000 DK</div>
+          </div>
+          <div class="gr-stat">.906</div>
+          <div class="gr-stat">2.95</div>
+          <div><span class="gr-start gs-likely">Likely</span></div>
+          <div class="gr-rec rec-wait" style="text-align:right;">? Wait</div>
+        </div>
+
+      </div><!-- /goalie-table -->
+
+      <div class="signal-rule-box" style="margin-top:24px;">
+        <h3>Signal Note on Goalies</h3>
+        <p>When Signal 1 is active (away B2B + home rested 3+ days), <strong>the home goalie gets a confidence boost</strong> and the away goalie gets downgraded regardless of individual stats. When Signal 2 fires (away B2B + confirmed backup), the away goalie becomes a <strong>hard avoid for all formats</strong>. Always cross-reference with this dashboard before setting lineups.</p>
+      </div>
+    </div><!-- /fp-goalie-starts -->
+
+
+    <!-- ── PLAYER PROPS ── -->
+    <div id="fp-player-props" class="fp-panel">
+      <div class="section-divider" style="margin-top:0;"><h2>Player Prop Picks</h2><div class="sd-line"></div><div class="sd-badge">March 5 · Best Bets</div></div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Props sourced from DraftKings Sportsbook. Odds approximate — verify before placing. Signal context applied where relevant.</div>
+
+      <!-- GOALS / POINTS -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);margin-bottom:8px;">Goals &amp; Points</div>
+      <div class="props-stack">
+
+        <div class="prop-row" style="border-left:3px solid var(--gold);">
+          <div>
+            <div class="prop-player">Nathan MacKinnon — Anytime Goal Scorer</div>
+            <div class="prop-desc">COL @ DAL · <strong>+135</strong> · Top scoring rate in the NHL, shooting 18.4% this season. DAL has allowed 2+ goals to top-6 Cs in 7 of last 10 home games.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">+135</div><div class="prop-line-label">Odds</div></div>
+          <div class="prop-pick pp-over">✓ Back It</div>
+        </div>
+
+        <div class="prop-row" style="border-left:3px solid var(--accent);">
+          <div>
+            <div class="prop-player">Mikko Rantanen — Over 0.5 Points</div>
+            <div class="prop-desc">CAR @ VAN · <strong>-155</strong> · 8-game point streak. VAN goaltending unconfirmed — if backup starts, this is near-automatic.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">-155</div><div class="prop-line-label">Odds</div></div>
+          <div class="prop-pick pp-over">✓ Back It</div>
+        </div>
+
+        <div class="prop-row" style="border-left:3px solid var(--accent);">
+          <div>
+            <div class="prop-player">Kyle Connor — Over 0.5 Points</div>
+            <div class="prop-desc">WPG vs TB · <strong>-130</strong> · Home ice, 3.8 SOG/GP, TB giving up 3.2 GPG away. Connor on the power play top unit.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">-130</div><div class="prop-line-label">Odds</div></div>
+          <div class="prop-pick pp-over">✓ Back It</div>
+        </div>
+
+        <div class="prop-row">
+          <div>
+            <div class="prop-player">Auston Matthews — Anytime Goal Scorer</div>
+            <div class="prop-desc">TOR @ NJ · <strong>+118</strong> · Elite goal scorer but TOR on back-to-back away is a Signal 1 game. Use at half-unit only given team-level fade.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">+118</div><div class="prop-line-label">Odds</div></div>
+          <div class="prop-pick" style="background:rgba(255,140,0,0.1);color:var(--orange);border:1px solid rgba(255,140,0,0.25);">½ Unit</div>
+        </div>
+
+      </div>
+
+      <!-- SHOTS -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);margin:20px 0 8px;">Shots on Goal</div>
+      <div class="props-stack">
+
+        <div class="prop-row" style="border-left:3px solid var(--accent);">
+          <div>
+            <div class="prop-player">Nathan MacKinnon — Over 3.5 Shots</div>
+            <div class="prop-desc">COL @ DAL · <strong>-118</strong> · Averaging 4.3 SOG/GP over last 15 games. Usage is elite, always 22+ min TOI.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">3.5</div><div class="prop-line-label">Over</div></div>
+          <div class="prop-pick pp-over">✓ Over</div>
+        </div>
+
+        <div class="prop-row" style="border-left:3px solid var(--accent);">
+          <div>
+            <div class="prop-player">Sebastian Aho — Over 2.5 Shots</div>
+            <div class="prop-desc">CAR @ VAN · <strong>-140</strong> · Aho averaging 3.2 SOG/GP, VAN goaltending in flux. Signal 1 game favours CAR shooters.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">2.5</div><div class="prop-line-label">Over</div></div>
+          <div class="prop-pick pp-over">✓ Over</div>
+        </div>
+
+        <div class="prop-row" style="border-left:3px solid rgba(255,71,87,0.5);">
+          <div>
+            <div class="prop-player">Mitch Marner — Over 2.5 Shots</div>
+            <div class="prop-desc">TOR @ NJ · <strong>-125</strong> · TOR on B2B away is a Signal 1 fade. Marner's shot volume dips on back-to-backs historically (2.0 SOG avg on B2Bs vs 3.1 normal).</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">2.5</div><div class="prop-line-label">Over</div></div>
+          <div class="prop-pick pp-under">✕ Under</div>
+        </div>
+
+      </div>
+
+      <!-- ASSISTS -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);margin:20px 0 8px;">Assists</div>
+      <div class="props-stack">
+
+        <div class="prop-row" style="border-left:3px solid var(--green);">
+          <div>
+            <div class="prop-player">Nikolaj Ehlers — Over 0.5 Assists</div>
+            <div class="prop-desc">WPG vs TB · <strong>-118</strong> · Ehlers is averaging 0.68 A/GP over last 20, plays with both Connor and Scheifele on PP1. Home game, TB PK struggling.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">0.5</div><div class="prop-line-label">Assists</div></div>
+          <div class="prop-pick pp-over">✓ Over</div>
+        </div>
+
+        <div class="prop-row" style="border-left:3px solid var(--green);">
+          <div>
+            <div class="prop-player">Cale Makar — Over 0.5 Assists</div>
+            <div class="prop-desc">COL @ DAL · <strong>-145</strong> · Makar is the engine on COL PP, averaging 0.81 A/GP. Even on B2B his assist rate holds — elite usage player.</div>
+          </div>
+          <div class="prop-line"><div class="prop-line-val">0.5</div><div class="prop-line-label">Assists</div></div>
+          <div class="prop-pick pp-over">✓ Over</div>
+        </div>
+
+      </div>
+
+    </div><!-- /fp-player-props -->
+
+  </div><!-- /main-wrap -->
+</div><!-- /page-fantasy-picks -->
+
+
 </script>
 </body>
 </html>
