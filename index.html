@@ -1279,5 +1279,48 @@ function runAnalysis() {
 
 
 </script>
+  <script>
+// ── DYNAMIC TICKER ─────────────────────────────────────────────────────────
+async function buildTicker() {
+  try {
+    const r = await fetch('data/ticker.json?nocache=' + Date.now());
+    const data = await r.json();
+
+    if (!data.games || data.games.length === 0) return;
+
+    const track = document.querySelector('.ticker-track');
+    if (!track) return;
+
+    // Build ticker items
+    let items = [];
+
+    for (const g of data.games) {
+      let text = `🏒 ${g.away} @ ${g.home} · ${g.time}`;
+      let oddsHtml = '';
+      if (g.away_ml && g.home_ml) {
+        oddsHtml = ` · <span style="color:var(--cyan)">${g.away} ${g.away_ml}</span> · <span style="color:var(--cyan)">${g.home} ${g.home_ml}</span>`;
+      }
+      items.push(`<span>🏒 ${g.away} @ ${g.home} · <span class="t-live">${g.time}</span>${oddsHtml}</span>`);
+      items.push('<span class="t-sep">·</span>');
+    }
+
+    // Always append signal stats at the end
+    items.push('<span><span class="t-sig">Signal 1</span> Away B2B + Home 3+ Days Rest → +8.7% ROI · 79 games</span>');
+    items.push('<span class="t-sep">·</span>');
+    items.push('<span><span class="t-sig">Signal 2</span> Away B2B + Backup Goalie → +38.7% ROI · 39 games</span>');
+    items.push('<span class="t-sep">·</span>');
+
+    // Duplicate for seamless loop
+    const all = [...items, ...items];
+    track.innerHTML = all.join('');
+
+    console.log(`Ticker loaded: ${data.games.length} games for ${data.date}`);
+  } catch (e) {
+    console.log('Ticker fetch failed, keeping static content:', e);
+  }
+}
+
+buildTicker();
+</script>
 </body>
 </html>
