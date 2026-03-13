@@ -1,160 +1,28 @@
 {
-  "date": "2026-03-12",
-  "updated": "11:37 PM MT",
+  "date": "2026-03-13",
+  "updated": "01:57 AM MT",
   "games": [
     {
-      "away": "SJS",
-      "home": "BOS",
-      "away_city": "San Jose",
-      "home_city": "Boston",
-      "away_score": 4,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "WSH",
-      "home": "BUF",
-      "away_city": "Washington",
-      "home_city": "Buffalo",
-      "away_score": 2,
-      "home_score": 1,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "ANA",
-      "home": "TOR",
-      "away_city": "Anaheim",
-      "home_city": "Toronto",
-      "away_score": 4,
-      "home_score": 6,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "DET",
-      "home": "TBL",
-      "away_city": "Detroit",
-      "home_city": "Tampa Bay",
-      "away_score": 1,
-      "home_score": 4,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "CBJ",
-      "home": "FLA",
-      "away_city": "Columbus",
-      "home_city": "Florida",
-      "away_score": 1,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
-    },
-    {
-      "away": "CGY",
-      "home": "NJD",
-      "away_city": "Calgary",
-      "home_city": "New Jersey",
-      "away_score": 5,
-      "home_score": 4,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "STL",
-      "home": "CAR",
-      "away_city": "St. Louis",
-      "home_city": "Carolina",
-      "away_score": 3,
-      "home_score": 1,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
+      "away": "LAK",
+      "home": "NYI",
+      "away_city": "Los Angeles",
+      "home_city": "New York",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
     },
     {
       "away": "EDM",
-      "home": "DAL",
+      "home": "STL",
       "away_city": "Edmonton",
-      "home_city": "Dallas",
-      "away_score": 2,
-      "home_score": 7,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "PHI",
-      "home": "MIN",
-      "away_city": "Philadelphia",
-      "home_city": "Minnesota",
-      "away_score": 3,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final/SO",
-      "period_label": "SO"
-    },
-    {
-      "away": "NYR",
-      "home": "WPG",
-      "away_city": "New York",
-      "home_city": "Winnipeg",
-      "away_score": 6,
-      "home_score": 3,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "CHI",
-      "home": "UTA",
-      "away_city": "Chicago",
-      "home_city": "Utah",
-      "away_score": 3,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
-    },
-    {
-      "away": "NSH",
-      "home": "VAN",
-      "away_city": "Nashville",
-      "home_city": "Vancouver",
-      "away_score": 3,
-      "home_score": 4,
-      "status": "final",
-      "display": "Final/SO",
-      "period_label": "SO"
-    },
-    {
-      "away": "PIT",
-      "home": "VGK",
-      "away_city": "Pittsburgh",
-      "home_city": "Vegas",
-      "away_score": 2,
-      "home_score": 6,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "COL",
-      "home": "SEA",
-      "away_city": "Colorado",
-      "home_city": "Seattle",
-      "away_score": 5,
-      "home_score": 1,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
+      "home_city": "St. Louis",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
     }
   ]
 }
