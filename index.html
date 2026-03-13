@@ -1316,34 +1316,36 @@ async function buildFantasy() {
 
     // ── GOALIE STARTS TAB ──
     const gs = data.goalie_starts;
-    const goalieContainer = document.querySelector('.fantasy-goalies-container');
+const goalieContainer = document.querySelector('.fantasy-goalies-container');
     if (goalieContainer && gs.goalies) {
-      goalieContainer.innerHTML = gs.goalies.map(g => {
-        const recClass = g.recommendation === 'start' ? 'rec-start' :
-                         g.recommendation === 'stream' ? 'rec-stream' :
-                         g.recommendation === 'avoid' ? 'rec-avoid' : 'rec-wait';
-        return `
-        <div class="goalie-card ${recClass}">
-          <div class="gc2-header">
-            <div class="gc2-rec ${recClass}">${g.rec_label}</div>
-            <div class="gc2-info">
-              <div class="gc2-name">${g.name}</div>
-              <div class="gc2-meta">${g.team} vs ${g.opponent} · ${g.home_away}</div>
-            </div>
-            <div class="gc2-stats">
-              <span>${g.sv_pct} SV%</span>
-              <span>${g.gaa} GAA</span>
-            </div>
+      goalieContainer.innerHTML = `
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Signal games flagged — goalies facing signal-favoured home teams rated higher.</div>
+        <div class="goalie-table">
+          <div class="goalie-row header">
+            <span>Goalie</span><span>SV%</span><span>GAA</span><span>Status</span><span style="text-align:right;">Rec.</span>
           </div>
-          <div class="gc2-salaries">
-            <span>DK: ${g.dk_salary}</span>
-            <span>FD: ${g.fd_salary}</span>
-            <span class="gc2-status">${g.status}</span>
-          </div>
-          ${g.signal_note ? `<div class="gc2-signal">${g.signal_note}</div>` : ''}
+          ${gs.goalies.map(g => {
+            const statusClass = g.status === 'confirmed' ? 'gs-confirmed' :
+                                g.status === 'likely' ? 'gs-likely' :
+                                g.status === 'b2b_away' ? 'gs-avoid' : 'gs-unknown';
+            const borderColor = g.recommendation === 'start' ? 'var(--gold)' :
+                                g.recommendation === 'stream' ? 'var(--accent)' : 'var(--red)';
+            const recClass = g.recommendation === 'start' ? 'rec-start' :
+                             g.recommendation === 'stream' ? 'rec-stream' :
+                             g.recommendation === 'avoid' ? 'rec-avoid' : 'rec-wait';
+            return `
+            <div class="goalie-row" style="border-left:3px solid ${borderColor};">
+              <div>
+                <div class="gr-name">${g.name}</div>
+                <div class="gr-team">${g.team} vs ${g.opponent} · ${g.dk_salary} DK${g.signal_note ? ' · <span style="color:var(--orange);">' + g.signal_note + '</span>' : ''}</div>
+              </div>
+              <div class="gr-stat">${g.sv_pct}</div>
+              <div class="gr-stat">${g.gaa}</div>
+              <div><span class="gr-start ${statusClass}">${g.status}</span></div>
+              <div class="gr-rec ${recClass}" style="text-align:right;">${g.rec_label}</div>
+            </div>`;
+          }).join('')}
         </div>`;
-      }).join('');
-    }
 
     // ── PLAYER PROPS TAB ──
     const pp = data.player_props;
