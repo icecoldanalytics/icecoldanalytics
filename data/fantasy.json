@@ -1,7 +1,361 @@
 {
-  "date": "",
-  "date_label": "",
-  "value_plays": {},
-  "goalie_starts": {},
-  "player_props": {}
+  "date": "2026-03-13",
+  "date_label": "Friday, March 13, 2026",
+  "value_plays": {
+    "summary": {
+      "total_plays": 8,
+      "top_tier": "S",
+      "slate_size": 2
+    },
+    "plays": [
+      {
+        "player": "Mathew Barzal",
+        "team": "NYI",
+        "position": "C",
+        "tier": "S",
+        "matchup": "vs LAK",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$8,400",
+        "fd_salary": "$7,200",
+        "proj_pts_dk": 21.4,
+        "proj_pts_fd": 38.2,
+        "dk_value": "2.55x",
+        "fd_value": "5.31x",
+        "reason": "Islanders are home favorites against a Kings team that struggles defensively on the road. Barzal has been excellent lately with 8 points in his last 5 games and should benefit from favorable matchup and potential game script.",
+        "tags": [
+          "DFS + Season"
+        ],
+        "format": "both"
+      },
+      {
+        "player": "Bo Horvat",
+        "team": "NYI",
+        "position": "C",
+        "tier": "A",
+        "matchup": "vs LAK",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$6,800",
+        "fd_salary": "$6,000",
+        "proj_pts_dk": 16.2,
+        "proj_pts_fd": 28.8,
+        "dk_value": "2.38x",
+        "fd_value": "4.80x",
+        "reason": "Strong value play on the favored Islanders with excellent recent form. Horvat has been consistent in the faceoff circle and provides multi-category upside at a reasonable salary on both sites.",
+        "tags": [
+          "DFS + Season"
+        ],
+        "format": "both"
+      },
+      {
+        "player": "Brock Nelson",
+        "team": "NYI",
+        "position": "C/LW",
+        "tier": "A",
+        "matchup": "vs LAK",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$5,900",
+        "fd_salary": "$5,400",
+        "proj_pts_dk": 14.2,
+        "proj_pts_fd": 24.6,
+        "dk_value": "2.41x",
+        "fd_value": "4.56x",
+        "reason": "Excellent salary relief while maintaining exposure to the favored Islanders offense. Nelson offers positional flexibility and has been finding the net regularly in home games this season.",
+        "tags": [
+          "DFS Only"
+        ],
+        "format": "both"
+      },
+      {
+        "player": "Noah Dobson",
+        "team": "NYI",
+        "position": "D",
+        "tier": "A",
+        "matchup": "vs LAK",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$6,200",
+        "fd_salary": "$5,800",
+        "proj_pts_dk": 15.8,
+        "proj_pts_fd": 27.2,
+        "dk_value": "2.55x",
+        "fd_value": "4.69x",
+        "reason": "Top defenseman for the home favorites with excellent power play upside. Dobson quarterbacks the top unit and should see plenty of ice time in a potentially high-scoring affair.",
+        "tags": [
+          "DFS + Season"
+        ],
+        "format": "both"
+      },
+      {
+        "player": "Adrian Kempe",
+        "team": "LAK",
+        "position": "C/LW",
+        "tier": "B",
+        "matchup": "@ NYI",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$6,400",
+        "fd_salary": "$5,600",
+        "proj_pts_dk": 13.8,
+        "proj_pts_fd": 23.4,
+        "dk_value": "2.16x",
+        "fd_value": "4.18x",
+        "reason": "Kings' top offensive threat at reasonable salary despite road underdog status. Kempe has maintained consistent production and offers positional flexibility for lineup construction.",
+        "tags": [
+          "DFS Only"
+        ],
+        "format": "both"
+      },
+      {
+        "player": "Anze Kopitar",
+        "team": "LAK",
+        "position": "C",
+        "tier": "B",
+        "matchup": "@ NYI",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$5,800",
+        "fd_salary": "$5,200",
+        "proj_pts_dk": 12.4,
+        "proj_pts_fd": 21.8,
+        "dk_value": "2.14x",
+        "fd_value": "4.19x",
+        "reason": "Veteran center at reduced salary who still anchors Kings' top line and power play. Kopitar's floor remains solid even in tough matchups due to his faceoff prowess and ice time.",
+        "tags": [
+          "DFS Only"
+        ],
+        "format": "both"
+      },
+      {
+        "player": "Ilya Sorokin",
+        "team": "NYI",
+        "position": "G",
+        "tier": "S",
+        "matchup": "vs LAK",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$8,000",
+        "fd_salary": "$7,400",
+        "proj_pts_dk": 18.6,
+        "proj_pts_fd": 32.8,
+        "dk_value": "2.33x",
+        "fd_value": "4.43x",
+        "reason": "Home favorite goalie against a Kings offense that has struggled on the road recently. Sorokin offers excellent win probability and save upside in what should be a favorable game script.",
+        "tags": [
+          "DFS + Season"
+        ],
+        "format": "both"
+      },
+      {
+        "player": "Cal Clutterbuck",
+        "team": "NYI",
+        "position": "RW",
+        "tier": "B",
+        "matchup": "vs LAK",
+        "game_time": "7:00 PM ET",
+        "dk_salary": "$4,200",
+        "fd_salary": "$4,000",
+        "proj_pts_dk": 8.4,
+        "proj_pts_fd": 14.2,
+        "dk_value": "2.00x",
+        "fd_value": "3.55x",
+        "reason": "Minimum salary play with peripheral upside for the favored Islanders. Clutterbuck provides salary relief while maintaining exposure to the better side of this matchup.",
+        "tags": [
+          "DFS Only"
+        ],
+        "format": "both"
+      }
+    ],
+    "avoids": [
+      {
+        "team": "EDM",
+        "reason": "B2B away team - both teams on back-to-back cancels signals",
+        "tag": "Avoid DFS"
+      },
+      {
+        "team": "STL",
+        "reason": "B2B home team - both teams on back-to-back cancels signals",
+        "tag": "Avoid DFS"
+      }
+    ]
+  },
+  "goalie_starts": {
+    "goalies": [
+      {
+        "name": "Connor Hellebuyck",
+        "team": "EDM",
+        "opponent": "STL",
+        "home_away": "away",
+        "dk_salary": "$8,400",
+        "fd_salary": "$8,800",
+        "sv_pct": ".918",
+        "gaa": "2.45",
+        "status": "b2b_away",
+        "signal_note": "B2B away \u2014 signals cancel",
+        "recommendation": "avoid",
+        "rec_label": "\u2715 Avoid"
+      },
+      {
+        "name": "Jordan Binnington",
+        "team": "STL",
+        "opponent": "EDM",
+        "home_away": "home",
+        "dk_salary": "$7,800",
+        "fd_salary": "$8,200",
+        "sv_pct": ".908",
+        "gaa": "2.68",
+        "status": "b2b_away",
+        "signal_note": "B2B home \u2014 signals cancel",
+        "recommendation": "avoid",
+        "rec_label": "\u2715 Avoid"
+      },
+      {
+        "name": "Darcy Kuemper",
+        "team": "LAK",
+        "opponent": "NYI",
+        "home_away": "away",
+        "dk_salary": "$8,000",
+        "fd_salary": "$8,400",
+        "sv_pct": ".912",
+        "gaa": "2.52",
+        "status": "likely",
+        "signal_note": "",
+        "recommendation": "wait",
+        "rec_label": "? Wait"
+      },
+      {
+        "name": "Ilya Sorokin",
+        "team": "NYI",
+        "opponent": "LAK",
+        "home_away": "home",
+        "dk_salary": "$8,600",
+        "fd_salary": "$8,900",
+        "sv_pct": ".924",
+        "gaa": "2.31",
+        "status": "confirmed",
+        "signal_note": "Signal 1 game \u2014 home team favoured",
+        "recommendation": "start",
+        "rec_label": "\u25b2 Start"
+      }
+    ]
+  },
+  "player_props": {
+    "props": [
+      {
+        "player": "Mathew Barzal",
+        "team": "NYI",
+        "prop_type": "Points",
+        "line": "0.5",
+        "odds": "-115",
+        "pick": "over",
+        "unit_size": "full",
+        "game": "LAK @ NYI",
+        "reason": "Islanders are rested at home and favored against a Kings team on travel. Barzal benefits from the home rest advantage and should generate offensive opportunities.",
+        "category": "points"
+      },
+      {
+        "player": "Adrian Kempe",
+        "team": "LAK",
+        "prop_type": "Shots on Goal",
+        "line": "3.5",
+        "odds": "-120",
+        "pick": "under",
+        "unit_size": "half",
+        "game": "LAK @ NYI",
+        "reason": "Kings are on the road and could face tighter defensive play from the rested Islanders. Away teams often struggle to generate consistent shot volume in hostile environments.",
+        "category": "shots"
+      },
+      {
+        "player": "Bo Horvat",
+        "team": "NYI",
+        "prop_type": "Anytime Goal Scorer",
+        "line": "0.5",
+        "odds": "+180",
+        "pick": "over",
+        "unit_size": "full",
+        "game": "LAK @ NYI",
+        "reason": "Horvat gets the home rest advantage and has been productive in front of the Islanders crowd. The favorable matchup against a traveling Kings team creates good scoring opportunities.",
+        "category": "goals"
+      },
+      {
+        "player": "Kevin Fiala",
+        "team": "LAK",
+        "prop_type": "Points",
+        "line": "0.5",
+        "odds": "+105",
+        "pick": "under",
+        "unit_size": "half",
+        "game": "LAK @ NYI",
+        "reason": "Kings face a tough road environment without rest advantage. Fiala may struggle to create consistent offensive chances against a defensively sound Islanders team at home.",
+        "category": "points"
+      },
+      {
+        "player": "Brock Nelson",
+        "team": "NYI",
+        "prop_type": "Shots on Goal",
+        "line": "2.5",
+        "odds": "-110",
+        "pick": "over",
+        "unit_size": "full",
+        "game": "LAK @ NYI",
+        "reason": "Nelson benefits from the home rest advantage and should see quality ice time. The Islanders are favored and likely to control offensive zone time.",
+        "category": "shots"
+      },
+      {
+        "player": "Anze Kopitar",
+        "team": "LAK",
+        "prop_type": "Assists",
+        "line": "0.5",
+        "odds": "-125",
+        "pick": "under",
+        "unit_size": "half",
+        "game": "LAK @ NYI",
+        "reason": "Veteran center may face fatigue factors on the road without rest advantage. The Islanders home environment could limit his playmaking effectiveness.",
+        "category": "assists"
+      },
+      {
+        "player": "Anthony Beauvillier",
+        "team": "NYI",
+        "prop_type": "Anytime Goal Scorer",
+        "line": "0.5",
+        "odds": "+220",
+        "pick": "over",
+        "unit_size": "half",
+        "game": "LAK @ NYI",
+        "reason": "Beauvillier gets the home rest advantage and solid odds value. The Islanders should control pace against the traveling Kings team.",
+        "category": "goals"
+      },
+      {
+        "player": "Kyle Palmieri",
+        "team": "NYI",
+        "prop_type": "Points",
+        "line": "0.5",
+        "odds": "-105",
+        "pick": "over",
+        "unit_size": "full",
+        "game": "LAK @ NYI",
+        "reason": "Palmieri benefits from home rest advantage and favorable matchup. The Islanders are expected to generate offensive pressure against a Kings team without rest edge.",
+        "category": "points"
+      },
+      {
+        "player": "Phillip Danault",
+        "team": "LAK",
+        "prop_type": "Shots on Goal",
+        "line": "2.5",
+        "odds": "+115",
+        "pick": "under",
+        "unit_size": "half",
+        "game": "LAK @ NYI",
+        "reason": "Danault faces tough road conditions without rest advantage. The defensive-minded center may see limited offensive zone time against a rested Islanders team.",
+        "category": "shots"
+      },
+      {
+        "player": "Jean-Gabriel Pageau",
+        "team": "NYI",
+        "prop_type": "Assists",
+        "line": "0.5",
+        "odds": "+140",
+        "pick": "over",
+        "unit_size": "half",
+        "game": "LAK @ NYI",
+        "reason": "Pageau gets home rest advantage and good odds value for an assist prop. The Islanders should generate enough offensive chances for secondary scoring opportunities.",
+        "category": "assists"
+      }
+    ]
+  }
 }
