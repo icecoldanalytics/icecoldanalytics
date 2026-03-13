@@ -1498,7 +1498,7 @@ async function buildDashboard() {
 // ── LIVE SCORES FROM scores.json ───────────────────────────────────────────
 async function updateLiveScores() {
   try {
-    const r = await fetch('data/scores.json?nocache=' + Date.now());
+    const r = await fetch('/data/scores.json?nocache=' + Date.now());
     const data = await r.json();
     if (!data.games || data.games.length === 0) return;
 
