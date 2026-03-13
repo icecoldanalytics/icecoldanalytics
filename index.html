@@ -1358,34 +1358,30 @@ const goalieContainer = document.querySelector('.fantasy-goalies-container');
         if (!categories[prop.category]) categories[prop.category] = [];
         categories[prop.category].push(prop);
       }
-      propsContainer.innerHTML = Object.entries(categories).map(([cat, props]) => {
-        const catLabel = cat.charAt(0).toUpperCase() + cat.slice(1);
-        const propsHtml = props.map(p => {
-          const unitClass = p.unit_size === 'full' ? 'unit-full' :
-                            p.unit_size === 'half' ? 'unit-half' : 'unit-avoid';
-          const pickClass = p.pick === 'over' ? 'pick-over' : p.pick === 'under' ? 'pick-under' : 'pick-back';
-          return `
-          <div class="prop-card">
-            <div class="prop-header">
-              <div class="prop-pick ${pickClass}">${p.pick.toUpperCase()} ${p.line}</div>
-              <div class="prop-info">
-                <div class="prop-player">${p.player} <span class="prop-team">${p.team}</span></div>
-                <div class="prop-type">${p.prop_type} · ${p.game}</div>
-              </div>
-              <div class="prop-right">
-                <div class="prop-odds">${p.odds}</div>
-                <div class="prop-unit ${unitClass}">${p.unit_size} unit</div>
-              </div>
-            </div>
-            <div class="prop-reason">${p.reason}</div>
-          </div>`;
-        }).join('');
-        return `
-        <div class="props-category">
-          <div class="props-cat-label">${catLabel}</div>
-          ${propsHtml}
-        </div>`;
-      }).join('');
+propsContainer.innerHTML = `
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Signal context applied where relevant. Verify odds before placing.</div>
+        ${Object.entries(categories).map(([cat, props]) => `
+          <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);margin:20px 0 8px;">${cat.charAt(0).toUpperCase() + cat.slice(1)}</div>
+          <div class="props-stack">
+            ${props.map(p => {
+              const borderColor = p.unit_size === 'full' ? 'var(--gold)' : p.unit_size === 'half' ? 'var(--accent)' : 'var(--red)';
+              const pickStyle = p.pick === 'over'
+                ? 'background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2);'
+                : p.pick === 'under'
+                ? 'background:rgba(255,71,87,0.1);color:var(--red);border:1px solid rgba(255,71,87,0.2);'
+                : 'background:rgba(0,163,255,0.1);color:var(--accent);border:1px solid rgba(0,163,255,0.2);';
+              const pickLabel = p.pick === 'over' ? '✓ OVER' : p.pick === 'under' ? '✕ UNDER' : '✓ Back It';
+              return `
+              <div class="prop-row" style="border-left:3px solid ${borderColor};">
+                <div>
+                  <div class="prop-player">${p.player} — ${p.prop_type}</div>
+                  <div class="prop-desc">${p.game} · <strong>${p.odds}</strong> · ${p.reason}</div>
+                </div>
+                <div class="prop-line"><div class="prop-line-val">${p.odds}</div><div class="prop-line-label">${p.line}</div></div>
+                <div class="prop-pick" style="${pickStyle}">${pickLabel}</div>
+              </div>`;
+            }).join('')}
+          </div>`).join('')}`;
     }
 
     // Update date label
