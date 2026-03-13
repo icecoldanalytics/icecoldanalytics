@@ -1427,36 +1427,48 @@ async function buildFantasy() {
     const vp = data.value_plays;
     const playsContainer = document.querySelector('.fantasy-plays-container');
     if (playsContainer && vp.plays) {
-      playsContainer.innerHTML = vp.plays.map(p => {
-        const tierClass = p.tier === 'S' ? 'tier-s' : p.tier === 'A' ? 'tier-a' : 'tier-b';
-        const tagsHtml = (p.tags || []).map(t =>
-          `<span class="tag tag-fantasy">${t}</span>`
-        ).join('');
-        return `
-        <div class="fantasy-card ${tierClass}">
-          <div class="fc-header">
-            <div class="fc-tier ${tierClass}">${p.tier}</div>
-            <div class="fc-player">
-              <div class="fc-name">${p.player}</div>
-              <div class="fc-meta">${p.team} · ${p.position} · ${p.matchup} · ${p.game_time}</div>
+// Group by tier
+      const tiers = { S: [], A: [], B: [] };
+      for (const p of vp.plays) {
+        if (tiers[p.tier]) tiers[p.tier].push(p);
+        else tiers.B.push(p);
+      }
+      const tierLabels = { S: 'S-Tier · Must-Plays', A: 'A-Tier · Strong Plays', B: 'B-Tier · Value Plays' };
+      const tierColors = { S: 'var(--gold)', A: 'var(--accent)', B: 'var(--text)' };
+      let playsHtml = '';
+      for (const [tier, plays] of Object.entries(tiers)) {
+        if (!plays.length) continue;
+        playsHtml += `<div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:${tierColors[tier]};margin:20px 0 10px;">${tierLabels[tier]}</div>`;
+        playsHtml += `<div class="picks-grid">`;
+        playsHtml += plays.map(p => {
+          const tagsHtml = (p.tags || []).map(t =>
+            `<span class="pick-tag pt-both">${t}</span>`
+          ).join('');
+          return `
+          <div class="pick-card tier-${tier.toLowerCase()}">
+            <div class="pick-header">
+              <div>
+                <div class="pick-player">${p.player}</div>
+                <div class="pick-team">${p.team} · ${p.position}</div>
+              </div>
+              <span class="pick-tier tier-${tier.toLowerCase()}-badge">${tier}-Tier</span>
             </div>
-            <div class="fc-tags">${tagsHtml}</div>
-          </div>
-          <div class="fc-salaries">
-            <div class="fc-sal-block">
-              <div class="fc-sal-label">DraftKings</div>
-              <div class="fc-sal-val">${p.dk_salary}</div>
-              <div class="fc-sal-proj">${p.proj_pts_dk} pts · ${p.dk_value}</div>
+            <div class="pick-body">
+              <div class="pick-matchup">${p.matchup} · ${p.game_time}</div>
+              <div class="pick-stats">
+                <div class="pick-stat"><span class="pick-stat-label">DK Salary</span><span class="pick-stat-val">${p.dk_salary}</span></div>
+                <div class="pick-stat"><span class="pick-stat-label">FD Salary</span><span class="pick-stat-val">${p.fd_salary}</span></div>
+                <div class="pick-stat"><span class="pick-stat-label">DK Proj</span><span class="pick-stat-val">${p.proj_pts_dk} pts</span></div>
+                <div class="pick-stat"><span class="pick-stat-label">Value</span><span class="pick-stat-val" style="color:var(--gold);">${p.dk_value}</span></div>
+              </div>
+              <div class="pick-reason">${p.reason}</div>
+              <div class="pick-tags">${tagsHtml}</div>
             </div>
-            <div class="fc-sal-block">
-              <div class="fc-sal-label">FanDuel</div>
-              <div class="fc-sal-val">${p.fd_salary}</div>
-              <div class="fc-sal-proj">${p.proj_pts_fd} pts · ${p.fd_value}</div>
-            </div>
-          </div>
-          <div class="fc-reason">${p.reason}</div>
-        </div>`;
-      }).join('');
+          </div>`;
+        }).join('');
+        playsHtml += `</div>`;
+      }
+      playsContainer.innerHTML = playsHtml;
 
       // Avoids section
       if (vp.avoids && vp.avoids.length > 0) {
