@@ -1582,6 +1582,146 @@ async function buildDashboardThenScores() {
 
 buildDashboardThenScores();
 </script>
+  <script>
+// ── FANTASY PICKS ──────────────────────────────────────────────────────────
+async function buildFantasy() {
+  try {
+    const r = await fetch('data/fantasy.json?nocache=' + Date.now());
+    const data = await r.json();
+    if (!data.date) return;
+
+    // ── VALUE PLAYS TAB ──
+    const vp = data.value_plays;
+    const playsContainer = document.querySelector('.fantasy-plays-container');
+    if (playsContainer && vp.plays) {
+      playsContainer.innerHTML = vp.plays.map(p => {
+        const tierClass = p.tier === 'S' ? 'tier-s' : p.tier === 'A' ? 'tier-a' : 'tier-b';
+        const tagsHtml = (p.tags || []).map(t =>
+          `<span class="tag tag-fantasy">${t}</span>`
+        ).join('');
+        return `
+        <div class="fantasy-card ${tierClass}">
+          <div class="fc-header">
+            <div class="fc-tier ${tierClass}">${p.tier}</div>
+            <div class="fc-player">
+              <div class="fc-name">${p.player}</div>
+              <div class="fc-meta">${p.team} · ${p.position} · ${p.matchup} · ${p.game_time}</div>
+            </div>
+            <div class="fc-tags">${tagsHtml}</div>
+          </div>
+          <div class="fc-salaries">
+            <div class="fc-sal-block">
+              <div class="fc-sal-label">DraftKings</div>
+              <div class="fc-sal-val">${p.dk_salary}</div>
+              <div class="fc-sal-proj">${p.proj_pts_dk} pts · ${p.dk_value}</div>
+            </div>
+            <div class="fc-sal-block">
+              <div class="fc-sal-label">FanDuel</div>
+              <div class="fc-sal-val">${p.fd_salary}</div>
+              <div class="fc-sal-proj">${p.proj_pts_fd} pts · ${p.fd_value}</div>
+            </div>
+          </div>
+          <div class="fc-reason">${p.reason}</div>
+        </div>`;
+      }).join('');
+
+      // Avoids section
+      if (vp.avoids && vp.avoids.length > 0) {
+        const avoidsHtml = vp.avoids.map(a =>
+          `<div class="fc-avoid-row"><span class="tag tag-avoid">${a.tag}</span> <strong>${a.team}</strong> — ${a.reason}</div>`
+        ).join('');
+        playsContainer.innerHTML += `
+        <div class="fc-avoids-block">
+          <div class="fc-avoids-title">⚠ Fades & Avoids</div>
+          ${avoidsHtml}
+        </div>`;
+      }
+    }
+
+    // ── GOALIE STARTS TAB ──
+    const gs = data.goalie_starts;
+    const goalieContainer = document.querySelector('.fantasy-goalies-container');
+    if (goalieContainer && gs.goalies) {
+      goalieContainer.innerHTML = gs.goalies.map(g => {
+        const recClass = g.recommendation === 'start' ? 'rec-start' :
+                         g.recommendation === 'stream' ? 'rec-stream' :
+                         g.recommendation === 'avoid' ? 'rec-avoid' : 'rec-wait';
+        return `
+        <div class="goalie-card ${recClass}">
+          <div class="gc2-header">
+            <div class="gc2-rec ${recClass}">${g.rec_label}</div>
+            <div class="gc2-info">
+              <div class="gc2-name">${g.name}</div>
+              <div class="gc2-meta">${g.team} vs ${g.opponent} · ${g.home_away}</div>
+            </div>
+            <div class="gc2-stats">
+              <span>${g.sv_pct} SV%</span>
+              <span>${g.gaa} GAA</span>
+            </div>
+          </div>
+          <div class="gc2-salaries">
+            <span>DK: ${g.dk_salary}</span>
+            <span>FD: ${g.fd_salary}</span>
+            <span class="gc2-status">${g.status}</span>
+          </div>
+          ${g.signal_note ? `<div class="gc2-signal">${g.signal_note}</div>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    // ── PLAYER PROPS TAB ──
+    const pp = data.player_props;
+    const propsContainer = document.querySelector('.fantasy-props-container');
+    if (propsContainer && pp.props) {
+      // Group by category
+      const categories = {};
+      for (const prop of pp.props) {
+        if (!categories[prop.category]) categories[prop.category] = [];
+        categories[prop.category].push(prop);
+      }
+      propsContainer.innerHTML = Object.entries(categories).map(([cat, props]) => {
+        const catLabel = cat.charAt(0).toUpperCase() + cat.slice(1);
+        const propsHtml = props.map(p => {
+          const unitClass = p.unit_size === 'full' ? 'unit-full' :
+                            p.unit_size === 'half' ? 'unit-half' : 'unit-avoid';
+          const pickClass = p.pick === 'over' ? 'pick-over' : p.pick === 'under' ? 'pick-under' : 'pick-back';
+          return `
+          <div class="prop-card">
+            <div class="prop-header">
+              <div class="prop-pick ${pickClass}">${p.pick.toUpperCase()} ${p.line}</div>
+              <div class="prop-info">
+                <div class="prop-player">${p.player} <span class="prop-team">${p.team}</span></div>
+                <div class="prop-type">${p.prop_type} · ${p.game}</div>
+              </div>
+              <div class="prop-right">
+                <div class="prop-odds">${p.odds}</div>
+                <div class="prop-unit ${unitClass}">${p.unit_size} unit</div>
+              </div>
+            </div>
+            <div class="prop-reason">${p.reason}</div>
+          </div>`;
+        }).join('');
+        return `
+        <div class="props-category">
+          <div class="props-cat-label">${catLabel}</div>
+          ${propsHtml}
+        </div>`;
+      }).join('');
+    }
+
+    // Update date label
+    document.querySelectorAll('.fantasy-date-label').forEach(el => {
+      el.textContent = data.date_label;
+    });
+
+    console.log(`Fantasy loaded: ${vp.plays?.length || 0} plays, ${gs.goalies?.length || 0} goalies, ${pp.props?.length || 0} props`);
+  } catch (e) {
+    console.log('Fantasy fetch error:', e);
+  }
+}
+
+buildFantasy();
+</script>
 </body>
 
 </html>
