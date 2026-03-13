@@ -1491,8 +1491,98 @@ async function buildDashboard() {
   }
 }
 
-buildDashboard();
+
 </script>
+
+<script>
+// ── LIVE SCORES FROM scores.json ───────────────────────────────────────────
+async function updateLiveScores() {
+  try {
+    const r = await fetch('data/scores.json?nocache=' + Date.now());
+    const data = await r.json();
+    if (!data.games || data.games.length === 0) return;
+
+    const cards = document.querySelectorAll('.game-card');
+
+    for (const g of data.games) {
+      for (const card of cards) {
+        const awayCity = card.querySelector('.gc-team.away .gc-city')?.textContent;
+        const homeCity = card.querySelector('.gc-team.home .gc-city')?.textContent;
+
+        if (awayCity !== g.away_city || homeCity !== g.home_city) continue;
+
+        const gcCenter = card.querySelector('.gc-center');
+        if (!gcCenter) break;
+
+        const scoreEl = gcCenter.querySelector('.gc-score');
+        const periodEl = gcCenter.querySelector('.gc-period');
+
+        if (g.status === 'live') {
+          if (scoreEl) scoreEl.textContent = `${g.away_score}–${g.home_score}`;
+          if (periodEl) {
+            periodEl.textContent = g.display;
+            periodEl.style.color = 'var(--cyan)';
+          }
+          // Add live tag
+          const awayTagsEl = card.querySelector('.gc-team.away .gc-tags');
+          if (awayTagsEl && !awayTagsEl.querySelector('.tag-live')) {
+            awayTagsEl.innerHTML += `<span class="tag tag-live">Live</span>`;
+          }
+
+        } else if (g.status === 'final') {
+          if (scoreEl) scoreEl.textContent = `${g.away_score}–${g.home_score}`;
+          if (periodEl) {
+            periodEl.textContent = g.display;
+            periodEl.style.color = 'var(--muted)';
+          }
+          // Update signal result
+          const signalBadgeEl = card.querySelector('.gsig-badge');
+          if (signalBadgeEl && (signalBadgeEl.classList.contains('gsb-s1') || signalBadgeEl.classList.contains('gsb-partial'))) {
+            const fadeWon = g.home_score > g.away_score;
+            const noteEl = card.querySelector('.gsig-note');
+            if (noteEl) {
+              noteEl.textContent = fadeWon ? '✅ Signal HIT — fade won' : '❌ Signal MISS — fade lost';
+              noteEl.style.color = fadeWon ? 'var(--green)' : 'var(--red)';
+            }
+            if (signalBadgeEl.classList.contains('gsb-s1')) {
+              signalBadgeEl.textContent = fadeWon ? '⚡ Signal 1 — HIT ✅' : '⚡ Signal 1 — MISS ❌';
+            }
+          }
+        }
+        break;
+      }
+    }
+
+    // Show last updated time
+    if (data.updated) {
+      const footer = document.querySelector('.footer-disclaimer');
+      if (footer) {
+        const existing = document.getElementById('scores-updated');
+        if (existing) existing.remove();
+        const span = document.createElement('span');
+        span.id = 'scores-updated';
+        span.style.color = 'var(--muted)';
+        span.textContent = ` · Scores updated ${data.updated}`;
+        footer.appendChild(span);
+      }
+    }
+
+    console.log(`Scores loaded: ${data.games.length} games, updated ${data.updated}`);
+  } catch (e) {
+    console.log('Scores fetch error:', e);
+  }
+}
+
+// Call after dashboard is built
+async function buildDashboardThenScores() {
+  await buildDashboard();
+  updateLiveScores();
+  setInterval(updateLiveScores, 60000);
+}
+
+buildDashboardThenScores();
+</script>
+</body>
 
 <script>
 // ── LIVE SCORES ────────────────────────────────────────────────────────────
