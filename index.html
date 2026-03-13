@@ -1322,5 +1322,175 @@ async function buildTicker() {
 
 buildTicker();
 </script>
+
+<script>
+// ── DYNAMIC DASHBOARD ──────────────────────────────────────────────────────
+async function buildDashboard() {
+  try {
+    const r = await fetch('data/dashboard.json?nocache=' + Date.now());
+    const data = await r.json();
+    if (!data.games_tonight) return;
+
+    // ── UPDATE HEADER STATS ──
+    const n = data.n_games || 0;
+    const heroStatGames = document.querySelector('.hero-stats div:last-child .hero-stat-val');
+    if (heroStatGames) heroStatGames.innerHTML = `${n}`;
+
+    // ── UPDATE DATE BADGE ──
+    document.querySelectorAll('.sd-badge').forEach(b => {
+      if (b.textContent.includes('2026') || b.textContent.includes('March')) {
+        b.textContent = data.date_label || b.textContent;
+      }
+    });
+
+    // ── UPDATE TONIGHT CARD ──
+    const tonightCard = document.querySelector('.sig-card.tonight .sig-title');
+    if (tonightCard) tonightCard.textContent = `${data.date_label} — ${n} Games`;
+    const tonightRoi = document.querySelector('.sig-card.tonight .sig-roi-big');
+    if (tonightRoi) {
+      if (data.n_sig1 > 0 || data.n_partial > 0) {
+        tonightRoi.innerHTML = `${data.n_sig1} Hit${data.n_sig1 !== 1 ? 's' : ''}<br><span style="font-size:1.1rem;">+ ${data.n_partial} Partial${data.n_partial !== 1 ? 's' : ''}</span>`;
+      } else {
+        tonightRoi.innerHTML = `No Signals`;
+      }
+    }
+
+    // ── BUILD TONIGHT'S GAMES ──
+    const gamesStack = document.querySelector('.games-stack');
+    if (gamesStack && data.games_tonight.length > 0) {
+      gamesStack.innerHTML = data.games_tonight.map(g => {
+        const cardClass = g.signal === 'sig1' ? 'sig1' :
+                          g.signal === 'partial' ? 'sig-partial' :
+                          g.signal === 'cancel' ? 'cancelled' : 'nosig';
+
+        const awayB2bTag = g.away_b2b ? `<span class="tag tag-b2b">B2B Away</span>` : '';
+        const homeTags = g.home_b2b ? `<span class="tag tag-b2b">B2B Home</span>` :
+                         g.home_rest >= 3 ? `<span class="tag tag-rest3">3+ Days Rest</span>` :
+                         g.home_rest === 2 ? `<span class="tag tag-rest2">2 Days Rest</span>` : '';
+
+        const oddsHtml = g.away_ml && g.home_ml
+          ? `<div class="gc-odds">${g.away} <span>${g.away_ml}</span> · ${g.home} <span>${g.home_ml}</span></div>`
+          : '';
+
+        let signalBadge, signalFade, signalNote;
+        if (g.signal === 'sig1') {
+          signalBadge = `<div class="gsig-badge gsb-s1">⚡ Signal 1 Active</div>`;
+          signalFade = `<div class="gsig-fade">Fade: <strong>${g.away} (Away B2B)</strong></div>`;
+          signalNote = `<div class="gsig-note">${g.home} rested ${g.home_rest}+ days · +8.7% ROI</div>`;
+        } else if (g.signal === 'partial') {
+          signalBadge = `<div class="gsig-badge gsb-partial">⚠ Signal 1 Partial</div>`;
+          signalFade = `<div class="gsig-fade">Fade: <strong>${g.away} (Away B2B)</strong></div>`;
+          signalNote = `<div class="gsig-note">${g.home} rested 2 days · Low confidence</div>`;
+        } else if (g.signal === 'cancel') {
+          signalBadge = `<div class="gsig-badge gsb-cancel">↔ Signals Cancel</div>`;
+          signalFade = '';
+          signalNote = `<div class="gsig-note">Both on B2B — signal void</div>`;
+        } else {
+          signalBadge = `<div class="gsig-badge gsb-none">No Signal</div>`;
+          signalFade = '';
+          signalNote = `<div class="gsig-note">Neither team on B2B</div>`;
+        }
+
+        return `
+        <div class="game-card ${cardClass}">
+          <div class="gc-team away">
+            <div class="gc-city">${g.away_city}</div>
+            <div class="gc-name">${g.away_name}</div>
+            <div class="gc-tags">${awayB2bTag}</div>
+          </div>
+          <div class="gc-center">
+            <div class="gc-score">vs</div>
+            <div class="gc-period">Upcoming</div>
+            <div class="gc-time">${g.time_et}</div>
+            ${oddsHtml}
+          </div>
+          <div class="gc-team home">
+            <div class="gc-city">${g.home_city}</div>
+            <div class="gc-name">${g.home_name}</div>
+            <div class="gc-tags">${homeTags}</div>
+          </div>
+          <div class="gc-signal">
+            ${signalBadge}
+            ${signalFade}
+            ${signalNote}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // ── BUILD LAST NIGHT'S RECAP ──
+    const recapTable = document.querySelector('.recap-table');
+    if (recapTable && data.last_night.length > 0) {
+      recapTable.innerHTML = data.last_night.map(g => {
+        const resultClass = g.result === 'hit' ? 'r-hit' :
+                            g.result === 'miss' ? 'r-miss' : 'r-none';
+        const resultText = g.result === 'hit' ? '✅ Hit' :
+                           g.result === 'miss' ? '❌ Miss' :
+                           g.result === 'cancel' ? 'Cancelled' : 'No Signal';
+        return `
+        <div class="recap-row">
+          <div>
+            <div class="rr-game"><strong>${g.away} @ ${g.home}</strong></div>
+            <div class="rr-note">${g.note}</div>
+          </div>
+          <div class="rr-score">${g.away} ${g.away_score}–${g.home_score} ${g.home}</div>
+          <div class="rr-result ${resultClass}">${resultText}</div>
+        </div>`;
+      }).join('');
+    }
+
+    // ── BUILD LOOK-AHEAD ──
+    const laStack = document.querySelector('.la-stack');
+    if (laStack && data.lookahead.length > 0) {
+      let html = '';
+      let lastDate = '';
+      for (const g of data.lookahead) {
+        if (g.date_label !== lastDate) {
+          html += `<div class="la-day-label">${g.date_label}</div>`;
+          lastDate = g.date_label;
+        }
+        let flagClass, flagText, desc;
+        if (g.signal === 'sig1') {
+          flagClass = 'lf-watch'; flagText = '⚡ Watch';
+          desc = `${g.away} on B2B away · ${g.home} rested ${g.home_rest}+ days → <strong>Signal 1 candidate — fade ${g.away}</strong>`;
+        } else if (g.signal === 'partial') {
+          flagClass = 'lf-watch'; flagText = '⚠ Partial';
+          desc = `${g.away} on B2B away · ${g.home} rested 2 days → Lower confidence partial flag`;
+        } else {
+          flagClass = 'lf-cancel'; flagText = 'Cancelled';
+          desc = `Both teams on B2B — <strong>signals cancel</strong>`;
+        }
+        html += `
+        <div class="la-row ${g.signal === 'sig1' || g.signal === 'partial' ? 'watch' : ''}">
+          <div>
+            <div class="la-game"><strong>${g.away} @ ${g.home}</strong></div>
+            <div class="la-desc">${desc} · ${g.time_et}</div>
+          </div>
+          <div class="la-flag ${flagClass}">${flagText}</div>
+        </div>`;
+      }
+      laStack.innerHTML = html;
+    } else if (laStack) {
+      laStack.innerHTML = '<div class="la-day-label">No flagged games in the next 2 days</div>';
+    }
+
+    // ── UPDATE SECTION BADGES ──
+    const allBadges = document.querySelectorAll('.sd-badge');
+    allBadges.forEach(b => {
+      if (b.textContent.includes('Games ·') || b.textContent.includes('In Progress')) {
+        b.textContent = `${data.n_games} Games`;
+      }
+      if (b.textContent.includes('Signal Review') || b.textContent.includes('March')) {
+        b.textContent = `${data.yesterday_label} · Signal Review`;
+      }
+    });
+
+    console.log(`Dashboard loaded: ${data.n_games} games for ${data.date}`);
+  } catch (e) {
+    console.log('Dashboard fetch failed, keeping static content:', e);
+  }
+}
+
+buildDashboard();
+</script>
 </body>
-</html>
