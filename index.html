@@ -862,7 +862,9 @@ function runAnalysis() {
 
     <!-- ── VALUE PLAYS ── -->
     <div id="fp-value-plays" class="fp-panel active">
-      <div class="section-divider" style="margin-top:0;"><h2>Top Value Plays</h2><div class="sd-line"></div><div class="sd-badge">March 5 Slate · 5 Games</div></div>
+      <div class="section-divider" style="margin-top:0;"><h2>Top Value Plays</h2><div class="sd-line"></div><div class="sd-badge fantasy-date-label">Loading...</div></div>
+      <div class="fantasy-plays-container"></div>
+    </div>
 
       <!-- S-TIER -->
       <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;">S-Tier · Must-Plays</div>
@@ -1034,187 +1036,18 @@ function runAnalysis() {
     </div><!-- /fp-value-plays -->
 
 
-    <!-- ── GOALIE STARTS ── -->
+  <!-- ── GOALIE STARTS ── -->
     <div id="fp-goalie-starts" class="fp-panel">
-      <div class="section-divider" style="margin-top:0;"><h2>Goalie Start Recommendations</h2><div class="sd-line"></div><div class="sd-badge">March 5 · 5 Games</div></div>
+      <div class="section-divider" style="margin-top:0;"><h2>Goalie Start Recommendations</h2><div class="sd-line"></div><div class="sd-badge">Goalie Starts</div></div>
+      <div class="fantasy-goalies-container"></div>
+    </div>
 
-      <div style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Statuses sourced from Daily Faceoff morning skate reports. Confirm before lineup lock. DFS salary = DraftKings. <strong style="color:var(--text);">Signal games flagged</strong> — goalies facing signal-favoured home teams rated higher.</div>
-
-      <div class="goalie-table">
-        <div class="goalie-row header">
-          <span>Goalie</span>
-          <span>SV%</span>
-          <span>GAA</span>
-          <span>Status</span>
-          <span style="text-align:right;">Rec.</span>
-        </div>
-
-        <div class="goalie-row" style="border-left:3px solid var(--gold);">
-          <div>
-            <div class="gr-name">Connor Hellebuyck</div>
-            <div class="gr-team">WPG Jets vs TB Lightning · $8,400 DK</div>
-          </div>
-          <div class="gr-stat" style="color:var(--green);">.924</div>
-          <div class="gr-stat" style="color:var(--green);">2.21</div>
-          <div><span class="gr-start gs-confirmed">Confirmed</span></div>
-          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
-        </div>
-
-        <div class="goalie-row" style="border-left:3px solid var(--accent);">
-          <div>
-            <div class="gr-name">Frederik Andersen</div>
-            <div class="gr-team">CAR Hurricanes @ VAN · $7,800 DK · <span style="color:var(--orange);">Signal 1 Game</span></div>
-          </div>
-          <div class="gr-stat" style="color:var(--green);">.921</div>
-          <div class="gr-stat" style="color:var(--green);">2.38</div>
-          <div><span class="gr-start gs-likely">Likely</span></div>
-          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
-        </div>
-
-        <div class="goalie-row" style="border-left:3px solid var(--accent);">
-          <div>
-            <div class="gr-name">Jake Oettinger</div>
-            <div class="gr-team">DAL Stars @ COL Avalanche · $7,600 DK</div>
-          </div>
-          <div class="gr-stat">.917</div>
-          <div class="gr-stat">2.44</div>
-          <div><span class="gr-start gs-likely">Likely</span></div>
-          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
-        </div>
-
-        <div class="goalie-row" style="border-left:3px solid var(--accent);">
-          <div>
-            <div class="gr-name">Jacob Markstrom</div>
-            <div class="gr-team">NJ Devils vs TOR · $7,200 DK · <span style="color:var(--orange);">Signal 1 Game</span></div>
-          </div>
-          <div class="gr-stat">.914</div>
-          <div class="gr-stat">2.61</div>
-          <div><span class="gr-start gs-likely">Likely</span></div>
-          <div class="gr-rec rec-start" style="text-align:right;">▲ Start</div>
-        </div>
-
-        <div class="goalie-row">
-          <div>
-            <div class="gr-name">Cam Talbot</div>
-            <div class="gr-team">LA Kings vs NYI · $6,800 DK</div>
-          </div>
-          <div class="gr-stat">.911</div>
-          <div class="gr-stat">2.72</div>
-          <div><span class="gr-start gs-confirmed">Confirmed</span></div>
-          <div class="gr-rec rec-stream" style="text-align:right;">~ Stream</div>
-        </div>
-
-        <div class="goalie-row">
-          <div>
-            <div class="gr-name">Philipp Grubauer</div>
-            <div class="gr-team">SEA Kraken vs STL · $6,400 DK</div>
-          </div>
-          <div class="gr-stat">.908</div>
-          <div class="gr-stat">2.89</div>
-          <div><span class="gr-start gs-likely">Likely</span></div>
-          <div class="gr-rec rec-stream" style="text-align:right;">~ Stream</div>
-        </div>
-
-        <div class="goalie-row">
-          <div>
-            <div class="gr-name">Thatcher Demko</div>
-            <div class="gr-team">VAN Canucks vs CAR · $7,000 DK · <span style="color:var(--red);">Signal 1 Fade</span></div>
-          </div>
-          <div class="gr-stat" style="color:var(--orange);">.903</div>
-          <div class="gr-stat" style="color:var(--orange);">3.01</div>
-          <div><span class="gr-start gs-unknown">Unconfirmed</span></div>
-          <div class="gr-rec rec-avoid" style="text-align:right;">✕ Avoid</div>
-        </div>
-
-        <div class="goalie-row">
-          <div>
-            <div class="gr-name">Ilya Samsonov</div>
-            <div class="gr-team">TOR Maple Leafs @ NJ · $6,200 DK · <span style="color:var(--red);">Signal 1 Fade</span></div>
-          </div>
-          <div class="gr-stat" style="color:var(--orange);">.901</div>
-          <div class="gr-stat" style="color:var(--orange);">3.14</div>
-          <div><span class="gr-start gs-unknown">Unconfirmed</span></div>
-          <div class="gr-rec rec-avoid" style="text-align:right;">✕ Avoid</div>
-        </div>
-
-        <div class="goalie-row">
-          <div>
-            <div class="gr-name">Adin Hill</div>
-            <div class="gr-team">VGK Golden Knights @ DET · $5,800 DK · <span style="color:var(--red);">Signal 1 + Possible S2</span></div>
-          </div>
-          <div class="gr-stat" style="color:var(--red);">.858</div>
-          <div class="gr-stat" style="color:var(--red);">3.76</div>
-          <div><span class="gr-start gs-avoid">B2B Away</span></div>
-          <div class="gr-rec rec-avoid" style="text-align:right;">✕ Hard Avoid</div>
-        </div>
-
-        <div class="goalie-row">
-          <div>
-            <div class="gr-name">Lukas Dostal</div>
-            <div class="gr-team">ANA Ducks vs NYI · $6,000 DK</div>
-          </div>
-          <div class="gr-stat">.906</div>
-          <div class="gr-stat">2.95</div>
-          <div><span class="gr-start gs-likely">Likely</span></div>
-          <div class="gr-rec rec-wait" style="text-align:right;">? Wait</div>
-        </div>
-
-      </div><!-- /goalie-table -->
-
-      <div class="signal-rule-box" style="margin-top:24px;">
-        <h3>Signal Note on Goalies</h3>
-        <p>When Signal 1 is active (away B2B + home rested 3+ days), <strong>the home goalie gets a confidence boost</strong> and the away goalie gets downgraded regardless of individual stats. When Signal 2 fires (away B2B + confirmed backup), the away goalie becomes a <strong>hard avoid for all formats</strong>. Always cross-reference with this dashboard before setting lineups.</p>
-      </div>
-    </div><!-- /fp-goalie-starts -->
-
-
-    <!-- ── PLAYER PROPS ── -->
+  <!-- ── PLAYER PROPS ── -->
     <div id="fp-player-props" class="fp-panel">
-      <div class="section-divider" style="margin-top:0;"><h2>Player Prop Picks</h2><div class="sd-line"></div><div class="sd-badge">March 5 · Best Bets</div></div>
-      <div style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Props sourced from DraftKings Sportsbook. Odds approximate — verify before placing. Signal context applied where relevant.</div>
-
-      <!-- GOALS / POINTS -->
-      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);margin-bottom:8px;">Goals &amp; Points</div>
-      <div class="props-stack">
-
-        <div class="prop-row" style="border-left:3px solid var(--gold);">
-          <div>
-            <div class="prop-player">Nathan MacKinnon — Anytime Goal Scorer</div>
-            <div class="prop-desc">COL @ DAL · <strong>+135</strong> · Top scoring rate in the NHL, shooting 18.4% this season. DAL has allowed 2+ goals to top-6 Cs in 7 of last 10 home games.</div>
-          </div>
-          <div class="prop-line"><div class="prop-line-val">+135</div><div class="prop-line-label">Odds</div></div>
-          <div class="prop-pick pp-over">✓ Back It</div>
-        </div>
-
-        <div class="prop-row" style="border-left:3px solid var(--accent);">
-          <div>
-            <div class="prop-player">Mikko Rantanen — Over 0.5 Points</div>
-            <div class="prop-desc">CAR @ VAN · <strong>-155</strong> · 8-game point streak. VAN goaltending unconfirmed — if backup starts, this is near-automatic.</div>
-          </div>
-          <div class="prop-line"><div class="prop-line-val">-155</div><div class="prop-line-label">Odds</div></div>
-          <div class="prop-pick pp-over">✓ Back It</div>
-        </div>
-
-        <div class="prop-row" style="border-left:3px solid var(--accent);">
-          <div>
-            <div class="prop-player">Kyle Connor — Over 0.5 Points</div>
-            <div class="prop-desc">WPG vs TB · <strong>-130</strong> · Home ice, 3.8 SOG/GP, TB giving up 3.2 GPG away. Connor on the power play top unit.</div>
-          </div>
-          <div class="prop-line"><div class="prop-line-val">-130</div><div class="prop-line-label">Odds</div></div>
-          <div class="prop-pick pp-over">✓ Back It</div>
-        </div>
-
-        <div class="prop-row">
-          <div>
-            <div class="prop-player">Auston Matthews — Anytime Goal Scorer</div>
-            <div class="prop-desc">TOR @ NJ · <strong>+118</strong> · Elite goal scorer but TOR on back-to-back away is a Signal 1 game. Use at half-unit only given team-level fade.</div>
-          </div>
-          <div class="prop-line"><div class="prop-line-val">+118</div><div class="prop-line-label">Odds</div></div>
-          <div class="prop-pick" style="background:rgba(255,140,0,0.1);color:var(--orange);border:1px solid rgba(255,140,0,0.25);">½ Unit</div>
-        </div>
-
-      </div>
-
+      <div class="section-divider" style="margin-top:0;"><h2>Player Prop Picks</h2><div class="sd-line"></div><div class="sd-badge">Player Props</div></div>
+      <div class="fantasy-props-container"></div>
+    </div>
+  
       <!-- SHOTS -->
       <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);margin:20px 0 8px;">Shots on Goal</div>
       <div class="props-stack">
