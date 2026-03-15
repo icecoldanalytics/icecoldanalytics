@@ -1,7 +1,7 @@
 name: Update Ticker Data
 on:
   schedule:
-    - cron: '0 14 * * *'  # 7 AM MST
+    - cron: '0 13 * * *'  # 7 AM MST
   workflow_dispatch:
 
 jobs:
