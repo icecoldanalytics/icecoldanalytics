@@ -117,8 +117,13 @@ def generate_value_plays(game_context, date_label, n_games):
 Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
 {game_context}
 
-CRITICAL: Only use players and teams listed above. Do not use players from other teams or rosters from your training data — use ONLY the players listed above.
-
+CRITICAL INSTRUCTION — YOU MUST FOLLOW THIS:
+The rosters listed above are the ONLY source of truth for tonight's players.
+Your training data about NHL rosters is OUTDATED — trades have happened, players have moved teams.
+DO NOT use any player not explicitly listed above.
+DO NOT use Mitch Marner on Toronto — he was traded.
+DO NOT use any player whose name does not appear in the roster lists above.
+If you cannot find enough players from the lists above, use fewer picks. Never invent or assume roster assignments.
 Generate fantasy value plays for both DraftKings and FanDuel. Apply signal logic where flagged.
 
 Respond ONLY with valid JSON, no markdown. Use this exact structure:
@@ -185,8 +190,7 @@ def generate_goalie_starts(game_context, date_label, rosters, games):
 Tonight's games with CONFIRMED CURRENT GOALIES:
 {goalie_context}
 
-CRITICAL: Only use goalies listed above. Do not use goalies from your training data.
-
+CRITICAL: The goalies listed above are the ONLY source of truth. Your training data is outdated. Only use goalies explicitly listed above.
 Generate goalie start recommendations. Signal context is critical.
 
 Respond ONLY with valid JSON, no markdown:
