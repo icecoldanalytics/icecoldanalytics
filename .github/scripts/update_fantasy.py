@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 Generates data/fantasy.json with AI-powered fantasy picks.
-Uses Claude API to generate Value Plays, Goalie Starts, and Player Props.
-Runs daily at 7 AM MST via GitHub Actions.
+Fetches real rosters from NHL API to ensure accurate player/team data.
 """
 
 import os
@@ -15,7 +14,6 @@ MST = pytz.timezone("America/Edmonton")
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
 def fetch_dashboard():
-    """Read today's dashboard.json for game context"""
     try:
         with open("data/dashboard.json", "r") as f:
             return json.load(f)
@@ -23,8 +21,38 @@ def fetch_dashboard():
         print(f"Dashboard read error: {e}")
         return {}
 
+def fetch_rosters(games):
+    """Fetch real skater and goalie rosters for tonight's games from NHL API"""
+    rosters = {}
+    for g in games:
+        for team in [g["away"], g["home"]]:
+            if team in rosters:
+                continue
+            try:
+                url = f"https://api-web.nhle.com/v1/roster/{team}/current"
+                r = requests.get(url, timeout=10)
+                r.raise_for_status()
+                data = r.json()
+                skaters = []
+                goalies = []
+                for pos_group in ["forwards", "defensemen"]:
+                    for p in data.get(pos_group, []):
+                        fn = p.get("firstName", {}).get("default", "")
+                        ln = p.get("lastName", {}).get("default", "")
+                        pos = p.get("positionCode", "")
+                        skaters.append(f"{fn} {ln} ({pos})")
+                for p in data.get("goalies", []):
+                    fn = p.get("firstName", {}).get("default", "")
+                    ln = p.get("lastName", {}).get("default", "")
+                    goalies.append(f"{fn} {ln}")
+                rosters[team] = {"skaters": skaters[:20], "goalies": goalies}
+                print(f"✓ Roster fetched: {team} — {len(skaters)} skaters, {len(goalies)} goalies")
+            except Exception as e:
+                print(f"Roster fetch error for {team}: {e}")
+                rosters[team] = {"skaters": [], "goalies": []}
+    return rosters
+
 def call_claude(prompt):
-    """Call Claude API and return parsed JSON response"""
     if not ANTHROPIC_API_KEY:
         print("No Anthropic API key")
         return None
@@ -45,7 +73,6 @@ def call_claude(prompt):
         )
         r.raise_for_status()
         text = r.json()["content"][0]["text"]
-        # Strip any markdown fences
         text = text.strip()
         if text.startswith("```"):
             text = text.split("\n", 1)[1]
@@ -55,12 +82,11 @@ def call_claude(prompt):
         print(f"Claude API error: {e}")
         return None
 
-def build_game_context(dashboard):
-    """Build a text summary of tonight's games for Claude"""
+def build_game_context(dashboard, rosters):
     games = dashboard.get("games_tonight", [])
     if not games:
-        return "No games tonight."
-    
+        return "No games tonight.", []
+
     lines = []
     for g in games:
         signal_note = ""
@@ -70,35 +96,43 @@ def build_game_context(dashboard):
             signal_note = f" [SIGNAL 1 PARTIAL — fade {g['away']}, home rested 2 days]"
         elif g["signal"] == "cancel":
             signal_note = " [BOTH B2B — signals cancel]"
-        
+
         odds_note = ""
         if g.get("away_ml") and g.get("home_ml"):
             odds_note = f" | ML: {g['away']} {g['away_ml']} / {g['home']} {g['home_ml']}"
-        
-        lines.append(f"- {g['away']} @ {g['home']} · {g['time_et']}{odds_note}{signal_note}")
-    
-    return "\n".join(lines)
 
-def generate_value_plays(game_context, date_label):
+        lines.append(f"- {g['away']} @ {g['home']} · {g['time_et']}{odds_note}{signal_note}")
+
+        # Add roster info
+        for team in [g["away"], g["home"]]:
+            if team in rosters and rosters[team]["skaters"]:
+                lines.append(f"  {team} skaters: {', '.join(rosters[team]['skaters'])}")
+                lines.append(f"  {team} goalies: {', '.join(rosters[team]['goalies'])}")
+
+    return "\n".join(lines), games
+
+def generate_value_plays(game_context, date_label, n_games):
     prompt = f"""You are an expert NHL DFS and fantasy hockey analyst. Today is {date_label}.
 
-Tonight's NHL slate:
+Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
 {game_context}
 
-Generate fantasy value plays for both DraftKings and FanDuel. Focus on signal-informed picks where applicable — teams flagged with Signal 1 or Signal 2 should be noted. Fade B2B away teams for DFS stacks.
+CRITICAL: Only use players and teams listed above. Do not use players from other teams or rosters from your training data — use ONLY the players listed above.
 
-Respond ONLY with a valid JSON object, no markdown, no preamble. Use this exact structure:
+Generate fantasy value plays for both DraftKings and FanDuel. Apply signal logic where flagged.
+
+Respond ONLY with valid JSON, no markdown. Use this exact structure:
 {{
   "summary": {{
     "total_plays": 8,
     "top_tier": "S",
-    "slate_size": {len(game_context.splitlines())}
+    "slate_size": {n_games}
   }},
   "plays": [
     {{
-      "player": "Player Name",
+      "player": "First Last",
       "team": "ABBREV",
-      "position": "C/LW/RW/D",
+      "position": "C",
       "tier": "S",
       "matchup": "vs OPP or @ OPP",
       "game_time": "7:00 PM ET",
@@ -107,9 +141,9 @@ Respond ONLY with a valid JSON object, no markdown, no preamble. Use this exact 
       "proj_pts_dk": 21.4,
       "proj_pts_fd": 38.2,
       "dk_value": "2.55x",
-      "fd_value": "2.31x",
-      "reason": "2-3 sentence explanation focusing on matchup, recent form, signal context",
-      "tags": ["DFS + Season", "Signal 1 Game"],
+      "fd_value": "5.31x",
+      "reason": "2-3 sentence explanation with signal context where relevant",
+      "tags": ["DFS + Season"],
       "format": "both"
     }}
   ],
@@ -122,23 +156,44 @@ Respond ONLY with a valid JSON object, no markdown, no preamble. Use this exact 
   ]
 }}
 
-Generate 6-10 plays across S/A/B tiers. Include 1-2 avoids for any B2B away teams. Tags options: "DFS + Season", "DFS Only", "Season-Long", "Signal 1 Game", "B2B Watch", "Avoid DFS"."""
+Generate 6-10 plays across S/A/B tiers. Tags: "DFS + Season", "DFS Only", "Season-Long", "Signal 1 Game", "B2B Watch", "Avoid DFS"."""
 
     return call_claude(prompt)
 
-def generate_goalie_starts(game_context, date_label):
-    prompt = f"""You are an expert NHL fantasy hockey analyst specializing in goalie analysis. Today is {date_label}.
+def generate_goalie_starts(game_context, date_label, rosters, games):
+    # Build goalie-specific context
+    goalie_lines = []
+    for g in games:
+        away = g["away"]
+        home = g["home"]
+        signal_note = ""
+        if g["signal"] == "sig1":
+            signal_note = f"SIGNAL 1 — home goalie boosted, away goalie downgraded"
+        elif g["signal"] == "cancel":
+            signal_note = "BOTH B2B — signals cancel"
 
-Tonight's NHL slate:
-{game_context}
+        away_goalies = rosters.get(away, {}).get("goalies", ["Unknown"])
+        home_goalies = rosters.get(home, {}).get("goalies", ["Unknown"])
+        goalie_lines.append(f"- {away} @ {home} · {g['time_et']}{' | ' + signal_note if signal_note else ''}")
+        goalie_lines.append(f"  {away} goalies: {', '.join(away_goalies)}")
+        goalie_lines.append(f"  {home} goalies: {', '.join(home_goalies)}")
 
-Generate goalie start recommendations. Signal context is critical — goalies facing signal-favoured home teams get a boost, B2B away goalies are hard avoids.
+    goalie_context = "\n".join(goalie_lines)
 
-Respond ONLY with a valid JSON object, no markdown, no preamble. Use this exact structure:
+    prompt = f"""You are an expert NHL fantasy hockey analyst. Today is {date_label}.
+
+Tonight's games with CONFIRMED CURRENT GOALIES:
+{goalie_context}
+
+CRITICAL: Only use goalies listed above. Do not use goalies from your training data.
+
+Generate goalie start recommendations. Signal context is critical.
+
+Respond ONLY with valid JSON, no markdown:
 {{
   "goalies": [
     {{
-      "name": "Goalie Name",
+      "name": "First Last",
       "team": "ABBREV",
       "opponent": "OPP",
       "home_away": "home",
@@ -147,33 +202,35 @@ Respond ONLY with a valid JSON object, no markdown, no preamble. Use this exact 
       "sv_pct": ".921",
       "gaa": "2.38",
       "status": "confirmed",
-      "signal_note": "Signal 1 game — home team favoured" or "",
+      "signal_note": "",
       "recommendation": "start",
       "rec_label": "▲ Start"
     }}
   ]
 }}
 
-Status options: "confirmed", "likely", "unknown", "b2b_away"
-Recommendation options: "start", "stream", "wait", "avoid"
-Rec label options: "▲ Start", "~ Stream", "? Wait", "✕ Avoid"
-List all goalies for tonight's games. Hard avoid any B2B away goalies."""
+Status: "confirmed", "likely", "unknown", "b2b_away"
+Recommendation: "start", "stream", "wait", "avoid"
+Rec label: "▲ Start", "~ Stream", "? Wait", "✕ Avoid"
+List one goalie per team. Hard avoid B2B away goalies."""
 
     return call_claude(prompt)
 
 def generate_player_props(game_context, date_label):
     prompt = f"""You are an expert NHL prop betting analyst. Today is {date_label}.
 
-Tonight's NHL slate:
+Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
 {game_context}
 
-Generate player prop picks. Apply signal logic — B2B away players get downgraded on shot/point props, signal-favoured home players get upgrades.
+CRITICAL: Only use players listed above. Do not use players from your training data.
 
-Respond ONLY with a valid JSON object, no markdown, no preamble. Use this exact structure:
+Generate player prop picks applying signal logic where relevant.
+
+Respond ONLY with valid JSON, no markdown:
 {{
   "props": [
     {{
-      "player": "Player Name",
+      "player": "First Last",
       "team": "ABBREV",
       "prop_type": "Anytime Goal Scorer",
       "line": "0.5",
@@ -181,16 +238,15 @@ Respond ONLY with a valid JSON object, no markdown, no preamble. Use this exact 
       "pick": "over",
       "unit_size": "full",
       "game": "AWAY @ HOME",
-      "reason": "2 sentence explanation with signal context where relevant",
+      "reason": "2 sentence explanation with signal context",
       "category": "goals"
     }}
   ]
 }}
 
-Generate 8-12 props across categories: "goals", "points", "shots", "assists"
-Pick options: "over", "under", "back"
-Unit size options: "full", "half", "avoid"
-Include at least 2 signal-informed props (upgrades or downgrades based on B2B/rest)."""
+Generate 8-12 props. Categories: "goals", "points", "shots", "assists"
+Pick: "over", "under", "back"
+Unit size: "full", "half", "avoid"."""
 
     return call_claude(prompt)
 
@@ -201,17 +257,23 @@ def main():
 
     print(f"Generating fantasy.json for {today}")
 
-    # Load dashboard context
     dashboard = fetch_dashboard()
-    game_context = build_game_context(dashboard)
-    print(f"Game context built: {len(dashboard.get('games_tonight', []))} games")
+    games = dashboard.get("games_tonight", [])
 
-    # Generate all three sections
+    if not games:
+        print("No games tonight — skipping fantasy generation")
+        return
+
+    print(f"Fetching rosters for {len(games)} games...")
+    rosters = fetch_rosters(games)
+
+    game_context, games_list = build_game_context(dashboard, rosters)
+
     print("Generating value plays...")
-    value_plays = generate_value_plays(game_context, date_label)
+    value_plays = generate_value_plays(game_context, date_label, len(games))
 
     print("Generating goalie starts...")
-    goalie_starts = generate_goalie_starts(game_context, date_label)
+    goalie_starts = generate_goalie_starts(game_context, date_label, rosters, games_list)
 
     print("Generating player props...")
     player_props = generate_player_props(game_context, date_label)
