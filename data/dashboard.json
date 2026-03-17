@@ -19,8 +19,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+150",
-      "home_ml": "-180"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "BOS",
@@ -35,8 +35,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+105",
-      "home_ml": "-126"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "LAK",
@@ -51,8 +51,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-114",
-      "home_ml": "-105"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "UTA",
@@ -67,8 +67,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+132",
-      "home_ml": "-160"
+      "away_ml": "-20000",
+      "home_ml": "+2500"
     },
     {
       "away": "PIT",
@@ -83,8 +83,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+190",
-      "home_ml": "-235"
+      "away_ml": "-188",
+      "home_ml": "+146"
     }
   ],
   "last_night": [
