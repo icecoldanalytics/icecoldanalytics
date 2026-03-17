@@ -22,31 +22,53 @@ def fetch_dashboard():
         return {}
 
 def fetch_rosters(games):
-    """Fetch real skater and goalie rosters for tonight's games from NHL API"""
+    """Fetch real rosters with stats from NHL API"""
     rosters = {}
     for g in games:
         for team in [g["away"], g["home"]]:
             if team in rosters:
                 continue
             try:
-                url = f"https://api-web.nhle.com/v1/roster/{team}/current"
+                url = f"https://api-web.nhle.com/v1/club-stats/{team}/now"
                 r = requests.get(url, timeout=10)
                 r.raise_for_status()
                 data = r.json()
+
+                # Calculate team average games played to detect injured players
+                all_gp = [p.get("gamesPlayed", 0) for p in data.get("skaters", [])]
+                avg_gp = sum(all_gp) / len(all_gp) if all_gp else 0
+                min_gp = avg_gp * 0.4  # Flag if played less than 40% of team average
+
                 skaters = []
+                for p in data.get("skaters", []):
+                    fn = p.get("firstName", {}).get("default", "")
+                    ln = p.get("lastName", {}).get("default", "")
+                    pos = p.get("positionCode", "")
+                    gp = p.get("gamesPlayed", 0)
+                    pts = p.get("points", 0)
+                    goals = p.get("goals", 0)
+                    shots = p.get("shots", 0)
+                    toi = round(p.get("avgTimeOnIcePerGame", 0) / 60, 1)
+
+                    # Skip likely injured (very low games played vs team avg)
+                    if gp < min_gp:
+                        print(f"  Skipping likely injured: {fn} {ln} ({gp} GP vs {avg_gp:.0f} avg)")
+                        continue
+
+                    skaters.append(f"{fn} {ln} ({pos}, {gp}GP, {goals}G {pts}PTS, {shots}SOG, {toi}min TOI)")
+
                 goalies = []
-                for pos_group in ["forwards", "defensemen"]:
-                    for p in data.get(pos_group, []):
-                        fn = p.get("firstName", {}).get("default", "")
-                        ln = p.get("lastName", {}).get("default", "")
-                        pos = p.get("positionCode", "")
-                        skaters.append(f"{fn} {ln} ({pos})")
                 for p in data.get("goalies", []):
                     fn = p.get("firstName", {}).get("default", "")
                     ln = p.get("lastName", {}).get("default", "")
-                    goalies.append(f"{fn} {ln}")
+                    gp = p.get("gamesPlayed", 0)
+                    gs = p.get("gamesStarted", 0)
+                    sv = round(p.get("savePercentage", 0), 3)
+                    gaa = round(p.get("goalsAgainstAverage", 0), 2)
+                    goalies.append(f"{fn} {ln} ({gp}GP, {gs}GS, .{str(sv)[2:]} SV%, {gaa} GAA)")
+
                 rosters[team] = {"skaters": skaters[:20], "goalies": goalies}
-                print(f"✓ Roster fetched: {team} — {len(skaters)} skaters, {len(goalies)} goalies")
+                print(f"✓ Roster fetched: {team} — {len(skaters)} active skaters, {len(goalies)} goalies")
             except Exception as e:
                 print(f"Roster fetch error for {team}: {e}")
                 rosters[team] = {"skaters": [], "goalies": []}
