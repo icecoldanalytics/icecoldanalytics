@@ -249,7 +249,8 @@ def generate_player_props(game_context, date_label):
 Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
 {game_context}
 
-CRITICAL: Only use players listed above. Do not use players from your training data.
+CRITICAL INSTRUCTION — YOU MUST FOLLOW THIS:
+You are operating in March 2026. Many trades happened in the 2025 offseason. Mitch Marner signed with Vegas and is NOT on Toronto. Do not use any player not explicitly listed in the rosters above. Your training data about NHL rosters is OUTDATED.
 
 Generate player prop picks applying signal logic where relevant.
 
