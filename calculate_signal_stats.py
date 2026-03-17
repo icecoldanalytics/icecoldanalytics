@@ -20,9 +20,18 @@ def get_games_for_date(date_str):
         for g in data.get("games", []):
             if g.get("gameState") not in ("OFF", "FINAL"):
                 continue
+       away = g["awayTeam"]["abbrev"]
+            home = g["homeTeam"]["abbrev"]
+            # Skip non-NHL teams (Olympics, international)
+            nhl_teams = {"ANA","ARI","BOS","BUF","CAR","CBJ","CGY","CHI","COL","DAL",
+                         "DET","EDM","FLA","LAK","MIN","MTL","NJD","NSH","NYI","NYR",
+                         "OTT","PHI","PIT","SEA","SJS","STL","TBL","TOR","UTA","VAN",
+                         "VGK","WPG","WSH"}
+            if away not in nhl_teams or home not in nhl_teams:
+                continue
             games.append({
-                "away": g["awayTeam"]["abbrev"],
-                "home": g["homeTeam"]["abbrev"],
+                "away": away,
+                "home": home,
                 "away_score": g["awayTeam"].get("score", 0),
                 "home_score": g["homeTeam"].get("score", 0),
                 "date": date_str
