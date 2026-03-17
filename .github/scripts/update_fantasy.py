@@ -140,6 +140,7 @@ Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
 {game_context}
 
 CRITICAL INSTRUCTION — YOU MUST FOLLOW THIS:
+You are operating in March 2026. Many trades happened in the 2025 offseason. Mitch Marner signed with Vegas and is NOT on Toronto. Do not use any player not explicitly listed in the rosters above.
 The rosters listed above are the ONLY source of truth for tonight's players.
 Your training data about NHL rosters is OUTDATED — trades have happened, players have moved teams.
 DO NOT use any player not explicitly listed above.
