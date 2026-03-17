@@ -633,9 +633,15 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
       </div>
     </div>
     <div class="signal-rule-box">
-      <h3>Signal Rules</h3>
-      <p><strong>Signal 1:</strong> Away team on back-to-back + home team rested 3 or more days → fade the away team. ROI: +8.6% across 51 games.<br><br><strong>Signal 2:</strong> Away team on back-to-back + confirmed backup goalie starting → fade the away team. ROI: +38.7% across 39 games. Higher variance — use smaller unit sizing.<br><br><strong>Cancellation Rule:</strong> When both teams are on a back-to-back, all signals are void.<br><br><strong>Partial Signal:</strong> Away B2B + home rested exactly 2 days = lower confidence. Track but do not act at full unit size.</p>
-    </div>
+  <h3>Signal Rules & Methodology</h3>
+  <p><strong>Signal 1 — Fatigue Edge:</strong> Fires when the away team is on a back-to-back (played the previous night) and the home team has been rested for 3 or more days. The logic is straightforward — a fatigued road team facing a rested home crowd is at a compounding disadvantage. Travel fatigue, compressed recovery, and psychological momentum all favour the home side. We fade the away team. Across 51 NHL games this season, Signal 1 has produced a 56.9% win rate and +8.6% ROI betting at -110 odds.</p>
+  <br>
+  <p><strong>Signal 1 Partial — Moderate Fatigue Edge:</strong> A softer version of Signal 1 that fires when the away team is on a back-to-back and the home team has been rested for exactly 2 days. The rest differential is smaller but still meaningful — the away team is fatigued while the home team had a full day off. This season the partial signal has actually outperformed the full signal, posting a 62.6% win rate and +19.5% ROI across 115 games. We treat this as a real edge but use slightly reduced unit sizing given the smaller rest differential.</p>
+  <br>
+  <p><strong>Signal 2 — Goalie Edge:</strong> Fires when Signal 1 conditions are met AND the away team's backup goalie is confirmed starting. A fatigued team plus a backup goalie is a significant double disadvantage. ROI: +38.7% across 39 historical games. Higher variance — use smaller unit sizing and always confirm goalie status before acting.</p>
+  <br>
+  <p><strong>Cancellation Rule:</strong> When both teams are on a back-to-back, all signals are void. The fatigue edge disappears when both teams are equally tired.</p>
+</div>
   </div>
 </div>
 
