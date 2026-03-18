@@ -1,17 +1,17 @@
 {
   "date": "2026-03-18",
-  "updated": "02:02 AM MT",
+  "updated": "05:55 PM MT",
   "games": [
     {
       "away": "NJD",
       "home": "NYR",
       "away_city": "New Jersey",
       "home_city": "New York",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 2,
+      "home_score": 1,
+      "status": "live",
+      "display": "1st \u00b7 07:46",
+      "period_label": "1st"
     },
     {
       "away": "PIT",
@@ -19,10 +19,10 @@
       "away_city": "Pittsburgh",
       "home_city": "Carolina",
       "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "home_score": 1,
+      "status": "live",
+      "display": "1st \u00b7 04:55",
+      "period_label": "1st"
     },
     {
       "away": "OTT",
@@ -31,9 +31,9 @@
       "home_city": "Washington",
       "away_score": 0,
       "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "status": "live",
+      "display": "1st \u00b7 11:11",
+      "period_label": "1st"
     },
     {
       "away": "DAL",
