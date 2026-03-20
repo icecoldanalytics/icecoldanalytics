@@ -1427,6 +1427,8 @@ propsContainer.innerHTML = `
     if (propsEl) propsEl.textContent = pp.props?.length || 0;
     if (gamesEl) gamesEl.textContent = data.value_plays?.summary?.slate_size || 0;
     if (tierEl) tierEl.textContent = (data.value_plays?.summary?.top_tier || '—') + '-tier';
+    const updatedEl = document.getElementById('fp-updated-date');
+    if (updatedEl) updatedEl.textContent = `Updated ${data.date_label}`;
     console.log(`Fantasy loaded: ${vp.plays?.length || 0} plays, ${gs.goalies?.length || 0} goalies, ${pp.props?.length || 0} props`);
   } catch (e) {
     console.log('Fantasy fetch error:', e);
