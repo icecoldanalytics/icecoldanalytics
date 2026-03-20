@@ -404,14 +404,19 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
     <div class="nav-brand-icon">🧊</div>
     <div class="nav-brand-text">Ice Cold <span>Analytics</span></div>
   </div>
-  <div class="nav-links">
-    <a id="nav-dashboard"      class="active"  onclick="showPage('dashboard')">Dashboard</a>
-    <a id="nav-signal-tracker"                 onclick="showPage('signal-tracker')">Signal Tracker</a>
-    <a id="nav-edge-finder"                  onclick="showPage('edge-finder')">Edge Finder</a>
-    <a id="nav-fantasy-picks"                  onclick="showPage('fantasy-picks')">Fantasy Picks</a>
-    <a id="nav-about"                          onclick="showPage('about')">About</a>
+  <div class="nav-links" id="nav-links">
+    <a id="nav-dashboard"      class="active"  onclick="showPage('dashboard');closeMenu()">Dashboard</a>
+    <a id="nav-signal-tracker"                 onclick="showPage('signal-tracker');closeMenu()">Signal Tracker</a>
+    <a id="nav-edge-finder"                    onclick="showPage('edge-finder');closeMenu()">Edge Finder</a>
+    <a id="nav-fantasy-picks"                  onclick="showPage('fantasy-picks');closeMenu()">Fantasy Picks</a>
+    <a id="nav-about"                          onclick="showPage('about');closeMenu()">About</a>
+    <a class="nav-beta-mobile" href="https://app.brevo.com/contact/list" onclick="closeMenu()">✉ Join Beta</a>
   </div>
-  <a class="nav-cta" onclick="showPage('edge-finder')">⚡ Edge Finder</a>
+  <div class="nav-right">
+    <a class="nav-cta" onclick="showPage('edge-finder')">⚡ Edge Finder</a>
+    <a class="nav-beta" href="mailto:info@icecoldanalytics.ca?subject=Beta%20Signup">✉ Join Beta</a>
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMenu()">☰</button>
+  </div>
 </nav>
 
 
