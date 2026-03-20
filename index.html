@@ -1415,7 +1415,18 @@ propsContainer.innerHTML = `
     document.querySelectorAll('.fantasy-date-label').forEach(el => {
       el.textContent = data.date_label;
     });
+// Update summary bar
+    const playsEl = document.getElementById('fp-stat-plays');
+    const goaliesEl = document.getElementById('fp-stat-goalies');
+    const propsEl = document.getElementById('fp-stat-props');
+    const gamesEl = document.getElementById('fp-stat-games');
+    const tierEl = document.getElementById('fp-stat-tier');
 
+    if (playsEl) playsEl.textContent = vp.plays?.length || 0;
+    if (goaliesEl) goaliesEl.textContent = gs.goalies?.length || 0;
+    if (propsEl) propsEl.textContent = pp.props?.length || 0;
+    if (gamesEl) gamesEl.textContent = data.value_plays?.summary?.slate_size || 0;
+    if (tierEl) tierEl.textContent = (data.value_plays?.summary?.top_tier || '—') + '-tier';
     console.log(`Fantasy loaded: ${vp.plays?.length || 0} plays, ${gs.goalies?.length || 0} goalies, ${pp.props?.length || 0} props`);
   } catch (e) {
     console.log('Fantasy fetch error:', e);
