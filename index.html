@@ -873,14 +873,13 @@ function runAnalysis() {
   <div class="main-wrap">
 
     <!-- SUMMARY BAR -->
-    <div class="fp-summary" style="margin-top:28px;">
-      <div class="fps-card"><div class="fps-val"><span>8</span></div><div class="fps-label">Value Plays Today</div></div>
-      <div class="fps-card"><div class="fps-val"><span>10</span></div><div class="fps-label">Goalies Assessed</div></div>
-      <div class="fps-card"><div class="fps-val"><span>9</span></div><div class="fps-label">Prop Picks</div></div>
-      <div class="fps-card"><div class="fps-val"><span>5</span></div><div class="fps-label">Games on Slate (Mar 5)</div></div>
-      <div class="fps-card"><div class="fps-val"><span style="color:var(--gold);">S</span>-tier</div><div class="fps-label">Top Tier Available</div></div>
-    </div>
-
+   <div class="fp-summary" style="margin-top:28px;">
+  <div class="fps-card"><div class="fps-val"><span id="fp-stat-plays">—</span></div><div class="fps-label">Value Plays Today</div></div>
+  <div class="fps-card"><div class="fps-val"><span id="fp-stat-goalies">—</span></div><div class="fps-label">Goalies Assessed</div></div>
+  <div class="fps-card"><div class="fps-val"><span id="fp-stat-props">—</span></div><div class="fps-label">Prop Picks</div></div>
+  <div class="fps-card"><div class="fps-val"><span id="fp-stat-games">—</span></div><div class="fps-label">Games on Slate</div></div>
+  <div class="fps-card"><div class="fps-val"><span id="fp-stat-tier" style="color:var(--gold);">—</span></div><div class="fps-label">Top Tier Available</div></div>
+</div>
     <!-- TABS -->
     <div class="fp-tabs">
       <button class="fp-tab active" onclick="showFPTab('value-plays', this)">🏒 Value Plays</button>
