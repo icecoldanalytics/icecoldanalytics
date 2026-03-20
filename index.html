@@ -766,6 +766,15 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
 
 
 <script>
+  function toggleMenu() {
+  const links = document.getElementById('nav-links');
+  links.classList.toggle('open');
+}
+
+function closeMenu() {
+  const links = document.getElementById('nav-links');
+  links.classList.remove('open');
+}
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
