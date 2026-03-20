@@ -12,15 +12,15 @@
       "away": "NJD",
       "home": "WSH",
       "time": "5:00 PM MT",
-      "away_ml": "+110",
-      "home_ml": "-130"
+      "away_ml": "+105",
+      "home_ml": "-125"
     },
     {
       "away": "COL",
       "home": "CHI",
       "time": "6:30 PM MT",
-      "away_ml": "-305",
-      "home_ml": "+245"
+      "away_ml": "-325",
+      "home_ml": "+260"
     },
     {
       "away": "FLA",
@@ -33,8 +33,8 @@
       "away": "ANA",
       "home": "UTA",
       "time": "8:00 PM MT",
-      "away_ml": "+110",
-      "home_ml": "-130"
+      "away_ml": "+120",
+      "home_ml": "-142"
     }
   ]
 }
