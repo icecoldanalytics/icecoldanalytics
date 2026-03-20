@@ -1,82 +1,40 @@
 {
-  "date": "2026-03-19",
+  "date": "2026-03-20",
   "games": [
     {
-      "away": "WPG",
-      "home": "BOS",
+      "away": "CAR",
+      "home": "TOR",
+      "time": "5:00 PM MT",
+      "away_ml": "-218",
+      "home_ml": "+180"
+    },
+    {
+      "away": "NJD",
+      "home": "WSH",
       "time": "5:00 PM MT",
       "away_ml": "+110",
       "home_ml": "-130"
     },
     {
-      "away": "NYI",
-      "home": "OTT",
-      "time": "5:00 PM MT",
-      "away_ml": "+114",
-      "home_ml": "-135"
-    },
-    {
-      "away": "MTL",
-      "home": "DET",
-      "time": "5:00 PM MT",
-      "away_ml": null,
-      "home_ml": null
-    },
-    {
-      "away": "NYR",
-      "home": "CBJ",
-      "time": "5:00 PM MT",
-      "away_ml": "+180",
-      "home_ml": "-218"
-    },
-    {
-      "away": "CHI",
-      "home": "MIN",
-      "time": "5:30 PM MT",
-      "away_ml": "+195",
-      "home_ml": "-238"
-    },
-    {
-      "away": "SEA",
-      "home": "NSH",
-      "time": "6:00 PM MT",
-      "away_ml": "+114",
-      "home_ml": "-135"
+      "away": "COL",
+      "home": "CHI",
+      "time": "6:30 PM MT",
+      "away_ml": "-305",
+      "home_ml": "+245"
     },
     {
       "away": "FLA",
-      "home": "EDM",
+      "home": "CGY",
       "time": "7:00 PM MT",
-      "away_ml": "+136",
-      "home_ml": "-162"
+      "away_ml": "-108",
+      "home_ml": "-112"
     },
     {
-      "away": "TBL",
-      "home": "VAN",
+      "away": "ANA",
+      "home": "UTA",
       "time": "8:00 PM MT",
-      "away_ml": "-315",
-      "home_ml": "+250"
-    },
-    {
-      "away": "UTA",
-      "home": "VGK",
-      "time": "8:00 PM MT",
-      "away_ml": "+114",
-      "home_ml": "-137"
-    },
-    {
-      "away": "BUF",
-      "home": "SJS",
-      "time": "8:00 PM MT",
-      "away_ml": "-146",
-      "home_ml": "+122"
-    },
-    {
-      "away": "PHI",
-      "home": "LAK",
-      "time": "8:30 PM MT",
-      "away_ml": "+142",
-      "home_ml": "-170"
+      "away_ml": "+110",
+      "home_ml": "-130"
     }
   ]
 }
