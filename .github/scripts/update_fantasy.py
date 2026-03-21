@@ -104,11 +104,10 @@ def call_claude(prompt):
         print(f"Claude API error: {e}")
         return None
 
-def build_game_context(dashboard, rosters):
+def build_game_context(dashboard, rosters, scratches=[]):
     games = dashboard.get("games_tonight", [])
     if not games:
         return "No games tonight.", []
-
     lines = []
     for g in games:
         signal_note = ""
@@ -118,27 +117,18 @@ def build_game_context(dashboard, rosters):
             signal_note = f" [SIGNAL 1 PARTIAL — fade {g['away']}, home rested 2 days]"
         elif g["signal"] == "cancel":
             signal_note = " [BOTH B2B — signals cancel]"
-
         odds_note = ""
         if g.get("away_ml") and g.get("home_ml"):
             odds_note = f" | ML: {g['away']} {g['away_ml']} / {g['home']} {g['home_ml']}"
-
         lines.append(f"- {g['away']} @ {g['home']} · {g['time_et']}{odds_note}{signal_note}")
-
-        # Add roster info
+        # Add roster info with scratches filtered out
         for team in [g["away"], g["home"]]:
             if team in rosters and rosters[team]["skaters"]:
-                lines.append(f"  {team} skaters: {', '.join(rosters[team]['skaters'])}")
-                lines.append(f"  {team} goalies: {', '.join(rosters[team]['goalies'])}")
-
+                active_skaters = [s for s in rosters[team]["skaters"] if not any(sc.lower() in s.lower() for sc in scratches)]
+                active_goalies = [s for s in rosters[team]["goalies"] if not any(sc.lower() in s.lower() for sc in scratches)]
+                lines.append(f"  {team} skaters: {', '.join(active_skaters)}")
+                lines.append(f"  {team} goalies: {', '.join(active_goalies)}")
     return "\n".join(lines), games
-
-def generate_value_plays(game_context, date_label, n_games):
-    prompt = f"""You are an expert NHL DFS and fantasy hockey analyst. Today is {date_label}.
-
-Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
-{game_context}
-
 CRITICAL INSTRUCTION — YOU MUST FOLLOW THIS:
 You are operating in March 2026. Many trades happened in the 2025 offseason. Mitch Marner signed with Vegas and is NOT on Toronto. Do not use any player not explicitly listed in the rosters above.
 The rosters listed above are the ONLY source of truth for tonight's players.
