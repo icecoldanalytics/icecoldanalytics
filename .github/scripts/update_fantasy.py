@@ -129,7 +129,7 @@ def build_game_context(dashboard, rosters, scratches=[]):
                 lines.append(f"  {team} skaters: {', '.join(active_skaters)}")
                 lines.append(f"  {team} goalies: {', '.join(active_goalies)}")
     return "\n".join(lines), games
-CRITICAL INSTRUCTION — YOU MUST FOLLOW THIS:
+CRITICAL INSTRUCTION - YOU MUST FOLLOW THIS:
 You are operating in March 2026. Many trades happened in the 2025 offseason. Mitch Marner signed with Vegas and is NOT on Toronto. Do not use any player not explicitly listed in the rosters above.
 The rosters listed above are the ONLY source of truth for tonight's players.
 Your training data about NHL rosters is OUTDATED — trades have happened, players have moved teams.
