@@ -240,9 +240,15 @@ Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
 {game_context}
 
 CRITICAL INSTRUCTION — YOU MUST FOLLOW THIS:
-You are operating in March 2026. Many trades happened in the 2025 offseason. Mitch Marner signed with Vegas and is NOT on Toronto. Do not use any player not explicitly listed in the rosters above. Your training data about NHL rosters is OUTDATED.
+You are operating in March 2026. Many trades and signings happened in the 2025 offseason.
+- Mitch Marner signed with Vegas and is NOT on Toronto
+- Nikolaj Ehlers was traded and is NOT on Winnipeg
+- Auston Matthews is injured and NOT playing
+- Do not use ANY player not explicitly listed in the rosters above
+- Your training data about NHL rosters is OUTDATED and WRONG
+- If a player is not in the roster list above, do NOT include them
 
-Generate player prop picks applying signal logic where relevant.
+Generate player prop picks using ONLY players listed in the rosters above. Apply signal logic where relevant.
 
 Respond ONLY with valid JSON, no markdown:
 {{
@@ -265,7 +271,6 @@ Respond ONLY with valid JSON, no markdown:
 Generate 8-12 props. Categories: "goals", "points", "shots", "assists"
 Pick: "over", "under", "back"
 Unit size: "full", "half", "avoid"."""
-
     return call_claude(prompt)
 
 def main():
