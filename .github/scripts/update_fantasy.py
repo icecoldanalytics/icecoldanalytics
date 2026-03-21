@@ -282,10 +282,11 @@ def main():
         print("No games tonight — skipping fantasy generation")
         return
 
-    print(f"Fetching rosters for {len(games)} games...")
-    rosters = fetch_rosters(games)
+print(f"Fetching rosters for {len(games)} games...")
+rosters = fetch_rosters(games)
+scratches = fetch_scratches()
 
-    game_context, games_list = build_game_context(dashboard, rosters)
+   game_context, games_list = build_game_context(dashboard, rosters, scratches)
 
     print("Generating value plays...")
     value_plays = generate_value_plays(game_context, date_label, len(games))
