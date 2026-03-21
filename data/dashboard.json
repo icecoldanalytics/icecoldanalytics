@@ -19,8 +19,8 @@
       "away_b2b": true,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-108",
-      "home_ml": "-112"
+      "away_ml": "-115",
+      "home_ml": "-115"
     },
     {
       "away": "CAR",
@@ -35,8 +35,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 3,
-      "away_ml": "-218",
-      "home_ml": "+180"
+      "away_ml": "-145",
+      "home_ml": "+114"
     },
     {
       "away": "NJD",
@@ -51,8 +51,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+105",
-      "home_ml": "-125"
+      "away_ml": "+650",
+      "home_ml": "-1150"
     },
     {
       "away": "COL",
@@ -67,8 +67,8 @@
       "away_b2b": false,
       "home_b2b": true,
       "home_rest": 1,
-      "away_ml": "-325",
-      "home_ml": "+260"
+      "away_ml": "-1850",
+      "home_ml": "+900"
     },
     {
       "away": "ANA",
