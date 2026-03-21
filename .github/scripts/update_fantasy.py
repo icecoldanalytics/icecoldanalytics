@@ -236,7 +236,7 @@ List one goalie per team. Hard avoid B2B away goalies."""
 def generate_player_props(game_context, date_label):
     prompt = f"""You are an expert NHL prop betting analyst. Today is {date_label}.
 
-Tonight's NHL slate with CONFIRMED CURRENT ROSTERS:
+Tonights NHL slate with CONFIRMED CURRENT ROSTERS:
 {game_context}
 
 CRITICAL INSTRUCTION — YOU MUST FOLLOW THIS:
