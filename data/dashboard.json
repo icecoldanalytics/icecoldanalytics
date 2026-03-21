@@ -35,8 +35,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 3,
-      "away_ml": "-145",
-      "home_ml": "+114"
+      "away_ml": "-135",
+      "home_ml": "+105"
     },
     {
       "away": "NJD",
@@ -51,8 +51,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+650",
-      "home_ml": "-1150"
+      "away_ml": "+950",
+      "home_ml": "-1950"
     },
     {
       "away": "COL",
@@ -67,8 +67,8 @@
       "away_b2b": false,
       "home_b2b": true,
       "home_rest": 1,
-      "away_ml": "-1850",
-      "home_ml": "+900"
+      "away_ml": "-1950",
+      "home_ml": "+950"
     },
     {
       "away": "ANA",

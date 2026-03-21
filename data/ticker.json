@@ -5,22 +5,22 @@
       "away": "CAR",
       "home": "TOR",
       "time": "5:00 PM MT",
-      "away_ml": "-145",
-      "home_ml": "+114"
+      "away_ml": "-135",
+      "home_ml": "+105"
     },
     {
       "away": "NJD",
       "home": "WSH",
       "time": "5:00 PM MT",
-      "away_ml": "+650",
-      "home_ml": "-1150"
+      "away_ml": "+950",
+      "home_ml": "-1950"
     },
     {
       "away": "COL",
       "home": "CHI",
       "time": "6:30 PM MT",
-      "away_ml": "-1850",
-      "home_ml": "+900"
+      "away_ml": "-1950",
+      "home_ml": "+950"
     },
     {
       "away": "FLA",
