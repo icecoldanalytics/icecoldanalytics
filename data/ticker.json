@@ -1,40 +1,82 @@
 {
-  "date": "2026-03-20",
+  "date": "2026-03-21",
   "games": [
     {
-      "away": "CAR",
-      "home": "TOR",
-      "time": "5:00 PM MT",
+      "away": "WPG",
+      "home": "PIT",
+      "time": "11:00 AM MT",
+      "away_ml": "+136",
+      "home_ml": "-162"
+    },
+    {
+      "away": "VGK",
+      "home": "NSH",
+      "time": "12:00 PM MT",
       "away_ml": "-135",
-      "home_ml": "+105"
+      "home_ml": "+114"
     },
     {
-      "away": "NJD",
-      "home": "WSH",
-      "time": "5:00 PM MT",
-      "away_ml": "+950",
-      "home_ml": "-1950"
+      "away": "DAL",
+      "home": "MIN",
+      "time": "2:00 PM MT",
+      "away_ml": "-130",
+      "home_ml": "+110"
     },
     {
-      "away": "COL",
-      "home": "CHI",
-      "time": "6:30 PM MT",
-      "away_ml": "-1950",
-      "home_ml": "+950"
+      "away": "BUF",
+      "home": "LAK",
+      "time": "2:00 PM MT",
+      "away_ml": "-122",
+      "home_ml": "+102"
     },
     {
-      "away": "FLA",
-      "home": "CGY",
-      "time": "7:00 PM MT",
-      "away_ml": "-115",
+      "away": "PHI",
+      "home": "SJS",
+      "time": "2:00 PM MT",
+      "away_ml": "-105",
       "home_ml": "-115"
     },
     {
-      "away": "ANA",
-      "home": "UTA",
+      "away": "SEA",
+      "home": "CBJ",
+      "time": "3:00 PM MT",
+      "away_ml": "+142",
+      "home_ml": "-170"
+    },
+    {
+      "away": "NYI",
+      "home": "MTL",
+      "time": "5:00 PM MT",
+      "away_ml": null,
+      "home_ml": null
+    },
+    {
+      "away": "TOR",
+      "home": "OTT",
+      "time": "5:00 PM MT",
+      "away_ml": "+205",
+      "home_ml": "-250"
+    },
+    {
+      "away": "STL",
+      "home": "VAN",
+      "time": "5:00 PM MT",
+      "away_ml": null,
+      "home_ml": null
+    },
+    {
+      "away": "BOS",
+      "home": "DET",
+      "time": "6:00 PM MT",
+      "away_ml": "+105",
+      "home_ml": "-125"
+    },
+    {
+      "away": "TBL",
+      "home": "EDM",
       "time": "8:00 PM MT",
-      "away_ml": "+120",
-      "home_ml": "-142"
+      "away_ml": "-142",
+      "home_ml": "+120"
     }
   ]
 }
