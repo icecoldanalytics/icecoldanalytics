@@ -200,7 +200,7 @@ def generate_goalie_starts(game_context, date_label, rosters, games):
 
     prompt = f"""You are an expert NHL fantasy hockey analyst. Today is {date_label}.
 
-Tonight's games with CONFIRMED CURRENT GOALIES:
+Games tonight with CONFIRMED CURRENT GOALIES:
 {goalie_context}
 
 CRITICAL: The goalies listed above are the ONLY source of truth. Your training data is outdated. Only use goalies explicitly listed above.
