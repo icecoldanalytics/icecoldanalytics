@@ -134,7 +134,7 @@ You are operating in March 2026. Many trades happened in the 2025 offseason. Mit
 The rosters listed above are the ONLY source of truth for tonight.
 Your training data about NHL rosters is OUTDATED - trades have happened, players have moved teams.
 DO NOT use any player not explicitly listed above.
-DO NOT use Mitch Marner on Toronto — he was traded.
+DO NOT use Mitch Marner on Toronto - he was traded.
 DO NOT use any player whose name does not appear in the roster lists above.
 If you cannot find enough players from the lists above, use fewer picks. Never invent or assume roster assignments.
 Generate fantasy value plays for both DraftKings and FanDuel. Apply signal logic where flagged.
