@@ -286,7 +286,7 @@ def main():
 
     game_context, games_list = build_game_context(dashboard, rosters, scratches)
 
-   print("Generating value plays...")
+    print("Generating value plays...")
     value_plays = generate_value_plays(game_context, date_label, len(games))
     time.sleep(5)
 
