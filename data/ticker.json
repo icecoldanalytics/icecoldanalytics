@@ -5,28 +5,28 @@
       "away": "WPG",
       "home": "NYR",
       "time": "10:00 AM MT",
-      "away_ml": "+105",
-      "home_ml": "-125"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "COL",
       "home": "WSH",
       "time": "10:30 AM MT",
-      "away_ml": "-162",
-      "home_ml": "+136"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "CAR",
       "home": "PIT",
       "time": "1:00 PM MT",
-      "away_ml": "-142",
-      "home_ml": "+120"
+      "away_ml": "-280",
+      "home_ml": "+210"
     },
     {
       "away": "NSH",
       "home": "CHI",
       "time": "1:00 PM MT",
-      "away_ml": "-110",
+      "away_ml": "-120",
       "home_ml": "-110"
     },
     {

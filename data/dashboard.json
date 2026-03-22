@@ -19,8 +19,8 @@
       "away_b2b": true,
       "home_b2b": false,
       "home_rest": 3,
-      "away_ml": "+105",
-      "home_ml": "-125"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "NSH",
@@ -35,7 +35,7 @@
       "away_b2b": true,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-110",
+      "away_ml": "-120",
       "home_ml": "-110"
     },
     {
@@ -131,8 +131,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-162",
-      "home_ml": "+136"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "CAR",
@@ -147,8 +147,8 @@
       "away_b2b": false,
       "home_b2b": true,
       "home_rest": 1,
-      "away_ml": "-142",
-      "home_ml": "+120"
+      "away_ml": "-280",
+      "home_ml": "+210"
     }
   ],
   "last_night": [
