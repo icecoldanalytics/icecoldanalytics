@@ -9,6 +9,7 @@ import json
 import requests
 from datetime import datetime
 import pytz
+import time
 
 MST = pytz.timezone("America/Edmonton")
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
@@ -285,11 +286,13 @@ def main():
 
     game_context, games_list = build_game_context(dashboard, rosters, scratches)
 
-    print("Generating value plays...")
+   print("Generating value plays...")
     value_plays = generate_value_plays(game_context, date_label, len(games))
+    time.sleep(5)
 
     print("Generating goalie starts...")
     goalie_starts = generate_goalie_starts(game_context, date_label, rosters, games_list)
+    time.sleep(5)
 
     print("Generating player props...")
     player_props = generate_player_props(game_context, date_label)
