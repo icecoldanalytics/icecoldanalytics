@@ -1,105 +1,17 @@
 {
-  "date": "2026-03-22",
-  "updated": "11:49 PM MT",
+  "date": "2026-03-23",
+  "updated": "03:16 AM MT",
   "games": [
     {
-      "away": "WPG",
+      "away": "OTT",
       "home": "NYR",
-      "away_city": "Winnipeg",
-      "home_city": "New York",
-      "away_score": 3,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final/SO",
-      "period_label": "SO"
-    },
-    {
-      "away": "COL",
-      "home": "WSH",
-      "away_city": "Colorado",
-      "home_city": "Washington",
-      "away_score": 3,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
-    },
-    {
-      "away": "CAR",
-      "home": "PIT",
-      "away_city": "Carolina",
-      "home_city": "Pittsburgh",
-      "away_score": 5,
-      "home_score": 1,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "NSH",
-      "home": "CHI",
-      "away_city": "Nashville",
-      "home_city": "Chicago",
-      "away_score": 3,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
-    },
-    {
-      "away": "CBJ",
-      "home": "NYI",
-      "away_city": "Columbus",
+      "away_city": "Ottawa",
       "home_city": "New York",
       "away_score": 0,
-      "home_score": 1,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "VGK",
-      "home": "DAL",
-      "away_city": "Vegas",
-      "home_city": "Dallas",
-      "away_score": 3,
-      "home_score": 2,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "TBL",
-      "home": "CGY",
-      "away_city": "Tampa Bay",
-      "home_city": "Calgary",
-      "away_score": 3,
-      "home_score": 4,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
-    },
-    {
-      "away": "BUF",
-      "home": "ANA",
-      "away_city": "Buffalo",
-      "home_city": "Anaheim",
-      "away_score": 5,
-      "home_score": 6,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
-    },
-    {
-      "away": "LAK",
-      "home": "UTA",
-      "away_city": "Los Angeles",
-      "home_city": "Utah",
-      "away_score": 3,
-      "home_score": 4,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
     }
   ]
 }
