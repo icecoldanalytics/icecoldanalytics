@@ -1410,6 +1410,11 @@ async function buildROI() {
     const r = await fetch('data/roi.json?nocache=' + Date.now());
     const d = await r.json();
 
+    // Update badges
+    document.querySelector('#tracker-grid .tracker-card:nth-child(1) .sd-badge').textContent = d.signal1.status;
+    document.querySelector('#tracker-grid .tracker-card:nth-child(2) .sd-badge').textContent = d.signal1_partial.roi > 15 ? 'Outperforming' : d.signal1_partial.status;
+    document.querySelector('#tracker-grid .tracker-card:nth-child(3) .sd-badge').textContent = d.signal2.games === 0 ? 'No Data' : 'High Variance';
+
     // Signal 1
     document.getElementById('s1-games').textContent = d.signal1.games + ' games';
     document.getElementById('s1-roi').textContent = (d.signal1.roi >= 0 ? '+' : '') + d.signal1.roi + '%';
