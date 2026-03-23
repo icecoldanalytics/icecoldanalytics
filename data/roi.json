@@ -1,15 +1,15 @@
 {
-  "generated": "2026-03-22 07:27 PM MT",
+  "generated": "2026-03-23 10:16 AM MT",
   "season": "2025-26",
-  "through_date": "2026-03-21",
+  "through_date": "2026-03-22",
   "signal1": {
-    "games": 52,
+    "games": 53,
     "wins": 29,
-    "losses": 23,
-    "win_rate": 55.8,
-    "roi": 6.5,
+    "losses": 24,
+    "win_rate": 54.7,
+    "roi": 4.5,
     "avg_odds": -112,
-    "streak": "1L",
+    "streak": "2L",
     "best_month": "Feb 2026",
     "monthly": [
       {
@@ -45,20 +45,20 @@
       {
         "month": "2026-03",
         "wins": 2,
-        "losses": 1,
-        "roi": 27.3
+        "losses": 2,
+        "roi": -4.5
       }
     ],
     "status": "Active"
   },
   "signal1_partial": {
-    "games": 119,
-    "wins": 76,
-    "losses": 43,
-    "win_rate": 63.9,
-    "roi": 21.9,
+    "games": 123,
+    "wins": 79,
+    "losses": 44,
+    "win_rate": 64.2,
+    "roi": 22.6,
     "avg_odds": -110,
-    "streak": "5W",
+    "streak": "3W",
     "monthly": [
       {
         "month": "2025-10",
@@ -92,9 +92,9 @@
       },
       {
         "month": "2026-03",
-        "wins": 10,
-        "losses": 11,
-        "roi": -9.1
+        "wins": 13,
+        "losses": 12,
+        "roi": -0.7
       }
     ],
     "status": "Active"
@@ -111,18 +111,11 @@
     "status": "Active"
   },
   "summary": {
-    "total_sig1_games": 52,
-    "total_partial_games": 119,
+    "total_sig1_games": 53,
+    "total_partial_games": 123,
     "total_sig2_games": 0,
-    "cancelled_both_b2b": 56,
+    "cancelled_both_b2b": 58,
     "last5_sig1": [
-      {
-        "date": "2026-02-26",
-        "away": "PHI",
-        "home": "NYR",
-        "score": "3-2",
-        "fade_won": false
-      },
       {
         "date": "2026-02-26",
         "away": "SEA",
@@ -149,6 +142,13 @@
         "away": "PHI",
         "home": "LAK",
         "score": "4-3",
+        "fade_won": false
+      },
+      {
+        "date": "2026-03-22",
+        "away": "WPG",
+        "home": "NYR",
+        "score": "3-2",
         "fade_won": false
       }
     ]
