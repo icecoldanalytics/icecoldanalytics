@@ -1403,6 +1403,17 @@ propsContainer.innerHTML = `
 
 buildFantasy();
 </script>
+
+<script>
+async function buildROI() {
+  try {
+    const r = await fetch('data/roi.json?nocache=' + Date.now());
+    const d = await r.json();
+    ...
+  }
+}
+buildROI();
+</script>
 </body>
 
 </html>
