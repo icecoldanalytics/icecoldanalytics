@@ -1409,11 +1409,55 @@ async function buildROI() {
   try {
     const r = await fetch('data/roi.json?nocache=' + Date.now());
     const d = await r.json();
-    ...
+
+    // Signal 1
+    document.getElementById('s1-games').textContent = d.signal1.games + ' games';
+    document.getElementById('s1-roi').textContent = (d.signal1.roi >= 0 ? '+' : '') + d.signal1.roi + '%';
+    document.getElementById('s1-wr').textContent = d.signal1.win_rate + '%';
+    document.getElementById('s1-best-month').textContent = d.signal1.best_month;
+    document.getElementById('s1-streak').textContent = d.signal1.streak;
+
+    // Signal 1 Partial
+    document.getElementById('s1p-games').textContent = d.signal1_partial.games + ' games';
+    document.getElementById('s1p-roi').textContent = (d.signal1_partial.roi >= 0 ? '+' : '') + d.signal1_partial.roi + '%';
+    document.getElementById('s1p-wr').textContent = d.signal1_partial.win_rate + '%';
+    document.getElementById('s1p-streak').textContent = d.signal1_partial.streak;
+
+    // Signal 2
+    document.getElementById('s2-games').textContent = d.signal2.games + ' games';
+    document.getElementById('s2-roi').textContent = (d.signal2.roi >= 0 ? '+' : '') + d.signal2.roi + '%';
+    document.getElementById('s2-wr').textContent = d.signal2.win_rate + '%';
+    document.getElementById('s2-streak').textContent = d.signal2.streak;
+
+    // Summary
+    document.getElementById('sum-sig1').textContent = d.summary.total_sig1_games;
+    document.getElementById('sum-roi').textContent = (d.signal1.roi >= 0 ? '+' : '') + d.signal1.roi + '%';
+    document.getElementById('sum-cancelled').textContent = d.summary.cancelled_both_b2b;
+    document.getElementById('sum-partial').textContent = d.summary.total_partial_games;
+    document.getElementById('sum-sig2').textContent = d.summary.total_sig2_games;
+    document.getElementById('sum-updated').textContent = d.generated;
+
+    // Last 5 results
+    const table = document.getElementById('last5-table');
+    if (d.summary.last5_sig1 && d.summary.last5_sig1.length > 0) {
+      table.innerHTML = d.summary.last5_sig1.reverse().map(g => `
+        <div class="recap-row">
+          <div>
+            <div class="rr-game"><strong>${g.away} @ ${g.home}</strong></div>
+            <div class="rr-note">${g.date} · Fade ${g.away}</div>
+          </div>
+          <div class="rr-score">${g.score}</div>
+          <div class="rr-result ${g.fade_won ? 'r-hit' : 'r-miss'}">${g.fade_won ? '✅ Hit' : '❌ Miss'}</div>
+        </div>`).join('');
+    }
+
+    console.log('ROI data loaded');
+  } catch(e) {
+    console.log('ROI fetch error:', e);
   }
 }
+
 buildROI();
 </script>
-</body>
 
 </html>
