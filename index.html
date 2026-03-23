@@ -608,40 +608,42 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
     </div>
   </div>
   <div class="main-wrap">
-    <div class="tracker-grid">
-
+    <div class="tracker-grid" id="tracker-grid">
       <div class="tracker-card">
-        <div class="tracker-card-header"><h3>Signal 1 — Fatigue Edge</h3><span class="sd-badge">Active</span></div>
+        <div class="tracker-card-header"><h3>Signal 1 — Fatigue Edge</h3><span class="sd-badge">Loading...</span></div>
         <div class="tracker-card-body">
-          <div class="stat-row"><span class="stat-label">Tracked Sample</span><span class="stat-val">51 games</span></div>
-          <div class="stat-row"><span class="stat-label">ROI</span><span class="stat-val good">+8.6%</span></div>
-          <div class="stat-row"><span class="stat-label">Win Rate</span><span class="stat-val good">56.9%</span></div>
+          <div class="stat-row"><span class="stat-label">Tracked Sample</span><span class="stat-val" id="s1-games">—</span></div>
+          <div class="stat-row"><span class="stat-label">ROI</span><span class="stat-val good" id="s1-roi">—</span></div>
+          <div class="stat-row"><span class="stat-label">Win Rate</span><span class="stat-val good" id="s1-wr">—</span></div>
           <div class="stat-row"><span class="stat-label">Avg Odds (fade team)</span><span class="stat-val">-112</span></div>
-          <div class="stat-row"><span class="stat-label">Best Month</span><span class="stat-val warn">Jan 2026</span></div>
+          <div class="stat-row"><span class="stat-label">Best Month</span><span class="stat-val warn" id="s1-best-month">—</span></div>
+          <div class="stat-row"><span class="stat-label">Current Streak</span><span class="stat-val" id="s1-streak">—</span></div>
           <div class="stat-row"><span class="stat-label">Status</span><span class="stat-val good">Active</span></div>
         </div>
       </div>
 
       <div class="tracker-card">
-        <div class="tracker-card-header"><h3>Signal 1 Partial — Moderate Edge</h3><span class="sd-badge" style="color:var(--green);border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.08);">Outperforming</span></div>
+        <div class="tracker-card-header"><h3>Signal 1 Partial — Moderate Edge</h3><span class="sd-badge" style="color:var(--green);border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.08);">Loading...</span></div>
         <div class="tracker-card-body">
-          <div class="stat-row"><span class="stat-label">Tracked Sample</span><span class="stat-val">115 games</span></div>
-          <div class="stat-row"><span class="stat-label">ROI</span><span class="stat-val good">+19.5%</span></div>
-          <div class="stat-row"><span class="stat-label">Win Rate</span><span class="stat-val good">62.6%</span></div>
+          <div class="stat-row"><span class="stat-label">Tracked Sample</span><span class="stat-val" id="s1p-games">—</span></div>
+          <div class="stat-row"><span class="stat-label">ROI</span><span class="stat-val good" id="s1p-roi">—</span></div>
+          <div class="stat-row"><span class="stat-label">Win Rate</span><span class="stat-val good" id="s1p-wr">—</span></div>
           <div class="stat-row"><span class="stat-label">Avg Odds (fade team)</span><span class="stat-val">-110</span></div>
           <div class="stat-row"><span class="stat-label">Condition</span><span class="stat-val warn">Away B2B + Home 2d Rest</span></div>
+          <div class="stat-row"><span class="stat-label">Current Streak</span><span class="stat-val" id="s1p-streak">—</span></div>
           <div class="stat-row"><span class="stat-label">Status</span><span class="stat-val good">Active</span></div>
         </div>
       </div>
 
       <div class="tracker-card">
-        <div class="tracker-card-header"><h3>Signal 2 — Goalie Edge</h3><span class="sd-badge" style="color:var(--gold);border-color:rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);">High Variance</span></div>
+        <div class="tracker-card-header"><h3>Signal 2 — Goalie Edge</h3><span class="sd-badge" style="color:var(--gold);border-color:rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);">Loading...</span></div>
         <div class="tracker-card-body">
-          <div class="stat-row"><span class="stat-label">Tracked Sample</span><span class="stat-val">39 games</span></div>
-          <div class="stat-row"><span class="stat-label">ROI</span><span class="stat-val good">+38.7%</span></div>
-          <div class="stat-row"><span class="stat-label">Win Rate</span><span class="stat-val good">64.1%</span></div>
+          <div class="stat-row"><span class="stat-label">Tracked Sample</span><span class="stat-val" id="s2-games">—</span></div>
+          <div class="stat-row"><span class="stat-label">ROI</span><span class="stat-val good" id="s2-roi">—</span></div>
+          <div class="stat-row"><span class="stat-label">Win Rate</span><span class="stat-val good" id="s2-wr">—</span></div>
           <div class="stat-row"><span class="stat-label">Avg Odds (fade team)</span><span class="stat-val">-108</span></div>
           <div class="stat-row"><span class="stat-label">Variance</span><span class="stat-val warn">High</span></div>
+          <div class="stat-row"><span class="stat-label">Current Streak</span><span class="stat-val" id="s2-streak">—</span></div>
           <div class="stat-row"><span class="stat-label">Status</span><span class="stat-val good">Active</span></div>
         </div>
       </div>
@@ -649,35 +651,37 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
       <div class="tracker-card">
         <div class="tracker-card-header"><h3>2025–26 Season to Date</h3><span class="sd-badge">Combined</span></div>
         <div class="tracker-card-body">
-          <div class="stat-row"><span class="stat-label">Total Signal Games</span><span class="stat-val">51</span></div>
-          <div class="stat-row"><span class="stat-label">Combined ROI</span><span class="stat-val good">+8.6%</span></div>
-          <div class="stat-row"><span class="stat-label">Cancelled (Both B2B)</span><span class="stat-val">56</span></div>
-          <div class="stat-row"><span class="stat-label">Partial Flags</span><span class="stat-val warn">115</span></div>
-          <div class="stat-row"><span class="stat-label">Last Signal Hit</span><span class="stat-val good">Mar 5 · NYI @ LAK</span></div>
-          <div class="stat-row"><span class="stat-label">Current Streak</span><span class="stat-val good">2W</span></div>
-        </div>
-      </div>
-
-    </div>
-
-```
-          <div class="stat-row"><span class="stat-label">Current Streak</span><span class="stat-val good">4W</span></div>
+          <div class="stat-row"><span class="stat-label">Total Signal Games</span><span class="stat-val" id="sum-sig1">—</span></div>
+          <div class="stat-row"><span class="stat-label">Signal 1 ROI</span><span class="stat-val good" id="sum-roi">—</span></div>
+          <div class="stat-row"><span class="stat-label">Cancelled (Both B2B)</span><span class="stat-val" id="sum-cancelled">—</span></div>
+          <div class="stat-row"><span class="stat-label">Partial Flags</span><span class="stat-val warn" id="sum-partial">—</span></div>
+          <div class="stat-row"><span class="stat-label">Signal 2 Games</span><span class="stat-val" id="sum-sig2">—</span></div>
+          <div class="stat-row"><span class="stat-label">Last Updated</span><span class="stat-val" id="sum-updated">—</span></div>
         </div>
       </div>
     </div>
-    <div class="signal-rule-box">
-  <h3>Signal Rules & Methodology</h3>
-  <p><strong>Signal 1 — Fatigue Edge:</strong> Fires when the away team is on a back-to-back (played the previous night) and the home team has been rested for 3 or more days. The logic is straightforward — a fatigued road team facing a rested home crowd is at a compounding disadvantage. Travel fatigue, compressed recovery, and psychological momentum all favour the home side. We fade the away team. Across 51 NHL games this season, Signal 1 has produced a 56.9% win rate and +8.6% ROI betting at -110 odds.</p>
-  <br>
-  <p><strong>Signal 1 Partial — Moderate Fatigue Edge:</strong> A softer version of Signal 1 that fires when the away team is on a back-to-back and the home team has been rested for exactly 2 days. The rest differential is smaller but still meaningful — the away team is fatigued while the home team had a full day off. This season the partial signal has actually outperformed the full signal, posting a 62.6% win rate and +19.5% ROI across 115 games. We treat this as a real edge but use slightly reduced unit sizing given the smaller rest differential.</p>
-  <br>
-  <p><strong>Signal 2 — Goalie Edge:</strong> Fires when Signal 1 conditions are met AND the away team's backup goalie is confirmed starting. A fatigued team plus a backup goalie is a significant double disadvantage. ROI: +38.7% across 39 historical games. Higher variance — use smaller unit sizing and always confirm goalie status before acting.</p>
-  <br>
-  <p><strong>Cancellation Rule:</strong> When both teams are on a back-to-back, all signals are void. The fatigue edge disappears when both teams are equally tired.</p>
-</div>
+
+    <!-- LAST 5 SIGNAL 1 RESULTS -->
+    <div class="section-divider" style="margin-top:32px;">
+      <h2>Last 5 Signal 1 Results</h2>
+      <div class="sd-line"></div>
+    </div>
+    <div class="recap-table" id="last5-table">
+      <div class="recap-row"><div class="rr-game">Loading...</div></div>
+    </div>
+
+    <div class="signal-rule-box" style="margin-top:28px;">
+      <h3>Signal Rules & Methodology</h3>
+      <p><strong>Signal 1 — Fatigue Edge:</strong> Fires when the away team is on a back-to-back and the home team has been rested for 3 or more days. We fade the away team.</p>
+      <br>
+      <p><strong>Signal 1 Partial — Moderate Fatigue Edge:</strong> Away team on back-to-back, home team rested exactly 2 days. Lower confidence — reduced unit sizing recommended.</p>
+      <br>
+      <p><strong>Signal 2 — Goalie Edge:</strong> Fires when Signal 1 conditions are met AND the away team's backup goalie is confirmed starting. Higher variance — use smaller unit sizing.</p>
+      <br>
+      <p><strong>Cancellation Rule:</strong> When both teams are on a back-to-back, all signals are void.</p>
+    </div>
   </div>
 </div>
-
 
 <!-- ══════════════════════════════════
      RISK ANALYZER PAGE
