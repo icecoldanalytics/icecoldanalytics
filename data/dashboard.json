@@ -35,8 +35,8 @@
       "away_b2b": true,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-120",
-      "home_ml": "-110"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "TBL",
@@ -51,8 +51,8 @@
       "away_b2b": true,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-175",
-      "home_ml": "+145"
+      "away_ml": "+340",
+      "home_ml": "-500"
     },
     {
       "away": "BUF",
@@ -67,8 +67,8 @@
       "away_b2b": true,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-112",
-      "home_ml": "-108"
+      "away_ml": "+175",
+      "home_ml": "-230"
     },
     {
       "away": "LAK",
@@ -83,8 +83,8 @@
       "away_b2b": true,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+145",
-      "home_ml": "-175"
+      "away_ml": "+124",
+      "home_ml": "-160"
     },
     {
       "away": "CBJ",
@@ -99,8 +99,8 @@
       "away_b2b": true,
       "home_b2b": true,
       "home_rest": 1,
-      "away_ml": "-122",
-      "home_ml": "+102"
+      "away_ml": "+550",
+      "home_ml": "-920"
     },
     {
       "away": "VGK",
@@ -115,8 +115,8 @@
       "away_b2b": true,
       "home_b2b": true,
       "home_rest": 1,
-      "away_ml": "+120",
-      "home_ml": "-142"
+      "away_ml": "-1050",
+      "home_ml": "+600"
     },
     {
       "away": "COL",
@@ -147,8 +147,8 @@
       "away_b2b": false,
       "home_b2b": true,
       "home_rest": 1,
-      "away_ml": "-280",
-      "home_ml": "+210"
+      "away_ml": null,
+      "home_ml": null
     }
   ],
   "last_night": [

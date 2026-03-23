@@ -1,0 +1,156 @@
+{
+  "generated": "2026-03-22 07:27 PM MT",
+  "season": "2025-26",
+  "through_date": "2026-03-21",
+  "signal1": {
+    "games": 52,
+    "wins": 29,
+    "losses": 23,
+    "win_rate": 55.8,
+    "roi": 6.5,
+    "avg_odds": -112,
+    "streak": "1L",
+    "best_month": "Feb 2026",
+    "monthly": [
+      {
+        "month": "2025-10",
+        "wins": 5,
+        "losses": 5,
+        "roi": -4.5
+      },
+      {
+        "month": "2025-11",
+        "wins": 5,
+        "losses": 4,
+        "roi": 6.1
+      },
+      {
+        "month": "2025-12",
+        "wins": 2,
+        "losses": 5,
+        "roi": -45.5
+      },
+      {
+        "month": "2026-01",
+        "wins": 9,
+        "losses": 5,
+        "roi": 22.7
+      },
+      {
+        "month": "2026-02",
+        "wins": 6,
+        "losses": 3,
+        "roi": 27.3
+      },
+      {
+        "month": "2026-03",
+        "wins": 2,
+        "losses": 1,
+        "roi": 27.3
+      }
+    ],
+    "status": "Active"
+  },
+  "signal1_partial": {
+    "games": 119,
+    "wins": 76,
+    "losses": 43,
+    "win_rate": 63.9,
+    "roi": 21.9,
+    "avg_odds": -110,
+    "streak": "5W",
+    "monthly": [
+      {
+        "month": "2025-10",
+        "wins": 13,
+        "losses": 3,
+        "roi": 55.1
+      },
+      {
+        "month": "2025-11",
+        "wins": 11,
+        "losses": 5,
+        "roi": 31.2
+      },
+      {
+        "month": "2025-12",
+        "wins": 12,
+        "losses": 8,
+        "roi": 14.5
+      },
+      {
+        "month": "2026-01",
+        "wins": 23,
+        "losses": 15,
+        "roi": 15.6
+      },
+      {
+        "month": "2026-02",
+        "wins": 7,
+        "losses": 1,
+        "roi": 67.0
+      },
+      {
+        "month": "2026-03",
+        "wins": 10,
+        "losses": 11,
+        "roi": -9.1
+      }
+    ],
+    "status": "Active"
+  },
+  "signal2": {
+    "games": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "roi": 0.0,
+    "avg_odds": -108,
+    "streak": "\u2014",
+    "note": "Manually logged \u2014 backup goalie confirmed games only",
+    "status": "Active"
+  },
+  "summary": {
+    "total_sig1_games": 52,
+    "total_partial_games": 119,
+    "total_sig2_games": 0,
+    "cancelled_both_b2b": 56,
+    "last5_sig1": [
+      {
+        "date": "2026-02-26",
+        "away": "PHI",
+        "home": "NYR",
+        "score": "3-2",
+        "fade_won": false
+      },
+      {
+        "date": "2026-02-26",
+        "away": "SEA",
+        "home": "STL",
+        "score": "1-5",
+        "fade_won": true
+      },
+      {
+        "date": "2026-03-05",
+        "away": "TOR",
+        "home": "NYR",
+        "score": "2-6",
+        "fade_won": true
+      },
+      {
+        "date": "2026-03-05",
+        "away": "NYI",
+        "home": "LAK",
+        "score": "3-5",
+        "fade_won": true
+      },
+      {
+        "date": "2026-03-19",
+        "away": "PHI",
+        "home": "LAK",
+        "score": "4-3",
+        "fade_won": false
+      }
+    ]
+  }
+}
