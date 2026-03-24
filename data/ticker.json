@@ -5,8 +5,8 @@
       "away": "TOR",
       "home": "BOS",
       "time": "5:00 PM MT",
-      "away_ml": "+160",
-      "home_ml": "-192"
+      "away_ml": "+170",
+      "home_ml": "-205"
     },
     {
       "away": "CAR",
@@ -54,8 +54,8 @@
       "away": "MIN",
       "home": "TBL",
       "time": "5:30 PM MT",
-      "away_ml": "+142",
-      "home_ml": "-170"
+      "away_ml": "+136",
+      "home_ml": "-162"
     },
     {
       "away": "WSH",
