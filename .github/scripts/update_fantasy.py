@@ -132,7 +132,7 @@ def build_game_context(dashboard, rosters, scratches=[]):
             if team in rosters and rosters[team]["skaters"]:
                 active_skaters = [s for s in rosters[team]["skaters"] if not any(sc.lower() in s.lower() for sc in scratches)]
                 active_goalies = [s for s in rosters[team]["goalies"] if not any(sc.lower() in s.lower() for sc in scratches)]
-                lines.append(f"  {team} skaters: {', '.join(active_skaters)}")
+                lines.append(f"  {team} skaters: {', '.join(active_skaters[:10])}")
                 lines.append(f"  {team} goalies: {', '.join(active_goalies)}")
     return "\n".join(lines), games
 
