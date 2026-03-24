@@ -289,11 +289,11 @@ def main():
 
     print("Generating value plays...")
     value_plays = generate_value_plays(game_context, date_label, len(games))
-    time.sleep(5)
+    time.sleep(15)
 
     print("Generating goalie starts...")
     goalie_starts = generate_goalie_starts(game_context, date_label, rosters, games_list)
-    time.sleep(5)
+    time.sleep(15)
 
     print("Generating player props...")
     player_props = generate_player_props(game_context, date_label)
