@@ -115,8 +115,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-166",
-      "home_ml": "+140"
+      "away_ml": "-175",
+      "home_ml": "+145"
     },
     {
       "away": "MIN",
@@ -179,8 +179,8 @@
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "+145",
-      "home_ml": "-175"
+      "away_ml": "+140",
+      "home_ml": "-166"
     },
     {
       "away": "VGK",

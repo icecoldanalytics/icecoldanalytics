@@ -47,8 +47,8 @@
       "away": "COL",
       "home": "PIT",
       "time": "5:00 PM MT",
-      "away_ml": "-166",
-      "home_ml": "+140"
+      "away_ml": "-175",
+      "home_ml": "+145"
     },
     {
       "away": "MIN",
@@ -75,8 +75,8 @@
       "away": "NJD",
       "home": "DAL",
       "time": "6:00 PM MT",
-      "away_ml": "+145",
-      "home_ml": "-175"
+      "away_ml": "+140",
+      "home_ml": "-166"
     },
     {
       "away": "VGK",
