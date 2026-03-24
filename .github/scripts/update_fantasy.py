@@ -73,7 +73,7 @@ def fetch_rosters(games):
                     gaa = round(p.get("goalsAgainstAverage", 0), 2)
                     goalies.append(f"{fn} {ln} ({gp}GP, {gs}GS, .{str(sv)[2:]} SV%, {gaa} GAA)")
 
-             rosters[team] = {"skaters": skaters[:20], "goalies": goalies}
+                rosters[team] = {"skaters": skaters[:20], "goalies": goalies}
                 print(f"Roster fetched: {team} - {len(skaters)} active skaters, {len(goalies)} goalies")
                 time.sleep(1)
             except Exception as e:
