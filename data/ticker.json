@@ -1,96 +1,19 @@
 {
-  "date": "2026-03-26",
+  "date": "2026-03-27",
   "games": [
     {
-      "away": "CBJ",
-      "home": "MTL",
+      "away": "DET",
+      "home": "BUF",
       "time": "5:00 PM MT",
-      "away_ml": null,
-      "home_ml": null
-    },
-    {
-      "away": "PIT",
-      "home": "OTT",
-      "time": "5:00 PM MT",
-      "away_ml": "+124",
-      "home_ml": "-148"
-    },
-    {
-      "away": "SEA",
-      "home": "TBL",
-      "time": "5:00 PM MT",
-      "away_ml": "+235",
-      "home_ml": "-290"
-    },
-    {
-      "away": "MIN",
-      "home": "FLA",
-      "time": "5:00 PM MT",
-      "away_ml": "-162",
-      "home_ml": "+136"
-    },
-    {
-      "away": "DAL",
-      "home": "NYI",
-      "time": "5:00 PM MT",
-      "away_ml": "-122",
-      "home_ml": "+102"
-    },
-    {
-      "away": "CHI",
-      "home": "PHI",
-      "time": "5:00 PM MT",
-      "away_ml": "+142",
-      "home_ml": "-170"
-    },
-    {
-      "away": "SJS",
-      "home": "STL",
-      "time": "6:00 PM MT",
-      "away_ml": null,
-      "home_ml": null
-    },
-    {
-      "away": "NJD",
-      "home": "NSH",
-      "time": "6:00 PM MT",
-      "away_ml": "-105",
-      "home_ml": "-115"
-    },
-    {
-      "away": "COL",
-      "home": "WPG",
-      "time": "6:00 PM MT",
-      "away_ml": "-185",
-      "home_ml": "+154"
-    },
-    {
-      "away": "WSH",
-      "home": "UTA",
-      "time": "7:00 PM MT",
       "away_ml": "+130",
       "home_ml": "-155"
     },
     {
-      "away": "ANA",
-      "home": "CGY",
-      "time": "7:00 PM MT",
-      "away_ml": "-135",
-      "home_ml": "+114"
-    },
-    {
-      "away": "EDM",
-      "home": "VGK",
-      "time": "7:30 PM MT",
-      "away_ml": "+114",
-      "home_ml": "-135"
-    },
-    {
-      "away": "LAK",
-      "home": "VAN",
-      "time": "8:00 PM MT",
-      "away_ml": "-175",
-      "home_ml": "+145"
+      "away": "CHI",
+      "home": "NYR",
+      "time": "5:00 PM MT",
+      "away_ml": "+154",
+      "home_ml": "-185"
     }
   ]
 }
