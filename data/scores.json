@@ -1,17 +1,17 @@
 {
   "date": "2026-03-27",
-  "updated": "05:56 PM MT",
+  "updated": "11:16 PM MT",
   "games": [
     {
       "away": "DET",
       "home": "BUF",
       "away_city": "Detroit",
       "home_city": "Buffalo",
-      "away_score": 3,
-      "home_score": 0,
-      "status": "live",
-      "display": "1st \u00b7 06:25",
-      "period_label": "1st"
+      "away_score": 5,
+      "home_score": 2,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     },
     {
       "away": "CHI",
@@ -19,10 +19,10 @@
       "away_city": "Chicago",
       "home_city": "New York",
       "away_score": 1,
-      "home_score": 1,
-      "status": "live",
-      "display": "1st \u00b7 07:14",
-      "period_label": "1st"
+      "home_score": 6,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
