@@ -1,16 +1,16 @@
 {
-  "generated": "2026-03-29 09:00 AM MT",
+  "generated": "2026-03-30 08:28 AM MT",
   "season": "2025-26",
-  "through_date": "2026-03-28",
+  "through_date": "2026-03-29",
   "signal1": {
-    "games": 51,
-    "wins": 29,
-    "losses": 22,
-    "win_rate": 56.9,
-    "roi": 8.6,
+    "games": 44,
+    "wins": 23,
+    "losses": 21,
+    "win_rate": 52.3,
+    "roi": -0.2,
     "avg_odds": -112,
-    "streak": "3W",
-    "best_month": "Mar 2026",
+    "streak": "2L",
+    "best_month": "Jan 2026",
     "monthly": [
       {
         "month": "2025-10",
@@ -38,27 +38,21 @@
       },
       {
         "month": "2026-02",
-        "wins": 6,
-        "losses": 3,
-        "roi": 27.3
-      },
-      {
-        "month": "2026-03",
         "wins": 2,
-        "losses": 0,
-        "roi": 90.9
+        "losses": 2,
+        "roi": -4.5
       }
     ],
     "status": "Active"
   },
   "signal1_partial": {
-    "games": 114,
-    "wins": 71,
-    "losses": 43,
-    "win_rate": 62.3,
-    "roi": 18.9,
+    "games": 95,
+    "wins": 64,
+    "losses": 31,
+    "win_rate": 67.4,
+    "roi": 28.6,
     "avg_odds": -110,
-    "streak": "3L",
+    "streak": "5W",
     "monthly": [
       {
         "month": "2025-10",
@@ -86,15 +80,9 @@
       },
       {
         "month": "2026-02",
-        "wins": 7,
-        "losses": 1,
-        "roi": 67.0
-      },
-      {
-        "month": "2026-03",
         "wins": 5,
-        "losses": 11,
-        "roi": -40.3
+        "losses": 0,
+        "roi": 90.9
       }
     ],
     "status": "Active"
@@ -111,45 +99,45 @@
     "status": "Active"
   },
   "summary": {
-    "total_sig1_games": 51,
-    "total_partial_games": 114,
+    "total_sig1_games": 44,
+    "total_partial_games": 95,
     "total_sig2_games": 0,
-    "cancelled_both_b2b": 52,
+    "cancelled_both_b2b": 47,
     "last5_sig1": [
       {
-        "date": "2026-02-26",
-        "away": "TBL",
-        "home": "CAR",
-        "score": "4-5",
+        "date": "2026-01-20",
+        "away": "NYR",
+        "home": "LAK",
+        "score": "3-4",
         "fade_won": true
       },
       {
-        "date": "2026-02-26",
-        "away": "PHI",
-        "home": "NYR",
-        "score": "3-2",
+        "date": "2026-02-01",
+        "away": "VGK",
+        "home": "ANA",
+        "score": "3-4",
+        "fade_won": true
+      },
+      {
+        "date": "2026-02-03",
+        "away": "WSH",
+        "home": "PHI",
+        "score": "2-4",
+        "fade_won": true
+      },
+      {
+        "date": "2026-02-03",
+        "away": "TOR",
+        "home": "EDM",
+        "score": "5-2",
         "fade_won": false
       },
       {
-        "date": "2026-02-26",
+        "date": "2026-02-04",
         "away": "SEA",
-        "home": "STL",
-        "score": "1-5",
-        "fade_won": true
-      },
-      {
-        "date": "2026-03-05",
-        "away": "TOR",
-        "home": "NYR",
-        "score": "2-6",
-        "fade_won": true
-      },
-      {
-        "date": "2026-03-05",
-        "away": "NYI",
         "home": "LAK",
-        "score": "3-5",
-        "fade_won": true
+        "score": "4-2",
+        "fade_won": false
       }
     ]
   }
