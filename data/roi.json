@@ -1,16 +1,16 @@
 {
-  "generated": "2026-04-02 08:25 AM MT",
+  "generated": "2026-04-03 08:04 AM MT",
   "season": "2025-26",
-  "through_date": "2026-04-01",
+  "through_date": "2026-04-02",
   "signal1": {
-    "games": 56,
-    "wins": 30,
+    "games": 57,
+    "wins": 31,
     "losses": 26,
-    "win_rate": 53.6,
-    "roi": 2.3,
+    "win_rate": 54.4,
+    "roi": 3.8,
     "avg_odds": -112,
-    "streak": "1W",
-    "best_month": "Feb 2026",
+    "streak": "2W",
+    "best_month": "Apr 2026",
     "monthly": [
       {
         "month": "2025-10",
@@ -47,6 +47,12 @@
         "wins": 3,
         "losses": 4,
         "roi": -18.2
+      },
+      {
+        "month": "2026-04",
+        "wins": 1,
+        "losses": 0,
+        "roi": 90.9
       }
     ],
     "status": "Active"
@@ -111,18 +117,11 @@
     "status": "Active"
   },
   "summary": {
-    "total_sig1_games": 56,
+    "total_sig1_games": 57,
     "total_partial_games": 125,
     "total_sig2_games": 0,
     "cancelled_both_b2b": 62,
     "last5_sig1": [
-      {
-        "date": "2026-03-19",
-        "away": "PHI",
-        "home": "LAK",
-        "score": "4-3",
-        "fade_won": false
-      },
       {
         "date": "2026-03-22",
         "away": "WPG",
@@ -149,6 +148,13 @@
         "away": "NYI",
         "home": "BUF",
         "score": "3-4",
+        "fade_won": true
+      },
+      {
+        "date": "2026-04-02",
+        "away": "VAN",
+        "home": "MIN",
+        "score": "2-5",
         "fade_won": true
       }
     ]
