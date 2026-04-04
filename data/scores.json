@@ -1,17 +1,17 @@
 {
   "date": "2026-04-03",
-  "updated": "05:41 PM MT",
+  "updated": "06:56 PM MT",
   "games": [
     {
       "away": "PHI",
       "home": "NYI",
       "away_city": "Philadelphia",
       "home_city": "New York",
-      "away_score": 2,
-      "home_score": 0,
+      "away_score": 3,
+      "home_score": 1,
       "status": "live",
-      "display": "1st \u00b7 00:56",
-      "period_label": "1st"
+      "display": "3rd \u00b7 20:00",
+      "period_label": "3rd"
     },
     {
       "away": "STL",
