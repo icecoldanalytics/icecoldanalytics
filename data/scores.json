@@ -1,16 +1,16 @@
 {
   "date": "2026-04-03",
-  "updated": "06:56 PM MT",
+  "updated": "08:43 PM MT",
   "games": [
     {
       "away": "PHI",
       "home": "NYI",
       "away_city": "Philadelphia",
       "home_city": "New York",
-      "away_score": 3,
+      "away_score": 4,
       "home_score": 1,
-      "status": "live",
-      "display": "3rd \u00b7 20:00",
+      "status": "final",
+      "display": "Final",
       "period_label": "3rd"
     },
     {
@@ -18,11 +18,11 @@
       "home": "ANA",
       "away_city": "St. Louis",
       "home_city": "Anaheim",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 2,
+      "home_score": 2,
+      "status": "live",
+      "display": "1st \u00b7 02:19",
+      "period_label": "1st"
     }
   ]
 }
