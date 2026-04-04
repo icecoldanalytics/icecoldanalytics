@@ -1,6 +1,6 @@
 {
   "date": "2026-04-03",
-  "updated": "08:43 PM MT",
+  "updated": "10:31 PM MT",
   "games": [
     {
       "away": "PHI",
@@ -18,11 +18,11 @@
       "home": "ANA",
       "away_city": "St. Louis",
       "home_city": "Anaheim",
-      "away_score": 2,
+      "away_score": 6,
       "home_score": 2,
       "status": "live",
-      "display": "1st \u00b7 02:19",
-      "period_label": "1st"
+      "display": "3rd \u00b7 06:50",
+      "period_label": "3rd"
     }
   ]
 }
