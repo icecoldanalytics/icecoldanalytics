@@ -1,16 +1,16 @@
 {
-  "generated": "2026-04-03 08:04 AM MT",
+  "generated": "2026-04-04 07:54 AM MT",
   "season": "2025-26",
-  "through_date": "2026-04-02",
+  "through_date": "2026-04-03",
   "signal1": {
-    "games": 57,
+    "games": 58,
     "wins": 31,
-    "losses": 26,
-    "win_rate": 54.4,
-    "roi": 3.8,
+    "losses": 27,
+    "win_rate": 53.4,
+    "roi": 2.0,
     "avg_odds": -112,
-    "streak": "2W",
-    "best_month": "Apr 2026",
+    "streak": "1L",
+    "best_month": "Feb 2026",
     "monthly": [
       {
         "month": "2025-10",
@@ -51,8 +51,8 @@
       {
         "month": "2026-04",
         "wins": 1,
-        "losses": 0,
-        "roi": 90.9
+        "losses": 1,
+        "roi": -4.5
       }
     ],
     "status": "Active"
@@ -117,18 +117,11 @@
     "status": "Active"
   },
   "summary": {
-    "total_sig1_games": 57,
+    "total_sig1_games": 58,
     "total_partial_games": 125,
     "total_sig2_games": 0,
     "cancelled_both_b2b": 62,
     "last5_sig1": [
-      {
-        "date": "2026-03-22",
-        "away": "WPG",
-        "home": "NYR",
-        "score": "3-2",
-        "fade_won": false
-      },
       {
         "date": "2026-03-24",
         "away": "OTT",
@@ -156,6 +149,13 @@
         "home": "MIN",
         "score": "2-5",
         "fade_won": true
+      },
+      {
+        "date": "2026-04-03",
+        "away": "PHI",
+        "home": "NYI",
+        "score": "4-1",
+        "fade_won": false
       }
     ]
   }
