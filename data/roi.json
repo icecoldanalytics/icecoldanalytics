@@ -1,7 +1,7 @@
 {
-  "generated": "2026-04-04 07:54 AM MT",
+  "generated": "2026-04-05 07:56 AM MT",
   "season": "2025-26",
-  "through_date": "2026-04-03",
+  "through_date": "2026-04-04",
   "signal1": {
     "games": 58,
     "wins": 31,
@@ -58,13 +58,13 @@
     "status": "Active"
   },
   "signal1_partial": {
-    "games": 125,
-    "wins": 81,
+    "games": 126,
+    "wins": 82,
     "losses": 44,
-    "win_rate": 64.8,
-    "roi": 23.7,
+    "win_rate": 65.1,
+    "roi": 24.2,
     "avg_odds": -110,
-    "streak": "5W",
+    "streak": "6W",
     "monthly": [
       {
         "month": "2025-10",
@@ -101,6 +101,12 @@
         "wins": 15,
         "losses": 12,
         "roi": 6.1
+      },
+      {
+        "month": "2026-04",
+        "wins": 1,
+        "losses": 0,
+        "roi": 90.9
       }
     ],
     "status": "Active"
@@ -118,7 +124,7 @@
   },
   "summary": {
     "total_sig1_games": 58,
-    "total_partial_games": 125,
+    "total_partial_games": 126,
     "total_sig2_games": 0,
     "cancelled_both_b2b": 62,
     "last5_sig1": [
