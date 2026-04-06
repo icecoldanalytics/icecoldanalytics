@@ -1,6 +1,6 @@
 {
   "date": "2026-04-05",
-  "updated": "09:23 PM MT",
+  "updated": "11:38 PM MT",
   "games": [
     {
       "away": "MIN",
@@ -73,11 +73,11 @@
       "home": "COL",
       "away_city": "St. Louis",
       "home_city": "Colorado",
-      "away_score": 2,
+      "away_score": 3,
       "home_score": 2,
-      "status": "live",
-      "display": "2nd \u00b7 12:49",
-      "period_label": "2nd"
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
