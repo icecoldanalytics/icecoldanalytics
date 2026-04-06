@@ -1,6 +1,6 @@
 {
   "date": "2026-04-05",
-  "updated": "07:05 PM MT",
+  "updated": "09:23 PM MT",
   "games": [
     {
       "away": "MIN",
@@ -51,10 +51,10 @@
       "home": "MTL",
       "away_city": "New Jersey",
       "home_city": "Montr\u00e9al",
-      "away_score": 2,
+      "away_score": 3,
       "home_score": 0,
-      "status": "live",
-      "display": "3rd \u00b7 15:27",
+      "status": "final",
+      "display": "Final",
       "period_label": "3rd"
     },
     {
@@ -63,9 +63,9 @@
       "away_city": "Washington",
       "home_city": "New York",
       "away_score": 1,
-      "home_score": 6,
-      "status": "live",
-      "display": "3rd \u00b7 18:52",
+      "home_score": 8,
+      "status": "final",
+      "display": "Final",
       "period_label": "3rd"
     },
     {
@@ -73,11 +73,11 @@
       "home": "COL",
       "away_city": "St. Louis",
       "home_city": "Colorado",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 2,
+      "home_score": 2,
+      "status": "live",
+      "display": "2nd \u00b7 12:49",
+      "period_label": "2nd"
     }
   ]
 }
