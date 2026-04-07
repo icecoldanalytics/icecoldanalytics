@@ -1,28 +1,28 @@
 {
   "date": "2026-04-06",
-  "updated": "05:43 PM MT",
+  "updated": "07:03 PM MT",
   "games": [
     {
       "away": "TBL",
       "home": "BUF",
       "away_city": "Tampa Bay",
       "home_city": "Buffalo",
-      "away_score": 1,
-      "home_score": 2,
+      "away_score": 2,
+      "home_score": 3,
       "status": "live",
-      "display": "1st \u00b7 03:50",
-      "period_label": "1st"
+      "display": "2nd \u00b7 02:54",
+      "period_label": "2nd"
     },
     {
       "away": "SEA",
       "home": "WPG",
       "away_city": "Seattle",
       "home_city": "Winnipeg",
-      "away_score": 0,
-      "home_score": 0,
+      "away_score": 1,
+      "home_score": 2,
       "status": "live",
-      "display": "1st \u00b7 20:00",
-      "period_label": "1st"
+      "display": "2nd \u00b7 09:05",
+      "period_label": "2nd"
     },
     {
       "away": "CHI",
