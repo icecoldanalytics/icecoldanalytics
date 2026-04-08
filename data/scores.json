@@ -1,6 +1,6 @@
 {
   "date": "2026-04-07",
-  "updated": "08:57 PM MT",
+  "updated": "11:19 PM MT",
   "games": [
     {
       "away": "FLA",
@@ -95,33 +95,33 @@
       "home": "UTA",
       "away_city": "Edmonton",
       "home_city": "Utah",
-      "away_score": 3,
-      "home_score": 1,
-      "status": "live",
-      "display": "2nd \u00b7 12:37",
-      "period_label": "2nd"
+      "away_score": 5,
+      "home_score": 6,
+      "status": "final",
+      "display": "Final/OT",
+      "period_label": "OT"
     },
     {
       "away": "VGK",
       "home": "VAN",
       "away_city": "Vegas",
       "home_city": "Vancouver",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "live",
-      "display": "1st \u00b7 03:45",
-      "period_label": "1st"
+      "away_score": 2,
+      "home_score": 1,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     },
     {
       "away": "NSH",
       "home": "ANA",
       "away_city": "Nashville",
       "home_city": "Anaheim",
-      "away_score": 0,
+      "away_score": 5,
       "home_score": 0,
-      "status": "live",
-      "display": "1st \u00b7 04:34",
-      "period_label": "1st"
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
