@@ -1,6 +1,6 @@
 {
   "date": "2026-04-11",
-  "updated": "09:27 PM MT",
+  "updated": "11:35 PM MT",
   "games": [
     {
       "away": "TBL",
@@ -161,11 +161,11 @@
       "home": "SJS",
       "away_city": "Vancouver",
       "home_city": "San Jose",
-      "away_score": 1,
-      "home_score": 2,
-      "status": "live",
-      "display": "2nd \u00b7 09:01",
-      "period_label": "2nd"
+      "away_score": 4,
+      "home_score": 3,
+      "status": "final",
+      "display": "Final/SO",
+      "period_label": "SO"
     }
   ]
 }
