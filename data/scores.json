@@ -1,39 +1,39 @@
 {
   "date": "2026-04-13",
-  "updated": "02:23 AM MT",
+  "updated": "05:52 PM MT",
   "games": [
     {
       "away": "DET",
       "home": "TBL",
       "away_city": "Detroit",
       "home_city": "Tampa Bay",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 1,
+      "home_score": 1,
+      "status": "live",
+      "display": "1st \u00b7 14:23",
+      "period_label": "1st"
     },
     {
       "away": "NYR",
       "home": "FLA",
       "away_city": "New York",
       "home_city": "Florida",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 1,
+      "home_score": 2,
+      "status": "live",
+      "display": "1st \u00b7 07:09",
+      "period_label": "1st"
     },
     {
       "away": "CAR",
       "home": "PHI",
       "away_city": "Carolina",
       "home_city": "Philadelphia",
-      "away_score": 0,
+      "away_score": 2,
       "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "status": "live",
+      "display": "1st \u00b7 07:05",
+      "period_label": "1st"
     },
     {
       "away": "DAL",
@@ -41,10 +41,10 @@
       "away_city": "Dallas",
       "home_city": "Toronto",
       "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "home_score": 1,
+      "status": "live",
+      "display": "1st \u00b7 14:45",
+      "period_label": "1st"
     },
     {
       "away": "MIN",
