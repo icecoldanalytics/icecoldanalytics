@@ -1,6 +1,6 @@
 {
   "date": "2026-04-15",
-  "updated": "09:30 PM MT",
+  "updated": "11:51 PM MT",
   "games": [
     {
       "away": "DAL",
@@ -63,10 +63,10 @@
       "away_city": "Seattle",
       "home_city": "Vegas",
       "away_score": 1,
-      "home_score": 0,
-      "status": "live",
-      "display": "2nd \u00b7 03:30",
-      "period_label": "2nd"
+      "home_score": 4,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
