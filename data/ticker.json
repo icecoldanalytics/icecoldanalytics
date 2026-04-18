@@ -1,4 +1,26 @@
 {
-  "date": "2026-04-17",
-  "games": []
+  "date": "2026-04-18",
+  "games": [
+    {
+      "away": "OTT",
+      "home": "CAR",
+      "time": "1:00 PM MT",
+      "away_ml": "+125",
+      "home_ml": "-150"
+    },
+    {
+      "away": "MIN",
+      "home": "DAL",
+      "time": "3:30 PM MT",
+      "away_ml": "+100",
+      "home_ml": "-120"
+    },
+    {
+      "away": "PHI",
+      "home": "PIT",
+      "time": "6:00 PM MT",
+      "away_ml": "+118",
+      "home_ml": "-142"
+    }
+  ]
 }
