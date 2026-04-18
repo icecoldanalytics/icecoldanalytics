@@ -1,6 +1,6 @@
 {
   "date": "2026-04-18",
-  "updated": "01:47 AM MT",
+  "updated": "05:42 PM MT",
   "games": [
     {
       "away": "OTT",
@@ -8,21 +8,21 @@
       "away_city": "Ottawa",
       "home_city": "Carolina",
       "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "home_score": 2,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     },
     {
       "away": "MIN",
       "home": "DAL",
       "away_city": "Minnesota",
       "home_city": "Dallas",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 4,
+      "home_score": 1,
+      "status": "live",
+      "display": "2nd \u00b7 04:37",
+      "period_label": "2nd"
     },
     {
       "away": "PHI",
