@@ -1,6 +1,6 @@
 {
   "date": "2026-04-22",
-  "updated": "09:28 PM MT",
+  "updated": "11:52 PM MT",
   "games": [
     {
       "away": "PIT",
@@ -18,22 +18,22 @@
       "home": "MIN",
       "away_city": "Dallas",
       "home_city": "Minnesota",
-      "away_score": 2,
+      "away_score": 3,
       "home_score": 3,
       "status": "live",
-      "display": "2nd \u00b7 00:22",
-      "period_label": "2nd"
+      "display": "OT \u00b7 08:57",
+      "period_label": "OT"
     },
     {
       "away": "ANA",
       "home": "EDM",
       "away_city": "Anaheim",
       "home_city": "Edmonton",
-      "away_score": 3,
-      "home_score": 1,
-      "status": "live",
-      "display": "2nd \u00b7 09:13",
-      "period_label": "2nd"
+      "away_score": 6,
+      "home_score": 4,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
