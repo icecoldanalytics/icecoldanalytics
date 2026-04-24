@@ -1,6 +1,6 @@
 {
   "date": "2026-04-23",
-  "updated": "09:30 PM MT",
+  "updated": "11:57 PM MT",
   "games": [
     {
       "away": "BUF",
@@ -29,11 +29,11 @@
       "home": "LAK",
       "away_city": "Colorado",
       "home_city": "Los Angeles",
-      "away_score": 2,
-      "home_score": 1,
-      "status": "live",
-      "display": "2nd \u00b7 05:32",
-      "period_label": "2nd"
+      "away_score": 4,
+      "home_score": 2,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
