@@ -1,6 +1,6 @@
 {
   "date": "2026-04-26",
-  "updated": "05:49 PM MT",
+  "updated": "09:41 PM MT",
   "games": [
     {
       "away": "BUF",
@@ -29,22 +29,22 @@
       "home": "MTL",
       "away_city": "Tampa Bay",
       "home_city": "Montr\u00e9al",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "live",
-      "display": "1st \u00b7 00:00",
-      "period_label": "1st"
+      "away_score": 3,
+      "home_score": 2,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     },
     {
       "away": "EDM",
       "home": "ANA",
       "away_city": "Edmonton",
       "home_city": "Anaheim",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 2,
+      "home_score": 2,
+      "status": "live",
+      "display": "2nd \u00b7 04:12",
+      "period_label": "2nd"
     }
   ]
 }
