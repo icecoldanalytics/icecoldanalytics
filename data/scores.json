@@ -1,28 +1,28 @@
 {
   "date": "2026-04-27",
-  "updated": "05:58 PM MT",
+  "updated": "09:47 PM MT",
   "games": [
     {
       "away": "PHI",
       "home": "PIT",
       "away_city": "Philadelphia",
       "home_city": "Pittsburgh",
-      "away_score": 0,
-      "home_score": 1,
-      "status": "live",
-      "display": "1st \u00b7 07:50",
-      "period_label": "1st"
+      "away_score": 2,
+      "home_score": 3,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     },
     {
       "away": "VGK",
       "home": "UTA",
       "away_city": "Vegas",
       "home_city": "Utah",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 3,
+      "home_score": 2,
+      "status": "live",
+      "display": "3rd \u00b7 20:00",
+      "period_label": "3rd"
     }
   ]
 }
