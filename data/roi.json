@@ -1,16 +1,16 @@
 {
-  "generated": "2026-04-29 09:11 AM MT",
+  "generated": "2026-04-30 09:07 AM MT",
   "season": "2025-26",
-  "through_date": "2026-04-28",
+  "through_date": "2026-04-29",
   "signal1": {
-    "games": 61,
-    "wins": 32,
-    "losses": 29,
-    "win_rate": 52.5,
-    "roi": 0.1,
+    "games": 37,
+    "wins": 19,
+    "losses": 18,
+    "win_rate": 51.4,
+    "roi": -2.0,
     "avg_odds": -112,
     "streak": "1L",
-    "best_month": "Feb 2026",
+    "best_month": "Jan 2026",
     "monthly": [
       {
         "month": "2025-10",
@@ -32,39 +32,21 @@
       },
       {
         "month": "2026-01",
-        "wins": 9,
-        "losses": 5,
-        "roi": 22.7
-      },
-      {
-        "month": "2026-02",
-        "wins": 6,
-        "losses": 3,
-        "roi": 27.3
-      },
-      {
-        "month": "2026-03",
-        "wins": 3,
+        "wins": 7,
         "losses": 4,
-        "roi": -18.2
-      },
-      {
-        "month": "2026-04",
-        "wins": 2,
-        "losses": 3,
-        "roi": -23.6
+        "roi": 21.5
       }
     ],
     "status": "Active"
   },
   "signal1_partial": {
-    "games": 137,
-    "wins": 89,
-    "losses": 48,
-    "win_rate": 65.0,
-    "roi": 24.0,
+    "games": 77,
+    "wins": 52,
+    "losses": 25,
+    "win_rate": 67.5,
+    "roi": 28.9,
     "avg_odds": -110,
-    "streak": "1W",
+    "streak": "2W",
     "monthly": [
       {
         "month": "2025-10",
@@ -86,27 +68,9 @@
       },
       {
         "month": "2026-01",
-        "wins": 23,
-        "losses": 15,
-        "roi": 15.6
-      },
-      {
-        "month": "2026-02",
-        "wins": 7,
-        "losses": 1,
-        "roi": 67.0
-      },
-      {
-        "month": "2026-03",
-        "wins": 15,
-        "losses": 12,
-        "roi": 6.1
-      },
-      {
-        "month": "2026-04",
-        "wins": 8,
-        "losses": 4,
-        "roi": 27.3
+        "wins": 16,
+        "losses": 9,
+        "roi": 22.2
       }
     ],
     "status": "Active"
@@ -123,44 +87,44 @@
     "status": "Active"
   },
   "summary": {
-    "total_sig1_games": 61,
-    "total_partial_games": 137,
+    "total_sig1_games": 37,
+    "total_partial_games": 77,
     "total_sig2_games": 0,
-    "cancelled_both_b2b": 72,
+    "cancelled_both_b2b": 43,
     "last5_sig1": [
       {
-        "date": "2026-04-02",
+        "date": "2026-01-13",
         "away": "VAN",
-        "home": "MIN",
-        "score": "2-5",
+        "home": "OTT",
+        "score": "1-2",
         "fade_won": true
       },
       {
-        "date": "2026-04-03",
-        "away": "PHI",
-        "home": "NYI",
+        "date": "2026-01-13",
+        "away": "CAR",
+        "home": "STL",
+        "score": "0-3",
+        "fade_won": true
+      },
+      {
+        "date": "2026-01-13",
+        "away": "DAL",
+        "home": "ANA",
+        "score": "1-3",
+        "fade_won": true
+      },
+      {
+        "date": "2026-01-16",
+        "away": "SJS",
+        "home": "DET",
+        "score": "2-4",
+        "fade_won": true
+      },
+      {
+        "date": "2026-01-17",
+        "away": "CAR",
+        "home": "NJD",
         "score": "4-1",
-        "fade_won": false
-      },
-      {
-        "date": "2026-04-07",
-        "away": "NSH",
-        "home": "ANA",
-        "score": "5-0",
-        "fade_won": false
-      },
-      {
-        "date": "2026-04-09",
-        "away": "TOR",
-        "home": "NYI",
-        "score": "3-5",
-        "fade_won": true
-      },
-      {
-        "date": "2026-04-12",
-        "away": "VAN",
-        "home": "ANA",
-        "score": "4-3",
         "fade_won": false
       }
     ]

@@ -1,26 +1,19 @@
 {
-  "date": "2026-04-29",
+  "date": "2026-04-30",
   "games": [
     {
-      "away": "MTL",
-      "home": "TBL",
-      "time": "5:00 PM MT",
-      "away_ml": null,
-      "home_ml": null
-    },
-    {
-      "away": "PIT",
-      "home": "PHI",
+      "away": "DAL",
+      "home": "MIN",
       "time": "5:30 PM MT",
-      "away_ml": "+100",
-      "home_ml": "-120"
+      "away_ml": "+102",
+      "home_ml": "-122"
     },
     {
-      "away": "UTA",
-      "home": "VGK",
+      "away": "EDM",
+      "home": "ANA",
       "time": "8:00 PM MT",
-      "away_ml": "+134",
-      "home_ml": "-162"
+      "away_ml": "-132",
+      "home_ml": "+110"
     }
   ]
 }
