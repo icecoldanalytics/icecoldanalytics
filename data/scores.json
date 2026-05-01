@@ -1,28 +1,39 @@
 {
-  "date": "2026-04-30",
-  "updated": "09:57 PM MT",
+  "date": "2026-05-01",
+  "updated": "12:42 AM MT",
   "games": [
     {
-      "away": "DAL",
-      "home": "MIN",
-      "away_city": "Dallas",
-      "home_city": "Minnesota",
-      "away_score": 2,
-      "home_score": 5,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
+      "away": "TBL",
+      "home": "MTL",
+      "away_city": "Tampa Bay",
+      "home_city": "Montr\u00e9al",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
     },
     {
-      "away": "EDM",
-      "home": "ANA",
-      "away_city": "Edmonton",
-      "home_city": "Anaheim",
-      "away_score": 1,
-      "home_score": 4,
-      "status": "live",
-      "display": "2nd \u00b7 16:13",
-      "period_label": "2nd"
+      "away": "BUF",
+      "home": "BOS",
+      "away_city": "Buffalo",
+      "home_city": "Boston",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
+    },
+    {
+      "away": "VGK",
+      "home": "UTA",
+      "away_city": "Vegas",
+      "home_city": "Utah",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
     }
   ]
 }
