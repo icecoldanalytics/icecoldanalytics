@@ -1,6 +1,6 @@
 {
   "date": "2026-05-01",
-  "updated": "09:30 PM MT",
+  "updated": "11:56 PM MT",
   "games": [
     {
       "away": "TBL",
@@ -29,11 +29,11 @@
       "home": "UTA",
       "away_city": "Vegas",
       "home_city": "Utah",
-      "away_score": 1,
-      "home_score": 0,
-      "status": "live",
-      "display": "2nd \u00b7 13:11",
-      "period_label": "2nd"
+      "away_score": 5,
+      "home_score": 1,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
