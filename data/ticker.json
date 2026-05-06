@@ -1,19 +1,19 @@
 {
-  "date": "2026-05-04",
+  "date": "2026-05-06",
   "games": [
     {
-      "away": "PHI",
-      "home": "CAR",
+      "away": "MTL",
+      "home": "BUF",
       "time": "5:00 PM MT",
-      "away_ml": "+210",
-      "home_ml": "-258"
+      "away_ml": null,
+      "home_ml": null
     },
     {
       "away": "ANA",
       "home": "VGK",
       "time": "7:30 PM MT",
-      "away_ml": "+140",
-      "home_ml": "-170"
+      "away_ml": "+134",
+      "home_ml": "-162"
     }
   ]
 }
