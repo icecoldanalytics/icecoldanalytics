@@ -1,17 +1,17 @@
 {
   "date": "2026-05-05",
-  "updated": "05:55 PM MT",
+  "updated": "09:45 PM MT",
   "games": [
     {
       "away": "MIN",
       "home": "COL",
       "away_city": "Minnesota",
       "home_city": "Colorado",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 2,
+      "home_score": 5,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
