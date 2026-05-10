@@ -1,19 +1,19 @@
 {
-  "date": "2026-05-09",
+  "date": "2026-05-10",
   "games": [
     {
-      "away": "CAR",
-      "home": "PHI",
-      "time": "4:00 PM MT",
-      "away_ml": "-192",
-      "home_ml": "+158"
+      "away": "BUF",
+      "home": "MTL",
+      "time": "5:00 PM MT",
+      "away_ml": null,
+      "home_ml": null
     },
     {
-      "away": "COL",
-      "home": "MIN",
-      "time": "7:00 PM MT",
-      "away_ml": "-130",
-      "home_ml": "+110"
+      "away": "VGK",
+      "home": "ANA",
+      "time": "7:30 PM MT",
+      "away_ml": "-122",
+      "home_ml": "+102"
     }
   ]
 }
