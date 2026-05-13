@@ -1,54 +1,48 @@
 {
-  "date": "2026-05-12",
-  "date_label": "May 12, 2026",
-  "yesterday_label": "May 11",
-  "n_games": 2,
+  "date": "2026-05-13",
+  "date_label": "May 13, 2026",
+  "yesterday_label": "May 12",
+  "n_games": 1,
   "n_sig1": 0,
   "n_partial": 0,
   "games_tonight": [
     {
-      "away": "BUF",
-      "home": "MTL",
-      "away_city": "Buffalo",
-      "away_name": "Sabres",
-      "home_city": "Montr\u00e9al",
-      "home_name": "Canadiens",
-      "time_et": "7:00 PM ET",
-      "time_mt": "5:00 PM MT",
+      "away": "MIN",
+      "home": "COL",
+      "away_city": "Minnesota",
+      "away_name": "Wild",
+      "home_city": "Colorado",
+      "home_name": "Avalanche",
+      "time_et": "8:00 PM ET",
+      "time_mt": "6:00 PM MT",
       "signal": "none",
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": null,
-      "home_ml": null
-    },
-    {
-      "away": "ANA",
-      "home": "VGK",
-      "away_city": "Anaheim",
-      "away_name": "Ducks",
-      "home_city": "Vegas",
-      "home_name": "Golden Knights",
-      "time_et": "9:30 PM ET",
-      "time_mt": "7:30 PM MT",
-      "signal": "none",
-      "away_b2b": false,
-      "home_b2b": false,
-      "home_rest": 2,
-      "away_ml": "+126",
-      "home_ml": "-152"
+      "away_ml": "+180",
+      "home_ml": "-220"
     }
   ],
   "last_night": [
     {
-      "away": "COL",
-      "home": "MIN",
-      "away_score": 5,
+      "away": "BUF",
+      "home": "MTL",
+      "away_score": 3,
       "home_score": 2,
       "signal": "none",
       "result": "none",
       "note": "No signal \u00b7 Neither team on B2B",
       "fade_won": false
+    },
+    {
+      "away": "ANA",
+      "home": "VGK",
+      "away_score": 2,
+      "home_score": 3,
+      "signal": "none",
+      "result": "none",
+      "note": "No signal \u00b7 Neither team on B2B",
+      "fade_won": true
     }
   ],
   "lookahead": []
