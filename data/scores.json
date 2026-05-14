@@ -1,17 +1,28 @@
 {
-  "date": "2026-05-13",
-  "updated": "09:56 PM MT",
+  "date": "2026-05-14",
+  "updated": "12:50 AM MT",
   "games": [
     {
-      "away": "MIN",
-      "home": "COL",
-      "away_city": "Minnesota",
-      "home_city": "Colorado",
-      "away_score": 3,
-      "home_score": 4,
-      "status": "final",
-      "display": "Final/OT",
-      "period_label": "OT"
+      "away": "MTL",
+      "home": "BUF",
+      "away_city": "Montr\u00e9al",
+      "home_city": "Buffalo",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
+    },
+    {
+      "away": "VGK",
+      "home": "ANA",
+      "away_city": "Vegas",
+      "home_city": "Anaheim",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
     }
   ]
 }
