@@ -1,28 +1,5 @@
 {
-  "date": "2026-05-14",
-  "updated": "10:00 PM MT",
-  "games": [
-    {
-      "away": "MTL",
-      "home": "BUF",
-      "away_city": "Montr\u00e9al",
-      "home_city": "Buffalo",
-      "away_score": 6,
-      "home_score": 3,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    },
-    {
-      "away": "VGK",
-      "home": "ANA",
-      "away_city": "Vegas",
-      "home_city": "Anaheim",
-      "away_score": 4,
-      "home_score": 1,
-      "status": "live",
-      "display": "3rd \u00b7 13:58",
-      "period_label": "3rd"
-    }
-  ]
+  "date": "2026-05-15",
+  "updated": "01:33 AM MT",
+  "games": []
 }
