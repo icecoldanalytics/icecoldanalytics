@@ -1,5 +1,17 @@
 {
-  "date": "2026-05-15",
-  "updated": "09:41 PM MT",
-  "games": []
+  "date": "2026-05-16",
+  "updated": "12:13 AM MT",
+  "games": [
+    {
+      "away": "BUF",
+      "home": "MTL",
+      "away_city": "Buffalo",
+      "home_city": "Montr\u00e9al",
+      "away_score": 0,
+      "home_score": 0,
+      "status": "pre",
+      "display": "Upcoming",
+      "period_label": ""
+    }
+  ]
 }
