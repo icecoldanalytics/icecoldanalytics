@@ -1,22 +1,28 @@
 {
-  "date": "2026-05-17",
-  "date_label": "May 17, 2026",
-  "yesterday_label": "May 16",
-  "n_games": 0,
+  "date": "2026-05-18",
+  "date_label": "May 18, 2026",
+  "yesterday_label": "May 17",
+  "n_games": 1,
   "n_sig1": 0,
   "n_partial": 0,
-  "games_tonight": [],
-  "last_night": [
+  "games_tonight": [
     {
-      "away": "BUF",
-      "home": "MTL",
-      "away_score": 8,
-      "home_score": 3,
+      "away": "MTL",
+      "home": "BUF",
+      "away_city": "Montr\u00e9al",
+      "away_name": "Canadiens",
+      "home_city": "Buffalo",
+      "home_name": "Sabres",
+      "time_et": "7:30 PM ET",
+      "time_mt": "5:30 PM MT",
       "signal": "none",
-      "result": "none",
-      "note": "No signal \u00b7 Neither team on B2B",
-      "fade_won": false
+      "away_b2b": false,
+      "home_b2b": false,
+      "home_rest": 2,
+      "away_ml": null,
+      "home_ml": null
     }
   ],
+  "last_night": [],
   "lookahead": []
 }
