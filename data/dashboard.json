@@ -1,22 +1,28 @@
 {
-  "date": "2026-05-19",
-  "date_label": "May 19, 2026",
-  "yesterday_label": "May 18",
-  "n_games": 0,
+  "date": "2026-05-20",
+  "date_label": "May 20, 2026",
+  "yesterday_label": "May 19",
+  "n_games": 1,
   "n_sig1": 0,
   "n_partial": 0,
-  "games_tonight": [],
-  "last_night": [
+  "games_tonight": [
     {
-      "away": "MTL",
-      "home": "BUF",
-      "away_score": 3,
-      "home_score": 2,
+      "away": "VGK",
+      "home": "COL",
+      "away_city": "Vegas",
+      "away_name": "Golden Knights",
+      "home_city": "Colorado",
+      "home_name": "Avalanche",
+      "time_et": "8:00 PM ET",
+      "time_mt": "6:00 PM MT",
       "signal": "none",
-      "result": "none",
-      "note": "No signal \u00b7 Neither team on B2B",
-      "fade_won": false
+      "away_b2b": false,
+      "home_b2b": false,
+      "home_rest": 3,
+      "away_ml": "+146",
+      "home_ml": "-176"
     }
   ],
+  "last_night": [],
   "lookahead": []
 }
