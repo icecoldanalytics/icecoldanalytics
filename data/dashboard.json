@@ -1,33 +1,33 @@
 {
-  "date": "2026-05-21",
-  "date_label": "May 21, 2026",
-  "yesterday_label": "May 20",
+  "date": "2026-05-22",
+  "date_label": "May 22, 2026",
+  "yesterday_label": "May 21",
   "n_games": 1,
   "n_sig1": 0,
   "n_partial": 0,
   "games_tonight": [
     {
-      "away": "MTL",
-      "home": "CAR",
-      "away_city": "Montr\u00e9al",
-      "away_name": "Canadiens",
-      "home_city": "Carolina",
-      "home_name": "Hurricanes",
+      "away": "VGK",
+      "home": "COL",
+      "away_city": "Vegas",
+      "away_name": "Golden Knights",
+      "home_city": "Colorado",
+      "home_name": "Avalanche",
       "time_et": "8:00 PM ET",
       "time_mt": "6:00 PM MT",
       "signal": "none",
       "away_b2b": false,
       "home_b2b": false,
-      "home_rest": 3,
-      "away_ml": null,
-      "home_ml": null
+      "home_rest": 2,
+      "away_ml": "+170",
+      "home_ml": "-205"
     }
   ],
   "last_night": [
     {
-      "away": "VGK",
-      "home": "COL",
-      "away_score": 4,
+      "away": "MTL",
+      "home": "CAR",
+      "away_score": 6,
       "home_score": 2,
       "signal": "none",
       "result": "none",
