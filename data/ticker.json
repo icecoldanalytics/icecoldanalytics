@@ -1,12 +1,12 @@
 {
-  "date": "2026-05-22",
+  "date": "2026-05-23",
   "games": [
     {
-      "away": "VGK",
-      "home": "COL",
-      "time": "6:00 PM MT",
-      "away_ml": "+170",
-      "home_ml": "-205"
+      "away": "MTL",
+      "home": "CAR",
+      "time": "5:00 PM MT",
+      "away_ml": null,
+      "home_ml": null
     }
   ]
 }
