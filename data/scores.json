@@ -1,17 +1,17 @@
 {
   "date": "2026-05-25",
-  "updated": "06:11 PM MT",
+  "updated": "10:08 PM MT",
   "games": [
     {
       "away": "CAR",
       "home": "MTL",
       "away_city": "Carolina",
       "home_city": "Montr\u00e9al",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 3,
+      "home_score": 2,
+      "status": "final",
+      "display": "Final/OT",
+      "period_label": "OT"
     }
   ]
 }
