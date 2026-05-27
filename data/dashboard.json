@@ -1,38 +1,38 @@
 {
-  "date": "2026-05-26",
-  "date_label": "May 26, 2026",
-  "yesterday_label": "May 25",
+  "date": "2026-05-27",
+  "date_label": "May 27, 2026",
+  "yesterday_label": "May 26",
   "n_games": 1,
   "n_sig1": 0,
   "n_partial": 0,
   "games_tonight": [
     {
-      "away": "COL",
-      "home": "VGK",
-      "away_city": "Colorado",
-      "away_name": "Avalanche",
-      "home_city": "Vegas",
-      "home_name": "Golden Knights",
-      "time_et": "9:00 PM ET",
-      "time_mt": "7:00 PM MT",
+      "away": "CAR",
+      "home": "MTL",
+      "away_city": "Carolina",
+      "away_name": "Hurricanes",
+      "home_city": "Montr\u00e9al",
+      "home_name": "Canadiens",
+      "time_et": "8:00 PM ET",
+      "time_mt": "6:00 PM MT",
       "signal": "none",
       "away_b2b": false,
       "home_b2b": false,
       "home_rest": 2,
-      "away_ml": "-114",
-      "home_ml": "-105"
+      "away_ml": null,
+      "home_ml": null
     }
   ],
   "last_night": [
     {
-      "away": "CAR",
-      "home": "MTL",
-      "away_score": 3,
+      "away": "COL",
+      "home": "VGK",
+      "away_score": 1,
       "home_score": 2,
       "signal": "none",
       "result": "none",
       "note": "No signal \u00b7 Neither team on B2B",
-      "fade_won": false
+      "fade_won": true
     }
   ],
   "lookahead": []
