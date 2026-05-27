@@ -1,17 +1,17 @@
 {
   "date": "2026-05-26",
-  "updated": "06:14 PM MT",
+  "updated": "10:21 PM MT",
   "games": [
     {
       "away": "COL",
       "home": "VGK",
       "away_city": "Colorado",
       "home_city": "Vegas",
-      "away_score": 0,
-      "home_score": 0,
-      "status": "pre",
-      "display": "Upcoming",
-      "period_label": ""
+      "away_score": 1,
+      "home_score": 2,
+      "status": "final",
+      "display": "Final",
+      "period_label": "3rd"
     }
   ]
 }
