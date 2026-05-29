@@ -1,22 +1,28 @@
 {
-  "date": "2026-05-28",
-  "date_label": "May 28, 2026",
-  "yesterday_label": "May 27",
-  "n_games": 0,
+  "date": "2026-05-29",
+  "date_label": "May 29, 2026",
+  "yesterday_label": "May 28",
+  "n_games": 1,
   "n_sig1": 0,
   "n_partial": 0,
-  "games_tonight": [],
-  "last_night": [
+  "games_tonight": [
     {
-      "away": "CAR",
-      "home": "MTL",
-      "away_score": 4,
-      "home_score": 0,
+      "away": "MTL",
+      "home": "CAR",
+      "away_city": "Montr\u00e9al",
+      "away_name": "Canadiens",
+      "home_city": "Carolina",
+      "home_name": "Hurricanes",
+      "time_et": "8:00 PM ET",
+      "time_mt": "6:00 PM MT",
       "signal": "none",
-      "result": "none",
-      "note": "No signal \u00b7 Neither team on B2B",
-      "fade_won": false
+      "away_b2b": false,
+      "home_b2b": false,
+      "home_rest": 2,
+      "away_ml": null,
+      "home_ml": null
     }
   ],
+  "last_night": [],
   "lookahead": []
 }
