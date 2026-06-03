@@ -1,17 +1,5 @@
 {
-  "date": "2026-06-02",
-  "updated": "10:51 PM MT",
-  "games": [
-    {
-      "away": "VGK",
-      "home": "CAR",
-      "away_city": "Vegas",
-      "home_city": "Carolina",
-      "away_score": 5,
-      "home_score": 4,
-      "status": "final",
-      "display": "Final",
-      "period_label": "3rd"
-    }
-  ]
+  "date": "2026-06-03",
+  "updated": "03:58 AM MT",
+  "games": []
 }
