@@ -1,4 +1,12 @@
 {
-  "date": "2026-06-03",
-  "games": []
+  "date": "2026-06-04",
+  "games": [
+    {
+      "away": "VGK",
+      "home": "CAR",
+      "time": "6:00 PM MT",
+      "away_ml": "+140",
+      "home_ml": "-170"
+    }
+  ]
 }
