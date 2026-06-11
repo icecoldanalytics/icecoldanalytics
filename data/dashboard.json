@@ -1,22 +1,28 @@
 {
-  "date": "2026-06-10",
-  "date_label": "June 10, 2026",
-  "yesterday_label": "June 9",
-  "n_games": 0,
+  "date": "2026-06-11",
+  "date_label": "June 11, 2026",
+  "yesterday_label": "June 10",
+  "n_games": 1,
   "n_sig1": 0,
   "n_partial": 0,
-  "games_tonight": [],
-  "last_night": [
+  "games_tonight": [
     {
-      "away": "CAR",
-      "home": "VGK",
-      "away_score": 5,
-      "home_score": 3,
+      "away": "VGK",
+      "home": "CAR",
+      "away_city": "Vegas",
+      "away_name": "Golden Knights",
+      "home_city": "Carolina",
+      "home_name": "Hurricanes",
+      "time_et": "8:00 PM ET",
+      "time_mt": "6:00 PM MT",
       "signal": "none",
-      "result": "none",
-      "note": "No signal \u00b7 Neither team on B2B",
-      "fade_won": false
+      "away_b2b": false,
+      "home_b2b": false,
+      "home_rest": 2,
+      "away_ml": "+132",
+      "home_ml": "-160"
     }
   ],
+  "last_night": [],
   "lookahead": []
 }
