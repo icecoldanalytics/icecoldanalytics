@@ -1,22 +1,11 @@
 {
-  "date": "2026-06-15",
-  "date_label": "June 15, 2026",
-  "yesterday_label": "June 14",
+  "date": "2026-06-16",
+  "date_label": "June 16, 2026",
+  "yesterday_label": "June 15",
   "n_games": 0,
   "n_sig1": 0,
   "n_partial": 0,
   "games_tonight": [],
-  "last_night": [
-    {
-      "away": "CAR",
-      "home": "VGK",
-      "away_score": 3,
-      "home_score": 0,
-      "signal": "none",
-      "result": "none",
-      "note": "No signal \u00b7 Neither team on B2B",
-      "fade_won": false
-    }
-  ],
+  "last_night": [],
   "lookahead": []
 }
