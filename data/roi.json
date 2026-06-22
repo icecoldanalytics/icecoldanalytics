@@ -1,7 +1,7 @@
 {
-  "generated": "2026-06-21 09:09 AM MT",
+  "generated": "2026-06-22 11:27 AM MT",
   "season": "2025-26",
-  "through_date": "2026-06-20",
+  "through_date": "2026-06-21",
   "signal1": {
     "games": 0,
     "wins": 0,
@@ -15,14 +15,21 @@
     "status": "Active"
   },
   "signal1_partial": {
-    "games": 0,
+    "games": 2,
     "wins": 0,
-    "losses": 0,
+    "losses": 2,
     "win_rate": 0.0,
-    "roi": 0.0,
+    "roi": -100.0,
     "avg_odds": -110,
-    "streak": "\u2014",
-    "monthly": [],
+    "streak": "2L",
+    "monthly": [
+      {
+        "month": "2025-12",
+        "wins": 0,
+        "losses": 2,
+        "roi": -100.0
+      }
+    ],
     "status": "Active"
   },
   "signal2": {
@@ -38,7 +45,7 @@
   },
   "summary": {
     "total_sig1_games": 0,
-    "total_partial_games": 0,
+    "total_partial_games": 2,
     "total_sig2_games": 0,
     "cancelled_both_b2b": 0,
     "last5_sig1": []
