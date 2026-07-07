@@ -29,6 +29,22 @@ def normalize_name(name):
     return name.strip().lower().replace(".", "").replace("'", "")
 
 
+def name_key(name):
+    """
+    Build a matchable (first_initial, last_name) key.
+    The NHL boxscore API returns abbreviated names like "M. Domi",
+    while our log stores full names like "Max Domi" — this lets both
+    sides match on first-initial + last-name instead of exact string.
+    """
+    clean = normalize_name(name)
+    parts = clean.split()
+    if not parts:
+        return ("", "")
+    initial = parts[0][0]
+    last = parts[-1]
+    return (initial, last)
+
+
 def get_game_id(date_str, away, home):
     """Look up the NHL gameId for a given date + matchup."""
     try:
@@ -72,7 +88,7 @@ def get_boxscore_stats(game_id):
                 assists = p.get("assists", 0)
                 points = p.get("points", goals + assists)
                 sog = p.get("sog", p.get("shots", 0))
-                stats[normalize_name(name)] = {
+                stats[name_key(name)] = {
                     "goals": goals,
                     "assists": assists,
                     "points": points,
@@ -129,12 +145,11 @@ def main():
             continue  # not final / not found yet, leave ungraded
         stats = get_boxscore_stats(game_id)
         for entry in entries:
-            key = normalize_name(entry["player"])
+            key = name_key(entry["player"])
             player_stats = stats.get(key)
             if player_stats is None:
                 print(f"  Warning: no boxscore stats found for {entry['player']} ({date_str})")
                 continue
-            actual = player_stats.get(entry["category"].rstrip("s") if entry["category"] == "assists" else entry["category"])
             # category names already match keys: goals, assists, points, shots
             actual = player_stats.get(entry["category"])
             won = grade_pick(entry["pick"], entry["line"], actual)

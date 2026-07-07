@@ -1,0 +1,61 @@
+{
+  "generated_from": "player_props_log.json",
+  "total_picks_logged": 242,
+  "total_graded": 216,
+  "pending": 26,
+  "overall": {
+    "picks": 216,
+    "wins": 82,
+    "losses": 134,
+    "win_rate": 38.0,
+    "roi": -21.9
+  },
+  "by_category": {
+    "goals": {
+      "picks": 64,
+      "wins": 21,
+      "losses": 43,
+      "win_rate": 32.8,
+      "roi": -16.5
+    },
+    "points": {
+      "picks": 65,
+      "wins": 24,
+      "losses": 41,
+      "win_rate": 36.9,
+      "roi": -30.7
+    },
+    "shots": {
+      "picks": 68,
+      "wins": 28,
+      "losses": 40,
+      "win_rate": 41.2,
+      "roi": -23.4
+    },
+    "assists": {
+      "picks": 19,
+      "wins": 9,
+      "losses": 10,
+      "win_rate": 47.4,
+      "roi": 0.5
+    }
+  },
+  "monthly": [
+    {
+      "picks": 139,
+      "wins": 53,
+      "losses": 86,
+      "win_rate": 38.1,
+      "roi": -20.7,
+      "month": "2026-03"
+    },
+    {
+      "picks": 77,
+      "wins": 29,
+      "losses": 48,
+      "win_rate": 37.7,
+      "roi": -24.2,
+      "month": "2026-04"
+    }
+  ]
+}
