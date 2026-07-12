@@ -1364,14 +1364,45 @@ propsContainer.innerHTML = `
                 ? 'background:rgba(255,71,87,0.1);color:var(--red);border:1px solid rgba(255,71,87,0.2);'
                 : 'background:rgba(0,163,255,0.1);color:var(--accent);border:1px solid rgba(0,163,255,0.2);';
               const pickLabel = p.pick === 'over' ? '✓ OVER' : p.pick === 'under' ? '✕ UNDER' : '✓ Back It';
+              const hasEdge = typeof p.edge === 'number';
+              const modelPct = hasEdge ? Math.round(p.model_prob * 100) : 0;
+              const marketPct = hasEdge ? Math.round(p.market_prob * 100) : 0;
+              const edgePct = hasEdge ? Math.round(p.edge * 100) : 0;
+              const maxPct = Math.max(modelPct, marketPct, 1);
+              const edgeBlock = !hasEdge ? '' : `
+                <div style="display:flex;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(22,35,52,0.7);">
+                  <div style="flex:1;">
+                    <div style="display:flex;justify-content:space-between;font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">
+                      <span>Model</span><span>${modelPct}%</span>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);border-radius:4px;height:8px;position:relative;overflow:hidden;margin-bottom:8px;">
+                      <div style="position:absolute;top:0;bottom:0;left:0;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--cyan));width:${(modelPct/maxPct)*100}%;"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">
+                      <span>Market</span><span>${marketPct}%</span>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);border-radius:4px;height:8px;position:relative;overflow:hidden;">
+                      <div style="position:absolute;top:0;bottom:0;left:0;border-radius:4px;background:linear-gradient(90deg,var(--muted),#6a8aa8);width:${(marketPct/maxPct)*100}%;"></div>
+                    </div>
+                  </div>
+                  <div style="flex-shrink:0;text-align:center;background:rgba(0,214,143,0.08);border:1px solid rgba(0,214,143,0.25);border-radius:8px;padding:8px 12px;">
+                    <div style="font-weight:900;font-size:1.05rem;color:var(--green);line-height:1;">+${edgePct}%</div>
+                    <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;">Edge</div>
+                  </div>
+                </div>`;
               return `
-              <div class="prop-row" style="border-left:3px solid ${borderColor};">
-                <div>
-                  <div class="prop-player">${p.player} — ${p.prop_type}</div>
-                  <div class="prop-desc">${p.game} · <strong>${p.odds}</strong> · ${p.reason}</div>
+              <div class="prop-row" style="border-left:3px solid ${borderColor};flex-direction:column;align-items:stretch;">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+                  <div>
+                    <div class="prop-player">${p.player} — ${p.prop_type}</div>
+                    <div class="prop-desc">${p.game} · <strong>${p.odds}</strong> · ${p.reason}</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">
+                    <div class="prop-line"><div class="prop-line-val">${p.odds}</div><div class="prop-line-label">${p.line}</div></div>
+                    <div class="prop-pick" style="${pickStyle}">${pickLabel}</div>
+                  </div>
                 </div>
-                <div class="prop-line"><div class="prop-line-val">${p.odds}</div><div class="prop-line-label">${p.line}</div></div>
-                <div class="prop-pick" style="${pickStyle}">${pickLabel}</div>
+                ${edgeBlock}
               </div>`;
             }).join('')}
           </div>`).join('')}`;
