@@ -246,6 +246,24 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--dark);color:va
 .about-cta-band h2{font-weight:900;font-size:2.2rem;text-transform:uppercase;color:var(--bright);margin-bottom:12px;}
 .about-cta-band p{font-size:0.9rem;color:var(--muted);margin-bottom:28px;}
 
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1100px;margin:48px auto 0;padding:0 24px;}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:32px 28px;position:relative;display:flex;flex-direction:column;}
+.price-card.featured{border-color:var(--accent);box-shadow:0 0 30px rgba(0,180,255,0.1);}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;font-weight:800;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:20px;white-space:nowrap;}
+.price-tier-name{font-weight:800;font-size:1.1rem;color:var(--bright);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.price-tier-value{font-weight:900;font-size:2.4rem;color:var(--bright);line-height:1;margin-bottom:2px;}
+.price-tier-value span{font-size:0.9rem;color:var(--muted);font-weight:600;}
+.price-tier-sub{font-size:0.78rem;color:var(--muted);margin-bottom:22px;}
+.price-features{list-style:none;flex:1;margin-bottom:24px;}
+.price-features li{font-size:0.85rem;color:var(--text);padding:9px 0;border-bottom:1px solid rgba(22,35,52,0.6);display:flex;align-items:flex-start;gap:10px;}
+.price-features li:last-child{border-bottom:none;}
+.price-features li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;}
+.price-cta{width:100%;padding:13px;border-radius:8px;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;text-align:center;text-decoration:none;cursor:pointer;border:none;}
+.price-cta.primary{background:linear-gradient(135deg,var(--accent),#0088cc);color:#000;}
+.price-cta.ghost{background:transparent;border:1px solid var(--border);color:var(--text);}
+.pricing-note{max-width:700px;margin:32px auto 0;padding:0 24px;text-align:center;font-size:0.82rem;color:var(--muted);line-height:1.7;}
+
 /* FOOTER */
 footer{background:#03070e;border-top:1px solid var(--border);padding:36px 32px;text-align:center;}
 .footer-brand{font-weight:800;font-size:1.1rem;color:var(--text);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
@@ -415,6 +433,7 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
     <a id="nav-signal-tracker"                 onclick="showPage('signal-tracker');closeMenu()">Signal Tracker</a>
     <a id="nav-edge-finder"                    onclick="showPage('edge-finder');closeMenu()">Edge Finder</a>
     <a id="nav-fantasy-picks"                  onclick="showPage('fantasy-picks');closeMenu()">Fantasy Picks</a>
+    <a id="nav-pricing"                        onclick="showPage('pricing');closeMenu()">Pricing</a>
     <a id="nav-about"                          onclick="showPage('about');closeMenu()">About</a>
 <a class="nav-beta-mobile" href="https://a4ceb66d.sibforms.com/serve/MUIFACuUw-XY-4Ja-nA-51l3oTnfYN4JPDuQyhJMasLYNND54R2AB5UO8L4vaA1Et5QnhClzTJRk2nMyA2XMO3Z1OvgVwSugVRFcR-KKOJ5wYGhz8usEPuv9L03uGuKzyvSAxXGhjWYepaAyaiMccEuUeqQw6wmvW-lvza1RWQsayfnge51YaYw9SC4ZpitnkiUkHfs7v4HbSgBFSw==" target="_blank" onclick="closeMenu()">✉ Join Beta</a>  </div>
   <div class="nav-right">
@@ -734,17 +753,70 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
 <!-- ══════════════════════════════════
      ABOUT PAGE
 ══════════════════════════════════ -->
+<div id="page-pricing" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-eyebrow">Coming September 2026</div>
+      <div class="page-title">One membership. <span class="hl-blue">Every signal.</span></div>
+      <p class="page-desc">Paid tiers launch alongside the 2026-27 season. Pricing below reflects our current plan — join the beta waitlist now to lock in early access and be notified the moment tiers go live.</p>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier-name">Free</div>
+      <div class="price-tier-value">$0</div>
+      <div class="price-tier-sub">Full transparency, always free</div>
+      <ul class="price-features">
+        <li>Public, auditable ROI tracker — every signal, every game, no cherry-picking</li>
+        <li>Season recap &amp; monthly breakdowns</li>
+        <li>One free daily signal</li>
+      </ul>
+      <a class="price-cta ghost" onclick="showPage('signal-tracker')">View Live Tracker</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-tier-name">Pro</div>
+      <div class="price-tier-value">$12<span>/month</span></div>
+      <div class="price-tier-sub">Full daily slate, every signal</div>
+      <ul class="price-features">
+        <li>Full daily signal slate — Signal 1, Signal 1 Partial, Signal 2, playoff signals</li>
+        <li>Player prop board with real model probability vs. market probability shown on every pick</li>
+        <li>Goalie starter confirmations</li>
+        <li>Daily email alerts, 7 AM MST</li>
+      </ul>
+      <a class="price-cta primary" href="https://a4ceb66d.sibforms.com/serve/MUIFACuUw-XY-4Ja-nA-51l3oTnfYN4JPDuQyhJMasLYNND54R2AB5UO8L4vaA1Et5QnhClzTJRk2nMyA2XMO3Z1OvgVwSugVRFcR-KKOJ5wYGhz8usEPuv9L03uGuKzyvSAxXGhjWYepaAyaiMccEuUeqQw6wmvW-lvza1RWQsayfnge51YaYw9SC4ZpitnkiUkHfs7v4HbSgBFSw==" target="_blank">Join Beta Waitlist</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-tier-name">Season Pass</div>
+      <div class="price-tier-value">$59<span>/season</span></div>
+      <div class="price-tier-sub">Everything in Pro, paid upfront</div>
+      <ul class="price-features">
+        <li>Everything in Pro</li>
+        <li>Locked-in price for the full 2026-27 season</li>
+        <li>Best value vs. paying monthly</li>
+      </ul>
+      <a class="price-cta ghost" href="https://a4ceb66d.sibforms.com/serve/MUIFACuUw-XY-4Ja-nA-51l3oTnfYN4JPDuQyhJMasLYNND54R2AB5UO8L4vaA1Et5QnhClzTJRk2nMyA2XMO3Z1OvgVwSugVRFcR-KKOJ5wYGhz8usEPuv9L03uGuKzyvSAxXGhjWYepaAyaiMccEuUeqQw6wmvW-lvza1RWQsayfnge51YaYw9SC4ZpitnkiUkHfs7v4HbSgBFSw==" target="_blank">Join Beta Waitlist</a>
+    </div>
+  </div>
+
+  <div class="pricing-note">We never take bets — Ice Cold Analytics is an independent analytics platform, not a sportsbook. Our incentive is a track record you trust, not a book's margin. Prices shown are current plans and may be adjusted before the September launch.</div>
+</div>
+
+
 <div id="page-about" class="page">
   <div class="about-hero">
     <div class="about-hero-inner">
       <div class="page-eyebrow" style="justify-content:center;display:flex;margin-bottom:12px;">Edmonton, Alberta</div>
       <div class="about-headline">Bet Smarter.<br><span>Stay Ice Cold.</span></div>
-      <p class="about-lead">Ice Cold Analytics gives you full control over your NHL betting decisions through our <strong>Risk Analyzer</strong> and <strong>Signal Tracker</strong> — built from the ice up for serious bettors and passionate fans alike. Our platform identifies proven scheduling edges, tracks goalie confirmations in real time, and flags high-confidence situations before puck drop, so you always know where the value is before money goes on the line.</p>
+      <p class="about-lead">Ice Cold Analytics gives you full control over your NHL betting decisions through our <strong>Risk Analyzer</strong> and <strong>Signal Tracker</strong> — built from the ice up for serious bettors and passionate fans alike. Our platform identifies proven scheduling edges, tracks goalie confirmations, and flags high-confidence situations before puck drop, so you always know where the value is before money goes on the line. <strong>We never take bets</strong> — we're an independent analytics platform, not a sportsbook, and every signal we publish is tracked publicly, win or lose.</p>
     </div>
   </div>
   <div class="about-features">
-    <div class="feat-card"><div class="feat-icon">⚡</div><div class="feat-title">Signal Detection</div><p class="feat-text">Two proprietary back-to-back fatigue signals tracked across hundreds of NHL games, with verified ROI data updated every day of the season.</p></div>
-    <div class="feat-card"><div class="feat-icon">🥅</div><div class="feat-title">Goalie Tracking</div><p class="feat-text">Real-time goalie confirmation data sourced from morning skates and official sources — the final piece before Signal 2 fires.</p></div>
+    <div class="feat-card"><div class="feat-icon">⚡</div><div class="feat-title">Signal Detection</div><p class="feat-text">Multiple back-to-back fatigue signals tracked across hundreds of NHL games, with verified ROI data updated every day of the season. Our top signal: 65% win rate, +24% ROI, 137 games — fully auditable on the Signal Tracker.</p></div>
+    <div class="feat-card"><div class="feat-icon">🥅</div><div class="feat-title">Goalie Tracking</div><p class="feat-text">Confirmed and projected starting goalie data, integrated as we roll out expanded coverage — the final piece before Signal 2 fires.</p></div>
     <div class="feat-card"><div class="feat-icon">📊</div><div class="feat-title">Edge Finder</div><p class="feat-text">Enter any NHL matchup and instantly get a full signal breakdown, confidence score, and recommendation powered by our analytics engine.</p></div>
     <div class="feat-card"><div class="feat-icon">🏒</div><div class="feat-title">Daily Dashboard</div><p class="feat-text">Every game on tonight's slate scanned for signal activity — live scores, moneylines, goalie status, and a 2-day look-ahead, every day.</p></div>
     <div class="feat-card"><div class="feat-icon">🧊</div><div class="feat-title">Hockey-Obsessed</div><p class="feat-text">Built in Edmonton by people who live and breathe the game. Every feature exists because a real bettor needed it before puck drop.</p></div>
@@ -765,7 +837,7 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
 <footer>
   <div class="footer-brand">🧊 Ice Cold Analytics</div>
   <p>NHL Betting Intelligence · Edmonton, Alberta · icecoldanalytics.ca</p>
-  <div class="footer-disclaimer">For informational and entertainment purposes only. Signal data is historically tracked and does not guarantee future results. Please gamble responsibly — if you or someone you know has a gambling problem, call 1-800-522-4700. Data: Daily Faceoff · ESPN · NHL.com · Sports Reference · Updated March 3, 2026</div>
+  <div class="footer-disclaimer">We never take bets — Ice Cold Analytics is an independent analytics platform, not a sportsbook. For informational and entertainment purposes only. Signal data is historically tracked and does not guarantee future results. Please gamble responsibly — if you or someone you know has a gambling problem, call 1-800-522-4700. Data: NHL.com · The Odds API · SportsDataIO</div>
 </footer>
 
 
