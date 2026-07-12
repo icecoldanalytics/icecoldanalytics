@@ -10,6 +10,7 @@ import requests
 from datetime import datetime
 import pytz
 import time
+from generate_real_props import generate_real_player_props, append_to_props_log
 
 MST = pytz.timezone("America/Edmonton")
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
@@ -295,10 +296,10 @@ def main():
     goalie_starts = generate_goalie_starts(game_context, date_label, rosters, games_list)
     time.sleep(60)
 
-    print("Generating player props...")
-    player_props = generate_player_props(game_context, date_label)
+    print("Generating player props (real model vs real market odds)...")
+    player_props = generate_real_player_props(games_list, scratches)
 
-    if not value_plays or not goalie_starts or not player_props:
+    if not value_plays or not goalie_starts or player_props is None:
         print("One or more sections failed - aborting")
         return
 
@@ -313,6 +314,8 @@ def main():
     os.makedirs("data", exist_ok=True)
     with open("data/fantasy.json", "w") as f:
         json.dump(output, f, indent=2)
+
+    append_to_props_log(player_props.get("props", []), today)
 
     n_plays = len(value_plays.get("plays", []))
     n_goalies = len(goalie_starts.get("goalies", []))
