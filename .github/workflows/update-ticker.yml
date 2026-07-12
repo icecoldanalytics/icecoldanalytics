@@ -27,9 +27,10 @@ jobs:
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python .github/scripts/update_dashboard.py
-      - name: Generate fantasy picks
+      -- name: Generate fantasy picks
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python .github/scripts/update_fantasy.py
       - name: Generate ROI data
         run: python .github/scripts/update_roi.py
