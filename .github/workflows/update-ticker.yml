@@ -16,7 +16,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: pip install requests pytz
+        run: pip install requests pytz beautifulsoup4
+      - name: Fetch injury/scratch data
+        run: python .github/scripts/fetch_injuries.py
       - name: Generate ticker data
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
@@ -35,6 +37,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ticker.json data/dashboard.json data/fantasy.json data/roi.json
+          git add data/ticker.json data/dashboard.json data/fantasy.json data/roi.json data/scratches.json
           git diff --staged --quiet || git commit -m "Update dashboard data $(date -u '+%Y-%m-%d')"
           git push
