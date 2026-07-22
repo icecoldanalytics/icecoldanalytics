@@ -470,10 +470,10 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
       </div>
       <div class="sig-card s2">
         <div class="sig-label-small">Signal 2 · Goalie Edge</div>
-        <div class="sig-title">Away B2B + Backup Goalie Confirmed</div>
+        <div class="sig-title">Away B2B + #1 Goalie Confirmed</div>
         <div class="sig-roi-big" id="sig2-card-roi">—</div>
         <div class="sig-meta" id="sig2-card-meta">Loading sample...</div>
-        <div class="sig-rule">Away B2B AND confirmed backup goalie → <strong>fade the away team</strong>. Stacks with Signal 1.</div>
+        <div class="sig-rule">Away B2B AND their #1 goalie confirmed starting → <strong>fade the away team</strong>. Redefined after a full-season backtest — see the Signal Tracker.</div>
       </div>
       <div class="sig-card tonight">
         <div class="sig-label-small">Tonight's Scan</div>
@@ -579,7 +579,7 @@ footer p{font-size:0.72rem;color:var(--muted);line-height:1.8;}
       <br>
       <p><strong>Signal 1 Partial — Moderate Fatigue Edge:</strong> Away team on back-to-back, home team rested exactly 2 days. Lower confidence — reduced unit sizing recommended.</p>
       <br>
-      <p><strong>Signal 2 — Goalie Edge:</strong> Fires when Signal 1 conditions are met AND the away team's backup goalie is confirmed starting. Higher variance — use smaller unit sizing.</p>
+      <p><strong>Signal 2 — Goalie Edge:</strong> Fires when Signal 1 conditions are met AND the away team's #1 goalie is confirmed starting. Our full-season backtest found the edge lives here — fatigued teams riding their starter underperformed the market, while backup starts (standard B2B practice) were already priced in.</p>
       <br>
       <p><strong>Cancellation Rule:</strong> When both teams are on a back-to-back, all signals are void.</p>
     </div>
@@ -786,18 +786,19 @@ function runAnalysis() {
     } else {
       signals.push({ icon:'➖', text:`Signal 1 not active — ${homeTeam} does not have sufficient rest advantage.`, badge:'rsi-inactive', label:'No S1' });
     }
-    if (backupGoalie) {
-      signals.push({ icon:'🥅', text:`<strong>Signal 2 ACTIVE</strong> — ${awayTeam} on back-to-back AND starting a backup goalie. Our strongest signal conditions — sample still building this season. <strong>Fade ${awayTeam}.</strong>`, badge:'rsi-fired', label:'⚡ Signal 2' });
+    if (goalie === 'starter') {
+      signals.push({ icon:'🥅', text:`<strong>Signal 2 ACTIVE</strong> — ${awayTeam} on back-to-back AND riding their #1 goalie. Backtested edge: fatigued teams starting their #1 underperformed the market. <strong>Fade ${awayTeam}.</strong>`, badge:'rsi-fired', label:'⚡ Signal 2' });
       score += 40;
     } else if (goalie === 'unknown') {
-      signals.push({ icon:'❓', text:`Goalie status for ${awayTeam} is unconfirmed. Check Daily Faceoff — Signal 2 could activate if a backup is confirmed.`, badge:'rsi-active', label:'Goalie TBD' });
+      signals.push({ icon:'❓', text:`Goalie status for ${awayTeam} is unconfirmed. Signal 2 activates if their #1 goalie is confirmed to start.`, badge:'rsi-active', label:'Goalie TBD' });
       score += 5;
     } else {
-      signals.push({ icon:'✅', text:`${awayTeam}'s starter is confirmed. Signal 2 does not apply.`, badge:'rsi-inactive', label:'No S2' });
+      signals.push({ icon:'⚠️', text:`${awayTeam} starting a backup — standard B2B practice that the market prices in. Our season backtest showed fading backup starts <strong>lost</strong> money. Signal 2 does not apply; consider passing.`, badge:'rsi-inactive', label:'No S2' });
+      score -= 15;
     }
   }
 
-  score = Math.min(score, 100);
+  score = Math.max(0, Math.min(score, 100));
 
   document.getElementById('result-signals').innerHTML = signals.map(s =>
     `<div class="result-sig-item"><span class="rsi-icon">${s.icon}</span><span class="rsi-text">${s.text}</span><span class="rsi-badge ${s.badge}">${s.label}</span></div>`

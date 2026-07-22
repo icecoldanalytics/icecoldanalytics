@@ -68,19 +68,21 @@ def get_teams_playing_on(date_str):
         return set()
 
 
-def load_signal2_log():
+def load_goalie_history():
     """
-    Load manually logged Signal 2 games from data/signal2_log.json.
-    Format: [{"date": "2026-01-15", "away": "FLA", "home": "NJD"}, ...]
+    Load the goalie starts cache built by backtest_signal2_history.py.
+    Used to determine, for each Signal 1 game, whether the away team
+    started their #1 goalie (new Signal 2 definition) — judged only on
+    starts accumulated BEFORE that date.
     """
     try:
-        with open("data/signal2_log.json", "r") as f:
+        with open("data/goalie_starts_cache.json", "r") as f:
             return json.load(f)
     except FileNotFoundError:
-        return []
+        return {}
     except Exception as e:
-        print(f"  Warning: could not load signal2_log.json: {e}")
-        return []
+        print(f"  Warning: could not load goalie_starts_cache.json: {e}")
+        return {}
 
 
 def calc_streak(results):
@@ -154,10 +156,32 @@ def main():
         if i % 30 == 0:
             print(f"  Progress: {date_str}")
 
-    # Load Signal 2 manual log
-    sig2_log = load_signal2_log()
-    sig2_set = {(e["date"], e["away"], e["home"]) for e in sig2_log}
-    print(f"  Signal 2 log: {len(sig2_set)} manually logged games")
+    # Load goalie start history and build chronological starts tracker
+    goalie_cache = load_goalie_history()
+    goalie_games = sorted(goalie_cache.values(), key=lambda g: g["date"])
+    print(f"  Goalie history: {len(goalie_games)} games with starter data")
+
+    # Pre-compute, for each (date, away, home): did away start their #1?
+    # Walk chronologically so every call uses only prior information.
+    MIN_TEAM_GAMES = 10
+    starts_tracker = {}
+    team_gp = {}
+    started_number_one = {}  # (date, away, home) -> True/False/None(unknown)
+    for g in goalie_games:
+        key = (g["date"], g["away"], g["home"])
+        starter = g.get("away_starter", "")
+        t_starts = starts_tracker.get(g["away"], {})
+        gp = team_gp.get(g["away"], 0)
+        if starter and gp >= MIN_TEAM_GAMES and t_starts:
+            leader = max(t_starts.values())
+            started_number_one[key] = t_starts.get(starter, 0) >= leader
+        else:
+            started_number_one[key] = None  # not enough info yet
+        for team, s in ((g["away"], g.get("away_starter")), (g["home"], g.get("home_starter"))):
+            team_gp[team] = team_gp.get(team, 0) + 1
+            if s:
+                starts_tracker.setdefault(team, {})
+                starts_tracker[team][s] = starts_tracker[team].get(s, 0) + 1
 
     # Evaluate each game
     sig1_results = []
@@ -213,8 +237,8 @@ def main():
             if away_b2b and not home_b2b:
                 if home_rest >= 3:
                     sig1_results.append(result)
-                    # Check if Signal 2 also fired
-                    if (date_str, away, home) in sig2_set:
+                    # New Signal 2: away team confirmed riding their #1 goalie
+                    if started_number_one.get((date_str, away, home)) is True:
                         sig2_results.append(result)
                 elif home_rest == 2:
                     sig1_partial_results.append(result)
@@ -277,7 +301,7 @@ def main():
             **s2,
             "avg_odds": -108,
             "streak": calc_streak(sig2_results),
-            "note": "Manually logged — backup goalie confirmed games only",
+            "note": "Redefined after full-season backtest: away B2B + confirmed #1 goalie starting (backup variant tested -15% ROI)",
             "status": "Active"
         },
         "summary": {
