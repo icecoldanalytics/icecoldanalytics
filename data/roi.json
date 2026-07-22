@@ -1,7 +1,7 @@
 {
-  "generated": "2026-07-11 08:21 AM MT",
+  "generated": "2026-07-21 09:32 PM MT",
   "season": "2025-26",
-  "through_date": "2026-07-10",
+  "through_date": "2026-07-20",
   "signal1": {
     "games": 61,
     "wins": 32,
@@ -112,20 +112,20 @@
     "status": "Active"
   },
   "signal2": {
-    "games": 0,
-    "wins": 0,
-    "losses": 0,
-    "win_rate": 0.0,
-    "roi": 0.0,
+    "games": 21,
+    "wins": 14,
+    "losses": 7,
+    "win_rate": 66.7,
+    "roi": 28.4,
     "avg_odds": -108,
-    "streak": "\u2014",
-    "note": "Manually logged \u2014 backup goalie confirmed games only",
+    "streak": "1L",
+    "note": "Redefined after full-season backtest: away B2B + confirmed #1 goalie starting (backup variant tested -15% ROI)",
     "status": "Active"
   },
   "summary": {
     "total_sig1_games": 61,
     "total_partial_games": 137,
-    "total_sig2_games": 0,
+    "total_sig2_games": 21,
     "cancelled_both_b2b": 72,
     "last5_sig1": [
       {
