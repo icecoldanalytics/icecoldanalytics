@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alberta Sportsbooks Guide | Ice Cold Analytics</title>
+<meta name="description" content="A practical guide to Alberta's regulated online sportsbooks for NHL bettors — which books offer the markets our signals and models actually use.">
+
+<style>
+:root {
+  --dark:#060b14; --navy:#0b1522; --card:#0d1a2a; --border:#162334;
+  --accent:#00b4ff; --cyan:#00e5ff; --gold:#f5a623; --green:#00d68f;
+  --red:#ff4757; --text:#c8dff0; --muted:#4a6a88; --bright:#ffffff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+a{color:var(--accent);}
+.topnav{position:sticky;top:0;z-index:999;background:rgba(6,11,20,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-brand-icon{width:38px;height:38px;background:linear-gradient(135deg,#00b4ff,#0066cc);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.nav-brand-text{font-weight:800;font-size:1.1rem;color:var(--bright);}
+.nav-brand-text span{color:var(--accent);}
+.nav-back{font-weight:700;font-size:0.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 14px;}
+.nav-back:hover{color:var(--accent);}
+.page-hero{background:linear-gradient(135deg,#060b14,#0b1827);border-bottom:1px solid var(--border);padding:52px 24px;}
+.page-hero-inner{max-width:900px;margin:0 auto;}
+.page-eyebrow{font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.page-title{font-weight:800;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--bright);margin-bottom:12px;line-height:1.15;}
+.hl{background:linear-gradient(90deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.page-desc{font-size:0.92rem;color:var(--muted);max-width:640px;line-height:1.8;}
+.main-wrap{max-width:900px;margin:0 auto;padding:8px 24px 72px;}
+.disclosure{margin-top:24px;background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.25);border-radius:10px;padding:14px 18px;font-size:0.78rem;color:var(--text);line-height:1.65;}
+.disclosure strong{color:var(--gold);}
+.section-divider{display:flex;align-items:center;gap:14px;margin:40px 0 18px;}
+.section-divider h2{font-weight:800;font-size:0.95rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--bright);white-space:nowrap;}
+.sd-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+.book-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+.book-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+.book-name{font-weight:800;font-size:1.05rem;color:var(--bright);}
+.book-tag{font-size:0.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);background:rgba(0,180,255,0.08);border:1px solid rgba(0,180,255,0.2);padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.book-body{font-size:0.85rem;color:var(--text);line-height:1.75;margin-top:10px;}
+.book-body strong{color:var(--bright);}
+.prose{font-size:0.9rem;line-height:1.85;color:var(--text);}
+.prose p{margin-bottom:14px;}
+.prose strong{color:var(--bright);}
+.footer-note{margin-top:56px;padding-top:22px;border-top:1px solid var(--border);font-size:0.72rem;color:var(--muted);line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="/" class="nav-brand">
+    <div class="nav-brand-icon">🧊</div>
+    <div class="nav-brand-text">ICE COLD <span>ANALYTICS</span></div>
+  </a>
+  <a href="/" class="nav-back">← Back to Live Tracker</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Alberta Bettor's Guide</div>
+    <h1 class="page-title">Where to bet in <span class="hl">Alberta's</span> regulated market</h1>
+    <p class="page-desc">As of July 13, 2026, Alberta's open iGaming market means real, licensed sportsbooks are legally available in-province. Here's a practical rundown for NHL bettors — specifically, which books carry the market types our signals and prop models are built to analyze.</p>
+    <div class="disclosure">
+      <strong>Disclosure:</strong> Ice Cold Analytics may earn a referral commission if you sign up with a sportsbook through links on this page. This never affects our signals, models, or tracked results — we never take bets, and our analytics are graded publicly whether they win or lose. Only bet with operators licensed in your province, and only bet what you can afford to lose.
+    </div>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+  <div class="section-divider"><h2>What matters for our signals</h2><div class="sd-line"></div></div>
+  <div class="prose">
+    <p>Our game signals (Signal 1, Signal 1 Partial, Signal 2) are moneyline plays — every licensed book carries those. Where books genuinely differ is <strong>player prop depth</strong>: our prop model compares its own probability estimates against real market prices on shots on goal, points, assists, and anytime goal scorer markets. The more of those markets a book posts (and the earlier in the day they post them), the more of our board you can actually act on.</p>
+    <p>The other practical difference is <strong>price</strong>. The same prop is often listed at different odds across books — and our model's edge calculations are only as good as the price you actually get. Having accounts at two or three books and taking the best available number is the single easiest ROI improvement most bettors never make.</p>
+  </div>
+
+  <div class="section-divider"><h2>Licensed operators in Alberta</h2><div class="sd-line"></div></div>
+
+  <!-- AFFILIATE LINK SLOTS: replace href="#" with tracked affiliate URLs as programs approve -->
+
+  <div class="book-card">
+    <div class="book-top"><div class="book-name">DraftKings</div><div class="book-tag">Deep Prop Menu</div></div>
+    <div class="book-body">Among the deepest NHL player prop menus in the market — full shots, points, assists, and goal scorer boards, typically posted the morning of games. If you follow our prop model, this is the market coverage it was validated against. <strong>Sign-up link coming soon.</strong></div>
+  </div>
+
+  <div class="book-card">
+    <div class="book-top"><div class="book-name">BetMGM</div><div class="book-tag">Strong NHL Coverage</div></div>
+    <div class="book-body">Full NHL market coverage including same-game parlays and a solid prop board. Prices sometimes lag market moves slightly — which can work in your favor if you're acting on an edge early. <strong>Sign-up link coming soon.</strong></div>
+  </div>
+
+  <div class="book-card">
+    <div class="book-top"><div class="book-name">BetRivers</div><div class="book-tag">Early Lines</div></div>
+    <div class="book-body">Known for posting lines early, which matters for our morning email subscribers — the earlier a line exists, the more often our 7 AM signal alerts land before the market adjusts. <strong>Sign-up link coming soon.</strong></div>
+  </div>
+
+  <div class="book-card">
+    <div class="book-top"><div class="book-name">theScore Bet</div><div class="book-tag">Canadian-Built</div></div>
+    <div class="book-body">Canadian-native book with strong hockey focus and clean integration with theScore's media app. NHL prop coverage is solid and improving. <strong>Sign-up link coming soon.</strong></div>
+  </div>
+
+  <div class="book-card">
+    <div class="book-top"><div class="book-name">Bally Bet</div><div class="book-tag">Newer Entrant</div></div>
+    <div class="book-body">Newer to the Canadian market — thinner prop menus than the leaders, but competitive sign-up offers as they build an Alberta customer base. <strong>Sign-up link coming soon.</strong></div>
+  </div>
+
+  <div class="section-divider"><h2>A few honest notes</h2><div class="sd-line"></div></div>
+  <div class="prose">
+    <p><strong>We don't rank these by commission.</strong> The notes above reflect what actually matters for using our analytics: prop depth, posting times, and pricing. When affiliate links go live, the operators listed and how we describe them won't change based on who pays.</p>
+    <p><strong>Line shop.</strong> Whatever books you use, compare the price before betting anything our tracker flags. An edge at -110 can disappear entirely at -125.</p>
+    <p><strong>Bet responsibly.</strong> Our signals are historically tracked patterns, not guarantees — full results, including every loss, are on the <a href="/">Signal Tracker</a>. If gambling stops being entertainment, help is available: call or text 1-800-522-4700, or use AGLC's self-exclusion program.</p>
+  </div>
+
+  <div class="footer-note">
+    Ice Cold Analytics is an independent analytics platform, not a sportsbook, and never takes bets. For informational and entertainment purposes only. Must be 18+ and physically located in Alberta to bet with Alberta-licensed operators. Operator availability, markets, and offers change — always confirm details on the operator's own site. Please gamble responsibly.
+  </div>
+
+</div>
+
+</body>
+</html>
